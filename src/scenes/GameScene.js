@@ -1,7 +1,6 @@
 import Phaser from "phaser";
 import Physics from "phaser";
-import logoImg from "../assets/logo.png";
-import smileyImg from "../assets/smiley.png";
+import parrotImg from "../assets/parrot.png";
 import C4C from "c4c-lib";
 
 function enterButtonHoverState(btn) {
@@ -18,8 +17,8 @@ export default class ExampleScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image("logo", logoImg);
-    this.load.image("smiley", smileyImg);
+    // this.load.image("logo", logoImg);
+    this.load.image("parrot", parrotImg);
   }
 
   create() {
@@ -30,7 +29,8 @@ export default class ExampleScene extends Phaser.Scene {
     C4C.Editor.Window.open();
     C4C.Editor.setText(`moveRight(20)`);
 
-    this.smiley = this.add.sprite(400, 300, "smiley");
+    // coords for position
+    this.parrot = this.add.sprite(200, 200, "parrot").setScale(10,10);
 
     // Define new function and store it in the symbol "alert-hello". This
     // function can now be called from our little language.
@@ -39,11 +39,11 @@ export default class ExampleScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveRight", (x_dist) => {
-      this.smiley.x += x_dist;
+      this.parrot.x += x_dist;
     });
 
     C4C.Interpreter.define("moveLeft", (x_dist) => {
-      this.smiley.x -= x_dist;
+      this.parrot.x -= x_dist;
     });
 
     // Create some interface to running the interpreter:
@@ -77,7 +77,6 @@ export default class ExampleScene extends Phaser.Scene {
           .on("pointerdown", () => {
             const programText = C4C.Editor.getText();
             // HERE'S THE IMPORTANT PART!!
-            
             try {
               C4C.Interpreter.check(programText);              
             } catch (err) {
