@@ -1,4 +1,6 @@
-# Phaser 3 + Code4Community Library Example Project
+#Parrot Island
+A game designed to help teach middle/high schoolers the fundamentals of programming
+Built with Phaser 3 + JS by the [Code4Community](http://c4cosu.com) club at Ohio State
 
 This project uses the [Phaser 3 Project
 Template](https://github.com/photonstorm/phaser3-project-template). Read more
