@@ -1,5 +1,5 @@
 # Parrot Island
-A game designed to help teach middle/high schoolers the fundamentals of programming
+A game designed to help teach middle/high schoolers the fundamentals of programming<br>
 Built with Phaser 3 + JS by the [Code4Community](http://c4cosu.com) club at Ohio State
 
 This project uses the [Phaser 3 Project
