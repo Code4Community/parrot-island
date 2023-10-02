@@ -1,6 +1,10 @@
 import Phaser from "phaser";
 import Physics from "phaser";
+
 import parrotImg from "../assets/parrot.png";
+import grassImg from "../assets/grass.png";
+import stoneImg from "../assets/stone.png";
+
 import C4C from "c4c-lib";
 
 function enterButtonHoverState(btn) {
@@ -11,14 +15,18 @@ function enterButtonRestState(btn) {
   btn.setStyle({ fill: "#fff" });
 }
 
-export default class ExampleScene extends Phaser.Scene {
+const TILE_SIZE = 30;
+
+export default class GameScene extends Phaser.Scene {
   constructor() {
-    super("Example");
+    super("Example")
   }
 
   preload() {
     // this.load.image("logo", logoImg);
     this.load.image("parrot", parrotImg);
+    this.load.image("grass", grassImg);
+    this.load.image("stone", stoneImg);
   }
 
   create() {
@@ -29,9 +37,33 @@ export default class ExampleScene extends Phaser.Scene {
     C4C.Editor.Window.open();
     C4C.Editor.setText(`moveRight(20)`);
 
-    // coords for position
-    this.parrot = this.add.sprite(200, 200, "parrot").setScale(10,10);
+    this.tiles = []
 
+    for (let y = 0; y < 30; y++) {
+      let row = []
+      for (let x = 0; x < 30; x++) {
+        let texture;
+        if (Math.random() < 0.5) {
+          texture = "stone"
+        } else {
+          texture = "grass"
+        }
+        let tile = this.add.sprite(x * TILE_SIZE + TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, texture)
+        tile.width = TILE_SIZE
+        tile.displayWidth = TILE_SIZE
+        tile.height = TILE_SIZE
+        tile.displayHeight = TILE_SIZE
+        row.push(tile)
+      }
+      this.tiles.push(row)
+    }
+        
+    // coords for position
+    this.parrot = this.add.sprite(TILE_SIZE / 2, TILE_SIZE / 2, "parrot")
+    this.parrot.width = TILE_SIZE
+    this.parrot.displayWidth = TILE_SIZE
+    this.parrot.height = TILE_SIZE
+    this.parrot.displayHeight = TILE_SIZE
     // Define new function and store it in the symbol "alert-hello". This
     // function can now be called from our little language.
     C4C.Interpreter.define("alertHello", () => {
@@ -46,8 +78,15 @@ export default class ExampleScene extends Phaser.Scene {
       this.parrot.x -= x_dist;
     });
 
-    // Create some interface to running the interpreter:
+    C4C.Interpreter.define("moveDown", (y_dist) => {
+      this.parrot.y += y_dist;
+    });
 
+    C4C.Interpreter.define("moveUp", (y_dist) => {
+      this.parrot.y -= y_dist;
+    });
+    
+    // Create some interface to running the interpreter:
     // Run Button
     const runButton = this.add
           .text(550, 100, "Evaluate", { fill: "#fff", fontSize: "30px" })
@@ -72,7 +111,7 @@ export default class ExampleScene extends Phaser.Scene {
 
     // Check Button
     const checkButton = this.add
-          .text(550, 300, "Check", { fill: "#fff", fontSize: "30px" })
+          .text(570, 300, "Check", { fill: "#fff", fontSize: "30px" })
           .setInteractive()
           .on("pointerdown", () => {
             const programText = C4C.Editor.getText();
@@ -87,5 +126,15 @@ export default class ExampleScene extends Phaser.Scene {
           })
           .on("pointerover", () => enterButtonHoverState(checkButton))
           .on("pointerout", () => enterButtonRestState(checkButton));
+
+    // Help Button
+    const helpButton = this.add
+          .text(580, 400, "Help", { fill: "#fff", fontSize: "30px" })
+          .setInteractive()
+          .on("pointerdown", () => {
+            C4C.Editor.Window.toggle();
+          })
+          .on("pointerover", () => enterButtonHoverState(helpButton))
+          .on("pointerout", () => enterButtonRestState(helpButton));
   }
 }

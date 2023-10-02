@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import C4C from "c4c-lib";
-import ExampleScene from "./scenes/GameScene";
+import WorldGame from "./scenes/GameScene";
 
 // You can define a custom theme here and pass it into .create below
 const theme = {
@@ -24,7 +24,8 @@ var config = {
   dom: {
     createContainer: true,
   },
-  scene: [ExampleScene],
+  scene: [WorldGame],
+  backgroundColor:"#5fe83c",
 };
 
 const game = new Phaser.Game(config);
