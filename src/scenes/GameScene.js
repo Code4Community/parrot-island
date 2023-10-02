@@ -7,6 +7,7 @@ import stoneImg from "../assets/stone.png";
 
 import C4C from "c4c-lib";
 
+//Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
 }
@@ -17,11 +18,13 @@ function enterButtonRestState(btn) {
 
 const TILE_SIZE = 30;
 
-export default class GameScene extends Phaser.Scene {
+export default class GameScene extends Phaser.Scene{
+
   constructor() {
     super("Example")
   }
 
+  //Load in images || TODO: move to own file
   preload() {
     // this.load.image("logo", logoImg);
     this.load.image("parrot", parrotImg);
@@ -29,14 +32,15 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("stone", stoneImg);
   }
 
+  //Create Scene
   create() {
-    // This is the text for a program which calls the function stored in the
-    // symbol "alert-hello". It starts with a line comment, and then a function
-    // call.
+
+    //Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
     C4C.Editor.setText(`moveRight(20)`);
 
+    //Set tile layout
     this.tiles = []
 
     for (let y = 0; y < 30; y++) {
@@ -64,12 +68,14 @@ export default class GameScene extends Phaser.Scene {
     this.parrot.displayWidth = TILE_SIZE
     this.parrot.height = TILE_SIZE
     this.parrot.displayHeight = TILE_SIZE
+    
     // Define new function and store it in the symbol "alert-hello". This
     // function can now be called from our little language.
     C4C.Interpreter.define("alertHello", () => {
       alert("hello");
     });
 
+    //Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
       this.parrot.x += x_dist;
     });

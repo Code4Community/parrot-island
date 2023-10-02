@@ -1,0 +1,18 @@
+# To Do
+- Grid system for positions of entities	-- Ram
+- Trees -- Levi
+  - type entity
+  - need to add texture
+- Work on the HTML -- Victor
+  - make it look more similar to other games
+  - easier to read/understand
+  - borrowed from other projects
+- Collisions with entities
+- Entity subclasses	(position, collision, texture)
+  - MovingEntity
+    - Player
+    - Enemy
+  - Collectible
+  - Goal
+  - Obstacle
+- Background (only grid of tiles for now)
