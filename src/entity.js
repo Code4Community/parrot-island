@@ -4,7 +4,6 @@ import Physics from "phaser";
 
 
 /** 
- * 
  * Class representing a game object that interacts with another game object. 
  * i.e. anything that isn't background
 */
