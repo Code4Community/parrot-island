@@ -4,6 +4,7 @@ import Physics from "phaser";
 import parrotImg from "../assets/parrot.png";
 import grassImg from "../assets/grass.png";
 import stoneImg from "../assets/stone.png";
+import treeImg from "../assets/tree.png";
 
 import C4C from "c4c-lib";
 
@@ -22,6 +23,8 @@ export default class GameScene extends Phaser.Scene{
 
   constructor() {
     super("Example")
+    // Buttons ;
+    // Buttons.constructor()
   }
 
   //Load in images || TODO: move to own file
@@ -30,17 +33,18 @@ export default class GameScene extends Phaser.Scene{
     this.load.image("parrot", parrotImg);
     this.load.image("grass", grassImg);
     this.load.image("stone", stoneImg);
+    this.load.image("tree", treeImg);
   }
 
-  //Create Scene
+  // Create Scene
   create() {
 
-    //Initialize editor window
+    // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`moveRight(20)`);
+    C4C.Editor.setText(`moveRight(1)`);
 
-    //Set tile layout
+    // Set tile layout
     this.tiles = []
 
     for (let y = 0; y < 30; y++) {
@@ -61,7 +65,21 @@ export default class GameScene extends Phaser.Scene{
       }
       this.tiles.push(row)
     }
-        
+
+    // Will eventually implement the trees showing up. The sprite for trees is currently not working.
+    for (let y = 0; y < 30; y++) {
+      for (let x = 0; x < 30; x++) {
+        if (Math.random() < 0.8) {
+          let tree = this.add.sprite(x * TILE_SIZE + TILE_SIZE / 2, y * TILE_SIZE + TILE_SIZE / 2, "tree")
+          tree.width = TILE_SIZE
+          tree.displayWidth = TILE_SIZE
+          tree.height = TILE_SIZE
+          tree.displayHeight = TILE_SIZE
+        }
+      }
+    }
+
+
     // coords for position
     this.parrot = this.add.sprite(TILE_SIZE / 2, TILE_SIZE / 2, "parrot")
     this.parrot.width = TILE_SIZE
@@ -77,19 +95,19 @@ export default class GameScene extends Phaser.Scene{
 
     //Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
-      this.parrot.x += x_dist;
+      this.parrot.x += x_dist*TILE_SIZE;
     });
 
     C4C.Interpreter.define("moveLeft", (x_dist) => {
-      this.parrot.x -= x_dist;
+      this.parrot.x -= x_dist*TILE_SIZE;
     });
 
     C4C.Interpreter.define("moveDown", (y_dist) => {
-      this.parrot.y += y_dist;
+      this.parrot.y += y_dist*TILE_SIZE;
     });
 
     C4C.Interpreter.define("moveUp", (y_dist) => {
-      this.parrot.y -= y_dist;
+      this.parrot.y -= y_dist*TILE_SIZE;
     });
     
     // Create some interface to running the interpreter:
@@ -142,5 +160,6 @@ export default class GameScene extends Phaser.Scene{
           })
           .on("pointerover", () => enterButtonHoverState(helpButton))
           .on("pointerout", () => enterButtonRestState(helpButton));
-  }
+	}
+  
 }

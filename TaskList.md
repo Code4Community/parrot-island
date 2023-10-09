@@ -16,3 +16,4 @@
   - Goal
   - Obstacle
 - Background (only grid of tiles for now)
+- Move buttons to their own class
