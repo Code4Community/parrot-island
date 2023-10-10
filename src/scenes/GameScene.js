@@ -66,7 +66,7 @@ export default class GameScene extends Phaser.Scene{
       this.tiles.push(row)
     }
 
-    // Will eventually implement the trees showing up. The sprite for trees is currently not working.
+    // Makes tree sprites appear on the grid
     for (let y = 0; y < 30; y++) {
       for (let x = 0; x < 30; x++) {
         if (Math.random() < 0.8) {
