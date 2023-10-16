@@ -5,6 +5,8 @@ import parrotImg from "../assets/parrot.png";
 import grassImg from "../assets/grass.png";
 import stoneImg from "../assets/stone.png";
 import treeImg from "../assets/tree.png";
+import treasureImg from "../assets/treasure.png";
+import mapPieceImg from "../assets/pieceOfMap.png";
 
 import C4C from "c4c-lib";
 
@@ -33,6 +35,8 @@ export default class GameScene extends Phaser.Scene {
         this.load.image("grass", grassImg);
         this.load.image("stone", stoneImg);
         this.load.image("tree", treeImg);
+        this.load.image("treasure", treasureImg);
+        this.load.image("mapPiece", mapPieceImg);
     }
 
     // Create Scene
@@ -83,6 +87,41 @@ export default class GameScene extends Phaser.Scene {
                     tree.displayHeight = TILE_SIZE;
                 }
             }
+        }
+
+        // Makes treasure sprites appear on the grid
+        for (let y = 0; y < 30; y++) {
+            for (let x = 0; x < 30; x++) {
+                if (Math.random() < 0.05) {
+                    let treasure = this.add.sprite(
+                        x * TILE_SIZE + TILE_SIZE / 2,
+                        y * TILE_SIZE + TILE_SIZE / 2,
+                        "treasure"
+                    );
+                    treasure.width = TILE_SIZE;
+                    treasure.displayWidth = TILE_SIZE;
+                    treasure.height = TILE_SIZE;
+                    treasure.displayHeight = TILE_SIZE;
+                }
+            }
+        }
+
+        // Makes map piece sprites appear on the grid
+        for (let y = 0; y < 30; y++) {
+            for (let x = 0; x < 30; x++) {
+                if (Math.random() < 0.05) {
+                    let mapPiece = this.add.sprite(
+                        x * TILE_SIZE + TILE_SIZE / 2,
+                        y * TILE_SIZE + TILE_SIZE / 2,
+                        "mapPiece"
+                    );
+                    mapPiece.width = TILE_SIZE;
+                    mapPiece.displayWidth = TILE_SIZE;
+                    mapPiece.height = TILE_SIZE;
+                    mapPiece.displayHeight = TILE_SIZE;
+                }
+            }
+        }
 
             // coords for position
             this.parrot = this.add.sprite(
@@ -171,6 +210,5 @@ export default class GameScene extends Phaser.Scene {
                 })
                 .on("pointerover", () => enterButtonHoverState(helpButton))
                 .on("pointerout", () => enterButtonRestState(helpButton));
-        }
     }
 }
