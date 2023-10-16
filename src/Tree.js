@@ -11,6 +11,9 @@ export default class Tree extends Entity{
     constructor(x, y, texture, w, h, depth = 1) {
         super(x, y, texture);
         this.texture = treeImg;
+        this.w = w;
+        this.h = h;
+        this.depth = depth;
     }
 
 }
