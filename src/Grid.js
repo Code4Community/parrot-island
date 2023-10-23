@@ -39,7 +39,7 @@ export class Grid {
 }
 
 export class Position{
-	constructor(gridx=0,gridY=0){
+	constructor(gridX=0,gridY=0){
 		this.x=gridX
 		this.y=gridY
 	}
