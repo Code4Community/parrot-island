@@ -2,12 +2,11 @@
 import Phaser from "phaser";
 import Physics from "phaser";
 
-
 /** 
  * Class representing a game object that interacts with another game object. 
  * i.e. anything that isn't background
 */
-export default class Entity{
+export default class Entity {
     
     /**
      * @description Construct an entity
@@ -15,18 +14,16 @@ export default class Entity{
      * @param {number} x - x position in tiles 
      * @param {number} y - y position in tiles
      * @param {string} texture - sprite image
-     * @param {number} w - width in pixels
-     * @param {number} h - height in pixels
+     * @param {number} size - size (width and height) in pixels
      * @param {number} depth - sprite layer TODO: necessary?
     */
-    constructor(x, y, texture, w, h, depth = 1) {
+    constructor(x, y, texture, size, depth = 1) {
         this.x = x;
         this.y = y;
 
         this.texture = texture; 
-        
-        this.w = w;
-        this.h = h;
+
+        this.size = size;
 
         this.depth = depth;
     }
@@ -40,5 +37,36 @@ export default class Entity{
      */
     isColliding(x, y) {
         return this.x == x && this.y == y;
+    }
+
+    /**
+     * 
+     * @param {Phaser.Scene} scene 
+     */
+    initialize(scene) {
+        this.sprite = scene.add.sprite(
+            this.x * this.size + this.size / 2,
+            this.y * this.size + this.size / 2, 
+            this.texture,
+        )
+    }
+
+    update() {
+
+    }
+
+    visualUpdate() {
+        this.sprite?.setX(this.x * this.size + this.size / 2)
+        this.sprite?.setY(this.y * this.size + this.size / 2)
+    }
+
+    /**
+     * 
+     * @param {number} newX
+     * @param {number} newY 
+     */
+    moveTo(newX, newY) {
+        this.x = newX
+        this.y = newY
     }
 }

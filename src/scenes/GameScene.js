@@ -10,9 +10,12 @@ import mapPieceImg from "../assets/pieceOfMap.png";
 
 import C4C from "c4c-lib";
 
-import {IslandTiles} from "./WorldGen.js";
+import { IslandTiles } from "./WorldGen.js";
 
-
+import Treasure from "../Treasure";
+import PieceOfMap from '../PieceOfMap'
+import Entity from '../entity'
+import MovingEntity from '../movingEntity'
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -30,6 +33,7 @@ export default class GameScene extends Phaser.Scene {
         super("Example");
         // Buttons ;
         // Buttons.constructor()
+        this.entities = []
     }
 
     //Load in images || TODO: move to own file
@@ -48,7 +52,7 @@ export default class GameScene extends Phaser.Scene {
     create() {
         // Initialize editor window
         C4C.Editor.Window.init(this);
-        C4C.Editor.Window.open();
+        // C4C.Editor.Window.open();
         C4C.Editor.setText(`moveRight(1)`);
 
 		let NumTilesX=30
@@ -61,7 +65,7 @@ export default class GameScene extends Phaser.Scene {
         for (let y = 0; y < 30; y++) {
             let row = [];
             for (let x = 0; x < 30; x++) {
-                let texture=this.textureGrid[y][x]
+                let texture = this.textureGrid[y][x]
                 let tile = this.add.sprite(
                     x * TILE_SIZE + TILE_SIZE / 2,
                     y * TILE_SIZE + TILE_SIZE / 2,
@@ -76,39 +80,16 @@ export default class GameScene extends Phaser.Scene {
             this.tiles.push(row);
         }
 
-		// coords for position
-		this.parrot = this.add.sprite(
-			TILE_SIZE / 2,
-			TILE_SIZE / 2,
-			"parrot"
-		);
-		this.parrot.width = TILE_SIZE;
-		this.parrot.displayWidth = TILE_SIZE;
-		this.parrot.height = TILE_SIZE;
-		this.parrot.displayHeight = TILE_SIZE;
+        this.parrot = new MovingEntity(0, 0, "parrot", TILE_SIZE, 0, 0)
+        this.entities.push(this.parrot)
 
+        this.mapPiece = new PieceOfMap(4, 8, TILE_SIZE)
+        this.entities.push(this.mapPiece)
 
-		// coords for position
-		this.mapPiece = this.add.sprite(
-			TILE_SIZE * 8,
-			TILE_SIZE * 4,
-			"mapPiece"
-		);
-		this.mapPiece.width = TILE_SIZE;
-		this.mapPiece.displayWidth = TILE_SIZE;
-		this.mapPiece.height = TILE_SIZE;
-		this.mapPiece.displayHeight = TILE_SIZE;
+        this.treasure = new Treasure(8, 4, TILE_SIZE)
+        this.entities.push(this.treasure)
 
-		// coords for position
-		this.treasure = this.add.sprite(
-			TILE_SIZE * 4,
-			TILE_SIZE * 8,
-			"treasure"
-		);
-		this.treasure.width = TILE_SIZE;
-		this.treasure.displayWidth = TILE_SIZE;
-		this.treasure.height = TILE_SIZE;
-		this.treasure.displayHeight = TILE_SIZE;
+        this.entities.forEach(e => e.initialize(this))
 
 		// Define new function and store it in the symbol "alert-hello". This
 		// function can now be called from our little language.
@@ -118,19 +99,23 @@ export default class GameScene extends Phaser.Scene {
 
 		//Intepreter Movement Commands
 		C4C.Interpreter.define("moveRight", (x_dist) => {
-			this.parrot.x += x_dist * TILE_SIZE;
+			this.parrot.x += x_dist
+            this.parrot.update()
 		});
 
 		C4C.Interpreter.define("moveLeft", (x_dist) => {
-			this.parrot.x -= x_dist * TILE_SIZE;
+			this.parrot.x -= x_dist;
+            this.parrot.update()
 		});
 
 		C4C.Interpreter.define("moveDown", (y_dist) => {
-			this.parrot.y += y_dist * TILE_SIZE;
+			this.parrot.y += y_dist;
+            this.parrot.update()
 		});
 
 		C4C.Interpreter.define("moveUp", (y_dist) => {
-			this.parrot.y -= y_dist * TILE_SIZE;
+			this.parrot.y -= y_dist;
+            this.parrot.update()
 		});
 
 		// Create some interface to running the interpreter:
@@ -182,9 +167,17 @@ export default class GameScene extends Phaser.Scene {
 			.text(580, 400, "Help", { fill: "#fff", fontSize: "30px" })
 			.setInteractive()
 			.on("pointerdown", () => {
-				C4C.Editor.Window.toggle();
+                this.entities.forEach(entity => {
+                    entity.update()
+                })
 			})
 			.on("pointerover", () => enterButtonHoverState(helpButton))
 			.on("pointerout", () => enterButtonRestState(helpButton));
+    }
+
+    update() {
+        this.entities.forEach(entity => {
+            entity.visualUpdate()
+        })
     }
 }

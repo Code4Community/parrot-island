@@ -1,14 +1,12 @@
 import Phaser from "phaser";
 import Physics from "phaser";
 
-const TILE_SIZE = GameScene.TILE_SIZE;
-var subX = 0;
-var subY = 0;
+import Entity from './entity'
 
 /**
  * Class representing a game object that interacts with another game object and has movement. 
 */
-export default class MovingEntity extends Entity{
+export default class MovingEntity extends Entity {
     
     /** 
         * @description construct a MovingEntity
@@ -22,8 +20,8 @@ export default class MovingEntity extends Entity{
         * @param vy y velocity in pixels / frame
         * @param depth - sprite layer TODO: necessary?
     */
-    constructor(x, y, texture, w, h, vx = 0, vy = 0, depth = 1){
-        super(x, y, texture, w, h, depth);
+    constructor(x, y, texture, size, vx = 0, vy = 0, depth = 1) {
+        super(x, y, texture, size, depth);
 
         this.vx = vx;
         this.vy = vy;
@@ -59,12 +57,26 @@ export default class MovingEntity extends Entity{
         return this.isColliding(E.x, E.y);
     }
 
-    //Update position
-    update(){
-        subX = (x*TILE_SIZE + vx)%TILE_SIZE;
-        x = floor((x*TILE_SIZE + vx)/TILE_SIZE);
+    update() {
+        super.update()
+        this.moveTo(this.x + this.vx, this.y + this.vy)
+    }
 
-        subY = (y*TILE_SIZE + vy)%TILE_SIZE;
-        y = floor((y*TILE_SIZE + vy)/TILE_SIZE);
+    visualUpdate() {
+        let currentVisX = this.sprite.x
+        let currentVisY = this.sprite.y
+        let targetVisX = this.x * this.size + this.size / 2
+        let targetVisY = this.y * this.size + this.size / 2
+        this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
+        this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+    }
+
+    /**
+     * 
+     * @param {number} newX
+     * @param {number} newY 
+     */
+    moveTo(newX, newY) {
+        super.moveTo(newX, newY)
     }
 }
