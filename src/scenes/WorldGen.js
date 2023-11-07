@@ -7,7 +7,7 @@ export function IslandTiles(width, height){
 	for (let y = 0; y < height; y++) {
 		let row = [];
 		for (let x = 0; x < width; x++) {
-			row.push("stone");
+			row.push("sand");
 		}
 		result.push(row);
 	}

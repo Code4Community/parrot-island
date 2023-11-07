@@ -7,6 +7,8 @@ import stoneImg from "../assets/stone.png";
 import treeImg from "../assets/tree.png";
 import treasureImg from "../assets/treasure.png";
 import mapPieceImg from "../assets/pieceOfMap.png";
+import waterImg from "../assets/water.png";
+import sandImg from "../assets/sand.png";
 
 import C4C from "c4c-lib";
 
@@ -31,7 +33,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("tree", treeImg);
     this.load.image("treasure", treasureImg);
     this.load.image("mapPiece", mapPieceImg);
-    this.load.image("water", stoneImg);
+    this.load.image("water", waterImg);
+    this.load.image("sand", sandImg);
   }
 
   // Create Scene
@@ -113,4 +116,5 @@ export default class GameScene extends Phaser.Scene {
     // Create some interface to running the interpreter:
     new Buttons(this);
   }
+  
 }
