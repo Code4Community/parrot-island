@@ -51,20 +51,23 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.textureGrid = IslandTiles(NumTilesX, NumTilesY);
 
-    for (let y = 0; y < 30; y++) {
+    for (let y = 0; y < NumTilesY; y++) {
       let row = [];
-      for (let x = 0; x < 30; x++) {
-        let texture = this.textureGrid[y][x];
-        let tile = this.add.sprite(
-          x * TILE_SIZE + TILE_SIZE / 2,
-          y * TILE_SIZE + TILE_SIZE / 2,
-          texture
-        );
-        tile.width = TILE_SIZE;
-        tile.displayWidth = TILE_SIZE;
-        tile.height = TILE_SIZE;
-        tile.displayHeight = TILE_SIZE;
-        row.push(tile);
+      for (let x = 0; x < NumTilesX; x++) {
+        row[x]=[]
+        for(let layer=0;layer<this.textureGrid[y][x].length;layer++){
+          let texture = this.textureGrid[y][x][layer];
+          let tile = this.add.sprite(
+            x * TILE_SIZE + TILE_SIZE / 2,
+            y * TILE_SIZE + TILE_SIZE / 2,
+            texture
+          );
+          tile.width = TILE_SIZE;
+          tile.displayWidth = TILE_SIZE;
+          tile.height = TILE_SIZE;
+          tile.displayHeight = TILE_SIZE;
+          row[x].push(tile);
+        }
       }
       this.tiles.push(row);
     }
