@@ -66,5 +66,18 @@ export default class Buttons {
       })
       .on("pointerover", () => enterButtonHoverState(helpButton))
       .on("pointerout", () => enterButtonRestState(helpButton));
+
+      // Help Button
+    const gridButton = scene.add
+    .text(580, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
+    .setInteractive()
+    .on("pointerdown", () => {
+      scene.tiles.forEach((tile) => {
+        try{tile.setAlpha(0.1);}catch(e){}
+      });
+      alert('why');
+    })
+    .on("pointerover", () => enterButtonHoverState(gridButton))
+    .on("pointerout", () => enterButtonRestState(gridButton));
   }
 }

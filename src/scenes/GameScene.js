@@ -66,6 +66,12 @@ export default class GameScene extends Phaser.Scene {
       this.tiles.push(row);
     }
 
+    /*for(var j = 0; j < NumTilesY; j++){
+      for(var i = 0; i < NumTilesX; i++){
+        this.add.rectangle(i*TILE_SIZE, j*TILE_SIZE, TILE_SIZE, TILE_SIZE, ((i + j) % 2 == 0)?0x00000:0x888888,0.1);
+      }  
+    }*/
+
     // coords for position
     this.parrot = this.add.sprite(TILE_SIZE / 2, TILE_SIZE / 2, "parrot");
     this.parrot.width = TILE_SIZE;
@@ -113,4 +119,5 @@ export default class GameScene extends Phaser.Scene {
     // Create some interface to running the interpreter:
     new Buttons(this);
   }
+
 }
