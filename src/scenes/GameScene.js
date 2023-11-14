@@ -7,6 +7,8 @@ import stoneImg from "../assets/stone.png";
 import treeImg from "../assets/tree.png";
 import treasureImg from "../assets/treasure.png";
 import mapPieceImg from "../assets/pieceOfMap.png";
+import waterImg from "../assets/water.png";
+import sandImg from "../assets/sand.png";
 
 import C4C from "c4c-lib";
 
@@ -31,7 +33,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("tree", treeImg);
     this.load.image("treasure", treasureImg);
     this.load.image("mapPiece", mapPieceImg);
-    this.load.image("water", stoneImg);
+    this.load.image("water", waterImg);
+    this.load.image("sand", sandImg);
   }
 
   // Create Scene
@@ -48,20 +51,23 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.textureGrid = IslandTiles(NumTilesX, NumTilesY);
 
-    for (let y = 0; y < 30; y++) {
+    for (let y = 0; y < NumTilesY; y++) {
       let row = [];
-      for (let x = 0; x < 30; x++) {
-        let texture = this.textureGrid[y][x];
-        let tile = this.add.sprite(
-          x * TILE_SIZE + TILE_SIZE / 2,
-          y * TILE_SIZE + TILE_SIZE / 2,
-          texture
-        );
-        tile.width = TILE_SIZE;
-        tile.displayWidth = TILE_SIZE;
-        tile.height = TILE_SIZE;
-        tile.displayHeight = TILE_SIZE;
-        row.push(tile);
+      for (let x = 0; x < NumTilesX; x++) {
+        row[x]=[]
+        for(let layer=0;layer<this.textureGrid[y][x].length;layer++){
+          let texture = this.textureGrid[y][x][layer];
+          let tile = this.add.sprite(
+            x * TILE_SIZE + TILE_SIZE / 2,
+            y * TILE_SIZE + TILE_SIZE / 2,
+            texture
+          );
+          tile.width = TILE_SIZE;
+          tile.displayWidth = TILE_SIZE;
+          tile.height = TILE_SIZE;
+          tile.displayHeight = TILE_SIZE;
+          row[x].push(tile);
+        }
       }
       this.tiles.push(row);
     }
@@ -119,5 +125,4 @@ export default class GameScene extends Phaser.Scene {
     // Create some interface to running the interpreter:
     new Buttons(this);
   }
-
 }
