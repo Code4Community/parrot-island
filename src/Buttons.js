@@ -72,10 +72,11 @@ export default class Buttons {
     .text(580, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
+      var state = scene.tiles[0][0][0].alpha === 0.8;
+      
       for(var j = 0; j < 30; j++){
         for(var i = j%2; i < 30; i+=2){
           for(var k = 0; k < scene.tiles[j][i].length; k++){
-            var state = scene.tiles[j][i][k].alpha === 0.8;
             scene.tiles[j][i][k].setAlpha(state ? 1 : 0.8);
           }
         }
