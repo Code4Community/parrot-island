@@ -25,7 +25,7 @@ var config = {
     createContainer: true,
   },
   scene: [WorldGame],
-  backgroundColor:"#5fe83c",
+  backgroundColor:"#000000",
 };
 
 const game = new Phaser.Game(config);

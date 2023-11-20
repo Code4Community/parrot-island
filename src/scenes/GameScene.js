@@ -2,13 +2,13 @@ import Phaser from "phaser";
 import Physics from "phaser";
 
 import parrotImg from "../assets/parrot.png";
-import grassImg from "../assets/grass.png";
-import stoneImg from "../assets/stone.png";
-import treeImg from "../assets/tree.png";
+import grassImg from "../assets/grassNew.png";
+import stoneImg from "../assets/stoneNew.png";
+import treeImg from "../assets/treeNew.png";
 import treasureImg from "../assets/treasure.png";
 import mapPieceImg from "../assets/pieceOfMap.png";
-import waterImg from "../assets/water.png";
-import sandImg from "../assets/sand.png";
+import waterImg from "../assets/waterNew.png";
+import sandImg from "../assets/sandNew.png";
 
 import C4C from "c4c-lib";
 

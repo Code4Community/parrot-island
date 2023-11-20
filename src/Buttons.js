@@ -69,7 +69,7 @@ export default class Buttons {
 
       // Help Button
     const gridButton = scene.add
-    .text(580, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
+    .text(510, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
       var state = scene.tiles[0][0][0].alpha === 0.8;
