@@ -1,19 +1,14 @@
 # To Do
-- Grid system for positions of entities	-- Ram
+- Grid system for positions of entities	-- David
 - Trees -- Levi
   - type entity
-  - need to add texture
-- Work on the HTML -- Victor
+  - need to draw on island map
+- Work on the HTML -- Ram
   - make it look more similar to other games
   - easier to read/understand
   - borrowed from other projects
 - Collisions with entities
+  - system in place, need to add to 
 - Entity subclasses	(position, collision, texture)
-  - MovingEntity
-    - Player
-    - Enemy
-  - Collectible
-  - Goal
-  - Obstacle
 - Background (only grid of tiles for now)
 - Move buttons to their own class
