@@ -31,6 +31,7 @@
     "webpack-merge": "^5.8.0"
   },
   "dependencies": {
+    "bootstrap": "^5.3.2",
     "c4c-lib": "github:code4community/c4c-lib#0.2.2",
     "phaser": "^3.55.2"
   }
