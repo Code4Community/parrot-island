@@ -79,30 +79,12 @@ export default class GameScene extends Phaser.Scene {
       }  
     }*/
 
-    // coords for position
-    //this.parrot = this.add.sprite(TILE_SIZE / 2, TILE_SIZE / 2, "parrot");
-    //this.parrot.width = TILE_SIZE;
-    //this.parrot.displayWidth = TILE_SIZE;
-    //this.parrot.height = TILE_SIZE;
-    //this.parrot.displayHeight = TILE_SIZE;
     this.parrot = new Entity(1, 1, "parrot", TILE_SIZE, 1);
     this.parrot.initialize(this);
 
-    // coords for position
-    //this.mapPiece = this.add.sprite(TILE_SIZE * 8 + TILE_SIZE / 2, TILE_SIZE * 4 + TILE_SIZE / 2, "mapPiece");
-    //this.mapPiece.width = TILE_SIZE;
-    //this.mapPiece.displayWidth = TILE_SIZE;
-    //this.mapPiece.height = TILE_SIZE;
-    //this.mapPiece.displayHeight = TILE_SIZE;
     this.map = new Entity(8, 4, "mapPiece", TILE_SIZE, 1);
     this.map.initialize(this);
 
-    // coords for position
-    //this.treasure = this.add.sprite(TILE_SIZE * 4 + TILE_SIZE / 2, TILE_SIZE * 8 + TILE_SIZE / 2, "treasure");
-    //this.treasure.width = TILE_SIZE;
-    //this.treasure.displayWidth = TILE_SIZE;
-    //this.treasure.height = TILE_SIZE;
-    //this.treasure.displayHeight = TILE_SIZE;
     this.treasure = new Entity(4, 8, "treasure", TILE_SIZE, 1);
     this.treasure.initialize(this);
 
@@ -114,22 +96,22 @@ export default class GameScene extends Phaser.Scene {
 
     //Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
-      this.parrot.x = this.parrot.x + x_dist * TILE_SIZE;
+      this.parrot.x += x_dist;
       this.parrot.visualUpdate();
     });
 
     C4C.Interpreter.define("moveLeft", (x_dist) => {
-      this.parrot.x -= x_dist * TILE_SIZE;
+      this.parrot.x -= x_dist;
       this.parrot.visualUpdate();
     });
 
     C4C.Interpreter.define("moveDown", (y_dist) => {
-      this.parrot.y += y_dist * TILE_SIZE;
+      this.parrot.y += y_dist;
       this.parrot.visualUpdate();
     });
 
     C4C.Interpreter.define("moveUp", (y_dist) => {
-      this.parrot.y -= y_dist * TILE_SIZE;
+      this.parrot.y -= y_dist;
       this.parrot.visualUpdate();
     });
 
