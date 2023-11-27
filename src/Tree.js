@@ -1,19 +1,25 @@
 import Phaser from "phaser";
-import Physics from "phaser";
-import Entity from "entity";
-import treeImg from "../assets/tree.png";
+import MovingEntity from "./movingEntity";
 
-/** 
+/**
  * 
  * Class representing a tree object
 */
-export default class Tree extends Entity{
-    constructor(x, y, texture, w, h, depth = 1) {
-        super(x, y, texture);
-        this.texture = treeImg;
-        this.w = w;
-        this.h = h;
-        this.depth = depth;
+export default class Tree extends MovingEntity {
+    constructor(x, y, size) {
+        super(x, y, "tree", size);
+        this.fadingAway = false;
     }
 
+    update() {
+        this.x += Math.floor(Math.random() * 3) - 1
+        this.y += Math.floor(Math.random() * 3) - 1
+
+        if (this.x < 0) {
+            this.x = 0;
+        }
+        if (this.y < 0) {
+            this.y = 0;
+        }
+    }
 }

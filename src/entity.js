@@ -1,6 +1,5 @@
 // @ts-check
 import Phaser from "phaser";
-import Physics from "phaser";
 
 /** 
  * Class representing a game object that interacts with another game object. 
@@ -26,6 +25,8 @@ export default class Entity {
         this.size = size;
 
         this.depth = depth;
+
+        this.alive = true;
     }
 
     /**
@@ -58,6 +59,10 @@ export default class Entity {
     visualUpdate() {
         this.sprite?.setX(this.x * this.size + this.size / 2)
         this.sprite?.setY(this.y * this.size + this.size / 2)
+    }
+
+    destroy() {
+        this.alive = false;
     }
 
     /**

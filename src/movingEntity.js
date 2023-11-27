@@ -25,6 +25,8 @@ export default class MovingEntity extends Entity {
 
         this.vx = vx;
         this.vy = vy;
+
+        this.fadingAway = false;
     }
 
     /**
@@ -59,16 +61,34 @@ export default class MovingEntity extends Entity {
 
     update() {
         super.update()
-        this.moveTo(this.x + this.vx, this.y + this.vy)
+        if (this.alive) {
+            this.moveTo(this.x + this.vx, this.y + this.vy)
+        }
     }
 
     visualUpdate() {
-        let currentVisX = this.sprite.x
-        let currentVisY = this.sprite.y
-        let targetVisX = this.x * this.size + this.size / 2
-        let targetVisY = this.y * this.size + this.size / 2
-        this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
-        this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+        if (this.fadingAway) {
+            if (this.deathVel === undefined) {
+                this.deathVel = [Math.random() * 5 - 2.5, Math.random() * 5 - 2.5]
+            } else {
+                const [vx, vy] = this.deathVel;
+                this.sprite.scale *= 0.95
+                this.sprite.x += vx;
+                this.sprite.y += vy;
+            }
+        } else {
+            let currentVisX = this.sprite.x
+            let currentVisY = this.sprite.y
+            let targetVisX = this.x * this.size + this.size / 2
+            let targetVisY = this.y * this.size + this.size / 2
+            this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
+            this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+        }
+    }
+
+    destroy() {
+        super.destroy();
+        this.fadingAway = true;
     }
 
     /**

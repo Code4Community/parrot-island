@@ -14,8 +14,8 @@ import { IslandTiles } from "./WorldGen.js";
 
 import Treasure from "../Treasure";
 import PieceOfMap from '../PieceOfMap'
-import Entity from '../entity'
-import MovingEntity from '../movingEntity'
+import InteractionsManager from '../interactions'
+import Parrot from "../Parrot.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -53,7 +53,7 @@ export default class GameScene extends Phaser.Scene {
         // Initialize editor window
         C4C.Editor.Window.init(this);
         // C4C.Editor.Window.open();
-        C4C.Editor.setText(`moveRight(1)`);
+        C4C.Editor.setText(`moveRight(1)\nmoveRight(1)\nmoveRight(1)\nmoveDown(1)\nmoveDown(1)\nmoveUp(1)\nmoveUp(1)\nmoveRight(1)\nmoveRight(1)\nmoveRight(1)`);
 
 		let NumTilesX=30
 		let NumTilesY=30
@@ -80,16 +80,43 @@ export default class GameScene extends Phaser.Scene {
             this.tiles.push(row);
         }
 
-        this.parrot = new MovingEntity(0, 0, "parrot", TILE_SIZE, 0, 0)
+        this.parrot = new Parrot(0, 0, TILE_SIZE);
         this.entities.push(this.parrot)
 
-        this.mapPiece = new PieceOfMap(4, 8, TILE_SIZE)
-        this.entities.push(this.mapPiece)
+		for (let x = 4; x < 20; x++) {
+			if (Math.random() < 0.5) {
+				this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
+			} else {
+				this.entities.push(new Treasure(x, 0, TILE_SIZE));
+			}
+		}
 
-        this.treasure = new Treasure(8, 4, TILE_SIZE)
-        this.entities.push(this.treasure)
+        // this.treasure = new Treasure(8, 4, TILE_SIZE)
+        // this.entities.push(this.treasure)
+
+		// for (let i = 0; i < 20; i++) {
+		// 	for (let j = 0; j < 20; j++) {
+		// 		const tree = new Tree(i, j, TILE_SIZE);
+		// 		this.entities.push(tree)
+		// 	}
+		// }
 
         this.entities.forEach(e => e.initialize(this))
+
+		this.interactionsManager = new InteractionsManager();
+
+		// this.interactionsManager.addInteraction([Tree, Tree], (t1, t2) => {
+		// 	t1.destroy();
+		// 	t2.destroy();
+		// })
+
+		this.interactionsManager.addInteraction([Parrot, PieceOfMap], (_, pieceOfMap) => {
+			pieceOfMap.destroy();
+		})
+
+		this.interactionsManager.addInteraction([Parrot, Treasure], (_, treasure) => {
+			treasure.destroy();
+		})
 
 		// Define new function and store it in the symbol "alert-hello". This
 		// function can now be called from our little language.
@@ -97,26 +124,32 @@ export default class GameScene extends Phaser.Scene {
 			alert("hello");
 		});
 
+		const updateAll = () => {
+        	this.entities.forEach(e => e.update())
+		}
+
 		//Intepreter Movement Commands
 		C4C.Interpreter.define("moveRight", (x_dist) => {
 			this.parrot.x += x_dist
-            this.parrot.update()
+            updateAll()
 		});
 
 		C4C.Interpreter.define("moveLeft", (x_dist) => {
 			this.parrot.x -= x_dist;
-            this.parrot.update()
+            updateAll()
 		});
 
 		C4C.Interpreter.define("moveDown", (y_dist) => {
 			this.parrot.y += y_dist;
-            this.parrot.update()
+            updateAll()
 		});
 
 		C4C.Interpreter.define("moveUp", (y_dist) => {
 			this.parrot.y -= y_dist;
-            this.parrot.update()
+            updateAll()
 		});
+
+		let n = 0;
 
 		// Create some interface to running the interpreter:
 		// Run Button
@@ -126,7 +159,12 @@ export default class GameScene extends Phaser.Scene {
 			.on("pointerdown", () => {
 				const programText = C4C.Editor.getText();
 				// HERE'S THE IMPORTANT PART!!
-				C4C.Interpreter.run(programText);
+				// if (n % 2 === 0) {
+				// 	this.interactionsManager.checkInteractions(this.entities.filter(e => e.alive));
+				// } else {
+				// 	C4C.Interpreter.run(programText);
+				// }
+				// n++;
 			})
 			.on("pointerover", () => enterButtonHoverState(runButton))
 			.on("pointerout", () => enterButtonRestState(runButton));
@@ -175,9 +213,20 @@ export default class GameScene extends Phaser.Scene {
 			.on("pointerout", () => enterButtonRestState(helpButton));
     }
 
+	lastUpdate = Date.now()
+
+	loc = 0;
+
     update() {
-        this.entities.forEach(entity => {
-            entity.visualUpdate()
-        })
+		if (Date.now() - this.lastUpdate > 1000) {
+			const programText = C4C.Editor.getText();
+			const res = C4C.Interpreter.stepRun(programText, [this.loc])
+			this.loc = res[1]
+			this.interactionsManager.checkInteractions(this.entities.filter(e => e.alive));
+			this.lastUpdate = Date.now();
+		}
+		this.entities.forEach(entity => {
+			entity.visualUpdate()
+		})
     }
 }
