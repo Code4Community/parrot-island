@@ -1,8 +1,7 @@
 import Entity from "./entity";
 
 /** 
- * 
- * Class representing a treasure object
+ * Class representing a piece of map object
 */
 export default class PieceOfMap extends Entity{
     constructor(x, y, size) {
