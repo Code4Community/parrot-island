@@ -1,12 +1,4 @@
 # To Do
-- Grid system for positions of entities	-- David
-- Trees -- Levi
-  - type entity
-  - need to draw on island map
-- Work on the HTML -- Ram
-  - make it look more similar to other games
-  - easier to read/understand
-  - borrowed from other projects
 - Collisions with entities
   - system in place, need to add to 
 - Entity subclasses	(position, collision, texture)
