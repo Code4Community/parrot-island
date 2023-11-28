@@ -14,28 +14,36 @@ export const readLevelData = async (filePath) => {
  * @param {LevelData} levelData - the level data.
  * @param {number} tileSize
  */
-export const createTilesFromLevelData = (levelData, scene, tileSize) => {
-    for (let y = 0; y < levelData.height; y++) {
+export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
+    for(let y = 0; y < levelData.height; y++){
         let row = [];
-        for (let x = 0; x < levelData.width; x++) {
-            const tile = levelData.tiles[y][x];
-            let texture = tile;
+        for(let x = 0; x < levelData.height; x++){
+            
+            let texture = "";
 
-            let phaserTile = scene.add.sprite(
+            switch(levelData.tiles[y][x]){
+                case 1: texture = "grass"; break;
+                case 2: texture = "sand";  break;
+                case 3: texture = "stone"; break;
+                case 4: texture = "tree"; break;
+                default: texture = "water"; break;
+            }
+
+            let tile = scene.add.sprite(
                 x * tileSize + tileSize / 2,
                 y * tileSize + tileSize / 2,
                 texture
-            );
+              );
 
-            phaserTile.width = tileSize;
-            phaserTile.displayWidth = tileSize;
-            phaserTile.height = tileSize;
-            phaserTile.displayHeight = tileSize;
+            tile.width = tileSize;
+            tile.displayWidth = tileSize;
+            tile.height = tileSize;
+            tile.displayHeight = tileSize;
             row.push(tile);
         }
         scene.tiles.push(row);
     }
-};
+}
 
 /**
  * @param {string} name
@@ -51,7 +59,7 @@ export const generateRandomLevelData = (name, width, height) => {
     const tiles = [];
 
     /**
-     * @type {Entity[][]}
+     * @type {Entity[]}
      */
     const entities = [];
 
@@ -109,7 +117,7 @@ export const generateRandomLevelData = (name, width, height) => {
  *      name: string,
  *      width: number,
  *      height: number, 
- *      tiles: Tile[][],    // indexed by [y][x]
+ *      tiles: number[][],    // indexed by [y][x]
  *      entities: Entity[], // “
  * }} LevelData
  */
