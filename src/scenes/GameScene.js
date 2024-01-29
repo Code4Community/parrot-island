@@ -53,7 +53,7 @@ export default class GameScene extends Phaser.Scene {
         // Initialize editor window
         C4C.Editor.Window.init(this);
         // C4C.Editor.Window.open();
-        C4C.Editor.setText(`moveRight(1)\nmoveRight(1)\nmoveRight(1)\nmoveDown(1)\nmoveDown(1)\nmoveUp(1)\nmoveUp(1)\nmoveRight(1)\nmoveRight(1)\nmoveRight(1)`);
+        C4C.Editor.setText(`moveRight(1)`)
 
 		let NumTilesX=30
 		let NumTilesY=30
@@ -158,13 +158,9 @@ export default class GameScene extends Phaser.Scene {
 			.setInteractive()
 			.on("pointerdown", () => {
 				const programText = C4C.Editor.getText();
-				// HERE'S THE IMPORTANT PART!!
-				// if (n % 2 === 0) {
-				// 	this.interactionsManager.checkInteractions(this.entities.filter(e => e.alive));
-				// } else {
-				// 	C4C.Interpreter.run(programText);
-				// }
-				// n++;
+				C4C.Interpreter.run(programText);
+				this.interactionsManager.checkInteractions(this.entities.filter(e => e.alive));
+				n++;
 			})
 			.on("pointerover", () => enterButtonHoverState(runButton))
 			.on("pointerout", () => enterButtonRestState(runButton));
