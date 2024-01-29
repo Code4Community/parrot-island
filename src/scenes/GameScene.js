@@ -15,6 +15,19 @@ import C4C from "c4c-lib";
 import { IslandTiles } from "./WorldGen.js";
 import Buttons from "../Buttons";
 import Entity from "../entity";
+import Treasure from "../Treasure";
+import PieceOfMap from '../PieceOfMap'
+import InteractionsManager from '../interactions'
+import Parrot from "../Parrot.js";
+
+//Button Hovering
+function enterButtonHoverState(btn) {
+    btn.setStyle({ fill: "#ff0" });
+}
+
+function enterButtonRestState(btn) {
+    btn.setStyle({ fill: "#fff" });
+}
 
 const TILE_SIZE = 30;
 
