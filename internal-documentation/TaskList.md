@@ -1,10 +1,11 @@
 # To Do/Notes
-- Fix parrot icon on the header (frontend) -- Ram (IN PROGRESS, DIFFICULT)
 - Collisions with entities -- Ayden (IN PROGRESS, V DIFFICULT)
   - system in place, need to add to physics
 - Entity subclasses	(position, collision, texture)
 - Config files to streamline map design/loading -- David (IN PROGRESS)
-- Custom textures (more of them)
+- Fix level display tiles being cut off
+- Custom textures (more of them) -- Levi (IN PROGRESS)
+  - custom parrot (DONE)
   - parrot eyepatch important
   - opencv edit texture?
 - Custom sounds (parrot call? cannonball?)
@@ -26,4 +27,5 @@
 - Parrot cosmetics
 
 - Scale pieceOfMap and treasure to better fit the grid cells -- Levi (DONE)
+- Fix parrot icon on the header (frontend) -- Ayden (DONE) 
 
