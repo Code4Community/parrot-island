@@ -1,34 +1,52 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" type="text/css" href="./dist/main.bundle.css" />
-    <link rel="stylesheet" type="text/css" href="./static/style.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
-        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+      integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2"
+      crossorigin="anonymous"
+    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        .popover {
-            color: #757575 !important;
-            max-width: 45%;
-        }
+      .popover {
+        color: #757575 !important;
+        max-width: 45%;
+      }
     </style>
     <title>Pirate Parrot</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <nav id="navbar" class="navbar navbar-light bg-light">
-        <a id="brand" class="navbar-brand" href="index.html">Pirate Parrot  <img
-                src="/static/parrot.png" width="50" height="50" /></a>
-        <ul class="nav me-auto">
-            <li class="nav-item">
-                <div class="container">
-                    <span type="button" class="btn btn-lg btn-success" href="#" id="instructions" data-toggle="popover"
-                        title="Instructions" data-html="true" data-content="<div><span class='first_instructs'>
+      <a id="brand" class="navbar-brand" href="index.html"
+        >Pirate Parrot <img src="/parrot.png" width="50" height="50"
+      /></a>
+      <ul class="nav me-auto">
+        <li class="nav-item">
+          <div class="container">
+            <span
+              type="button"
+              class="btn btn-lg btn-success"
+              href="#"
+              id="instructions"
+              data-toggle="popover"
+              title="Instructions"
+              data-html="true"
+              data-content="<div><span class='first_instructs'>
                         <center>Modify the code to tell the basket how to move.<br><br>
                         <strong>Actions</strong><br>
                         <em>moveLeft, moveRight, moveUp, moveDown</em><br>
@@ -41,47 +59,61 @@
                         Combine 'if' with either 'true' or 'false' to determine if a chunk of code will run or not. For example, any code between 'if false' and 'end' will not run.<br><br>
                         After writing your code, use the dropdown to select a level - you can start with 1, 
                         or challenge yourself with the final level! Run your code by clicking the Start button.</center>
-                        </div>">Instructions</span>
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" value="1">
-                        Level 1
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a href="#" data-value="1">Level 1</a></li>
-                    </ul>
-                </div>
-            </li>
-            <li class="nav-item">
-                <button id="run" type="button" class="btn btn-lg btn-success">
-                    Start!
-                </button>
-            </li>
-        </ul>
+                        </div>"
+              >Instructions</span
+            >
+          </div>
+        </li>
+        <li class="nav-item">
+          <div class="dropdown">
+            <button
+              class="btn btn-default dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              value="1"
+            >
+              Level 1
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a href="#" data-value="1">Level 1</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
+          <button id="run" type="button" class="btn btn-lg btn-success">
+            Start!
+          </button>
+        </li>
+      </ul>
     </nav>
 
     <div id="alert-container"></div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
     <script>
-        $(function () {
-            $('[data-toggle="popover"]').popover();
-        });
+      $(function () {
+        $('[data-toggle="popover"]').popover();
+      });
     </script>
 
     <script src="./dist/main.bundle.js"></script>
-</body>
-
+  </body>
 </html>
