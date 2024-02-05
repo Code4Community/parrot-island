@@ -16,17 +16,17 @@ import { IslandTiles } from "./WorldGen.js";
 import Buttons from "../Buttons";
 import Entity from "../entity";
 import Treasure from "../Treasure";
-import PieceOfMap from '../PieceOfMap'
-import InteractionsManager from '../interactions'
+import PieceOfMap from "../PieceOfMap";
+import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
-    btn.setStyle({ fill: "#ff0" });
+  btn.setStyle({ fill: "#ff0" });
 }
 
 function enterButtonRestState(btn) {
-    btn.setStyle({ fill: "#fff" });
+  btn.setStyle({ fill: "#fff" });
 }
 
 const TILE_SIZE = 30;
@@ -65,11 +65,13 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.textureGrid = IslandTiles(NumTilesX, NumTilesY);
 
+    this.entities = [];
+
     for (let y = 0; y < NumTilesY; y++) {
       let row = [];
       for (let x = 0; x < NumTilesX; x++) {
-        row[x]=[]
-        for(let layer=0;layer<this.textureGrid[y][x].length;layer++){
+        row[x] = [];
+        for (let layer = 0; layer < this.textureGrid[y][x].length; layer++) {
           let texture = this.textureGrid[y][x][layer];
           let tile = this.add.sprite(
             x * TILE_SIZE + TILE_SIZE / 2,
@@ -92,43 +94,88 @@ export default class GameScene extends Phaser.Scene {
       }  
     }*/
 
-    this.parrot = new Entity(1, 1, "parrot", TILE_SIZE, 1);
-    this.parrot.initialize(this);
+    this.parrot = new Parrot(0, 0, TILE_SIZE);
+    this.entities.push(this.parrot);
 
-    this.map = new Entity(8, 4, "mapPiece", TILE_SIZE, 1);
-    this.map.initialize(this);
+    for (let x = 4; x < 20; x++) {
+      if (Math.random() < 0.5) {
+        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
+      } else {
+        this.entities.push(new Treasure(x, 0, TILE_SIZE));
+      }
+    }
 
-    this.treasure = new Entity(4, 8, "treasure", TILE_SIZE, 1);
-    this.treasure.initialize(this);
+    this.entities.forEach((e) => e.initialize(this));
 
-    // Define new function and store it in the symbol "alert-hello". This
-    // function can now be called from our little language.
-    C4C.Interpreter.define("alertHello", () => {
-      alert("hello");
-    });
+    const updateAll = () => {
+      this.entities.forEach((e) => e.update());
+    };
 
-    //Intepreter Movement Commands
+    // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
       this.parrot.x += x_dist;
-      this.parrot.visualUpdate();
+      updateAll();
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
     });
 
     C4C.Interpreter.define("moveLeft", (x_dist) => {
       this.parrot.x -= x_dist;
-      this.parrot.visualUpdate();
+      updateAll();
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
     });
 
     C4C.Interpreter.define("moveDown", (y_dist) => {
       this.parrot.y += y_dist;
-      this.parrot.visualUpdate();
+      updateAll();
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
     });
 
     C4C.Interpreter.define("moveUp", (y_dist) => {
       this.parrot.y -= y_dist;
-      this.parrot.visualUpdate();
+      updateAll();
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
     });
 
     // Create some interface to running the interpreter:
     new Buttons(this);
+
+    this.interactionsManager = new InteractionsManager();
+
+    this.interactionsManager.addInteraction(
+      [Parrot, PieceOfMap],
+      (_, pieceOfMap) => {
+        pieceOfMap.destroy();
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Treasure],
+      (_, treasure) => {
+        treasure.destroy();
+      }
+    );
+  }
+
+  update() {
+    if (Date.now() - this.lastUpdate > 1000) {
+      const programText = C4C.Editor.getText();
+      const res = C4C.Interpreter.stepRun(programText, [this.loc]);
+      this.loc = res[1];
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
+      this.lastUpdate = Date.now();
+    }
+    this.entities.forEach((entity) => {
+      entity.visualUpdate();
+    });
   }
 }
