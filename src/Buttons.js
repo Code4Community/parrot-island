@@ -67,22 +67,22 @@ export default class Buttons {
       .on("pointerover", () => enterButtonHoverState(helpButton))
       .on("pointerout", () => enterButtonRestState(helpButton));
 
-      // Toggle Grid Button
+    // Toggle Grid Button
     const gridButton = scene.add
-    .text(510, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
-    .setInteractive()
-    .on("pointerdown", () => {
-      var square_alpha=0.7;
-      var state = scene.tiles[0][0][0].alpha === square_alpha;
-      for(var j = 0; j < 30; j++){
-        for(var i = j%2; i < 30; i+=2){
-          for(var k = 0; k < scene.tiles[j][i].length; k++){
-            scene.tiles[j][i][k].setAlpha(state ? 1 : square_alpha);
+      .text(510, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
+      .setInteractive()
+      .on("pointerdown", () => {
+        var square_alpha = 0.7;
+        var state = scene.tiles[0][0][0].alpha === square_alpha;
+        for (var j = 0; j < 30; j++) {
+          for (var i = j % 2; i < 30; i += 2) {
+            for (var k = 0; k < scene.tiles[j][i].length; k++) {
+              scene.tiles[j][i][k].setAlpha(state ? 1 : square_alpha);
+            }
           }
         }
-      }
-    })
-    .on("pointerover", () => enterButtonHoverState(gridButton))
-    .on("pointerout", () => enterButtonRestState(gridButton));
+      })
+      .on("pointerover", () => enterButtonHoverState(gridButton))
+      .on("pointerout", () => enterButtonRestState(gridButton));
   }
 }
