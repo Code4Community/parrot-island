@@ -73,7 +73,7 @@ export default class Buttons {
       .setInteractive()
       .on("pointerdown", () => {
         var square_alpha = 0.7;
-        var state = scene.tiles[0][0][0].alpha === square_alpha;
+        var state = scene.tiles[0][0].alpha === square_alpha;
         for (var j = 0; j < 30; j++) {
           for (var i = j % 2; i < 30; i += 2) {
             scene.tiles[j][i].setAlpha(state ? 1 : square_alpha);
