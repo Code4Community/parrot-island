@@ -76,9 +76,7 @@ export default class Buttons {
       var state = scene.tiles[0][0][0].alpha === square_alpha;
       for(var j = 0; j < 30; j++){
         for(var i = j%2; i < 30; i+=2){
-          for(var k = 0; k < scene.tiles[j][i].length; k++){
-            scene.tiles[j][i][k].setAlpha(state ? 1 : square_alpha);
-          }
+            scene.tiles[j][i].setAlpha(state ? 1 : square_alpha);
         }
       }
     })
