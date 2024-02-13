@@ -38,7 +38,7 @@
         {
             "x":12,
             "y":3,
-            "texture":"mapPiece",
+            "texture":"parrot",
             "size":30
         }
     ]

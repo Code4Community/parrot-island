@@ -47,6 +47,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
         switch(data.texture){
             case "parrot":
                 entity = new Parrot(data.x, data.y, data.size);
+                scene.parrot = entity;
             break;
             case "mapPiece":            
                 entity = new PieceOfMap(data.x, data.y, data.size);
