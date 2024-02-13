@@ -28,4 +28,3 @@
 
 - Scale pieceOfMap and treasure to better fit the grid cells -- Levi (DONE)
 - Fix parrot icon on the header (frontend) -- Ayden (DONE) 
-
