@@ -38,9 +38,8 @@
         {
             "x":12,
             "y":3,
-            "texture":"parrot",
+            "texture":"mapPiece",
             "size":30
-        },
-        {}
+        }
     ]
 }

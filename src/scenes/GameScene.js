@@ -67,10 +67,11 @@ export default class GameScene extends Phaser.Scene {
     // Set tile layout
     this.tiles = [];
     this.entities = [];
-    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
 
     this.parrot = new Parrot(0, 0, TILE_SIZE);
     this.entities.push(this.parrot);
+
+    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
 
     for (let x = 4; x < 20; x++) {
       if (Math.random() < 0.5) {
