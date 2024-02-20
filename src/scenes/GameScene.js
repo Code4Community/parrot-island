@@ -8,6 +8,7 @@ import treasureImg from "../assets/treasure.png";
 import mapPieceImg from "../assets/pieceOfMap.png";
 import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
+import cannonballImg from "../assets/cannonball.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -23,6 +24,7 @@ import Treasure from "../Treasure";
 import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
+import Emitter from "../Emitter.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -59,6 +61,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("water", waterImg);
     this.load.image("sand", sandImg);
+    this.load.image("cannonball", cannonballImg);
+    this.load.image("mapPiece", mapPieceImg);
   }
 
   // Create Scene
@@ -75,11 +79,11 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.entities = [];
 
-    let levelFile=[level1JSON,level2JSON, level3JSON][Math.floor(Math.random()*3)]
-    GenerateSceneFromLevelData(levelFile,this,TILE_SIZE);
-
     this.parrot = new Parrot(0, 0, TILE_SIZE);
     this.entities.push(this.parrot);
+    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
+
+    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
 
     for (let x = 4; x < 20; x++) {
       if (Math.random() < 0.5) {

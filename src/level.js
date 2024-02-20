@@ -1,6 +1,10 @@
 // @ts-check
 
+import Parrot from "./Parrot";
+import PieceOfMap from "./PieceOfMap";
+import Treasure from "./Treasure";
 import Entity from "./entity";
+import MovingEntity from "./movingEntity";
 
 /**
  * @param {LevelData} levelData - the level data.
@@ -38,8 +42,25 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
     
     for(var i = 0; i < levelData.entities.length; i++){
         let data = levelData.entities[i];
-        let entity = new Entity(data.x, data.y, data.texture, data.size);
+        var entity;
+        
+        switch(data.texture){
+            case "parrot":
+                entity = new Parrot(data.x, data.y, data.size);
+                scene.parrot = entity;
+            break;
+            case "mapPiece":            
+                entity = new PieceOfMap(data.x, data.y, data.size);
+            break;
+            case "treasure":
+                entity = new Treasure(data.x, data.y, data.size);
+            break;
+            default:
+                entity = new Entity(data.x, data.y, data.texture, data.size);
+        }
+
         scene.entities.push(entity);
+
     }
 }
 

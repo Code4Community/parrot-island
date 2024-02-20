@@ -40,7 +40,6 @@
             "y":3,
             "texture":"parrot",
             "size":30
-        },
-        {}
+        }
     ]
 }
