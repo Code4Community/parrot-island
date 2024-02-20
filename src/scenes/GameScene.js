@@ -25,6 +25,7 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
+import Tree from "../Tree.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -144,6 +145,13 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Treasure],
       (_, treasure) => {
         treasure.destroy();
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Tree],
+      (p, _) => {
+        p.destroy();
       }
     );
   }

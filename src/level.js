@@ -4,6 +4,7 @@ import Emitter from "./Emitter";
 import Parrot from "./Parrot";
 import PieceOfMap from "./PieceOfMap";
 import Treasure from "./Treasure";
+import Tree from "./Tree";
 import Entity from "./entity";
 import MovingEntity from "./movingEntity";
 
@@ -22,7 +23,9 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 case 1: texture = "grass"; break;
                 case 2: texture = "sand";  break;
                 case 3: texture = "stone"; break;
-                case 4: texture = "tree"; break;
+                case 4: texture = "tree"; 
+                    scene.entities.push(new Tree(x,y,tileSize));
+                break;
                 default: texture = "water"; break;
             }
 

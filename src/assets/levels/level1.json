@@ -37,7 +37,7 @@
     "entities":[
         {
             "x":15,
-            "y":2,
+            "y":4,
             "texture":"parrot",
             "size":30
         },{

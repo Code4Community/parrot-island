@@ -50,6 +50,11 @@ export default class Entity {
             this.y * this.size + this.size / 2, 
             this.texture,
         )
+
+        this.sprite.width = this.size;
+        this.sprite.height = this.size;
+        this.sprite.displayWidth = this.size;
+        this.sprite.displayHeight = this.size;
     }
 
     update() {
