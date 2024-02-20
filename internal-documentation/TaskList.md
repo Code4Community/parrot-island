@@ -4,6 +4,14 @@
 - Entity subclasses	(position, collision, texture)
 - Config files to streamline map design/loading -- David (IN PROGRESS)
 - Fix level display tiles being cut off
+- collision response -- not phase through all blocks 
+  - trees & water are parrot-collidable
+  - just over water
+- more interpreter features
+  - 'wait' command
+  - conditionals -- detect cannonball?
+- level design
+  - Kent and Ayden (for now)
 - Custom textures (more of them) -- Levi (IN PROGRESS)
   - custom parrot (DONE)
   - parrot eyepatch important
@@ -13,6 +21,7 @@
 - finalize game mechanic
   - obstacles
     - cannonballs
+
     - animals
     - ship
   - start to finish
