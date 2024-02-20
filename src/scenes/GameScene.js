@@ -9,6 +9,7 @@ import mapPieceImg from "../assets/pieceOfMap.png";
 import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
+import blankImg from "../assets/blank.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -25,8 +26,8 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
-import Tree from "../Tree.js";
 import Cannonball from "../Cannonball.js";
+import Barrier from "../Barrier.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -65,6 +66,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("sand", sandImg);
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
+    this.load.image("none", blankImg);
   }
 
   // Create Scene
@@ -150,7 +152,7 @@ export default class GameScene extends Phaser.Scene {
     );
 
     this.interactionsManager.addInteraction(
-      [Parrot, Tree],
+      [Parrot, Barrier],
       (p, _) => {
         p.destroy();
       }

@@ -4,7 +4,7 @@ import Emitter from "./Emitter";
 import Parrot from "./Parrot";
 import PieceOfMap from "./PieceOfMap";
 import Treasure from "./Treasure";
-import Tree from "./Tree";
+import Barrier from "./Barrier";
 import Entity from "./entity";
 import MovingEntity from "./movingEntity";
 
@@ -24,9 +24,12 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 case 2: texture = "sand";  break;
                 case 3: texture = "stone"; break;
                 case 4: texture = "tree"; 
-                    scene.entities.push(new Tree(x,y,tileSize));
+                    scene.entities.push(new Barrier(x,y,tileSize));
                 break;
-                default: texture = "water"; break;
+                default: texture = "water"; 
+                    scene.entities.push(new Barrier(x,y,tileSize));
+                break;
+                    
             }
 
             let tile = scene.add.sprite(
