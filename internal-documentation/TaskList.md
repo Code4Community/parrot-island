@@ -1,39 +1,44 @@
-# To Do/Notes
-- Collisions with entities -- Ayden (IN PROGRESS, V DIFFICULT)
-  - system in place, need to add to physics
-- Entity subclasses	(position, collision, texture)
-- Config files to streamline map design/loading -- David (IN PROGRESS)
+# To Do/Notes:
+- Collisions -- 
+  - add callbacks for different combinations of collisions -- David (IN PROGRESS)
+  - parrot should not phase through all blocks 
+    - trees & water should be parrot-collidable -- David (IN PROGRESS)
+    - parrot should not fly over water
+    - straightforward system to add more types of collisions + callbacks?
 - Fix level display tiles being cut off
-- collision response -- not phase through all blocks 
-  - trees & water are parrot-collidable
-  - just over water
+  - (bottom few rows are not visible on game scene)
 - more interpreter features
-  - 'wait' command
-  - conditionals -- detect cannonball?
+  - 'wait' command Connor (IN PROGRESS)
+  - conditionals -- detect cannonball -- Ram (IN PROGRESS)
 - level design
-  - Kent and Ayden (for now)
-- Custom textures (more of them) -- Levi (IN PROGRESS)
-  - custom parrot (DONE)
-  - parrot eyepatch important
-  - opencv edit texture?
-- Custom sounds (parrot call? cannonball?)
-- create system to handle collision responses
-- finalize game mechanic
+  - Kent and Ayden (IN PROGRESS)
+  - more pairs of people independently design levels going forward.
+- Custom textures (more of them) -- 
+  - custom cannon -- Levi (IN PROGRESS)
+- Custom sounds
+  - parrot call
+  - cannonball
+- General: finalize game mechanics:
   - obstacles
     - cannonballs
-
     - animals
     - ship
-  - start to finish
+  - start to finish -- straightforward path?
+  - Points system
   - goal objective
     - treasure map and some treasure
     - levels leading up to final treasure map
-- autocomplete
-- blockly
+- QoL
+  - autocomplete
+  - blockly
+  - Parrot cosmetics
 
-- Points system
-- Move buttons to their own class
-- Parrot cosmetics
+# Finished:
 
+- Collisions with entities -- Ayden (DONE)
 - Scale pieceOfMap and treasure to better fit the grid cells -- Levi (DONE)
 - Fix parrot icon on the header (frontend) -- Ayden (DONE) 
+- Config files to streamline map design/loading -- David (DONE)
+- Primary textures
+  - connected tiles -- David (DONE)
+  - custom parrot -- Levi (DONE)
