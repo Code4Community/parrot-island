@@ -80,6 +80,9 @@
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a href="#" data-value="1">Level 1</a></li>
+              <li><a href="#" data-value="2">Level 2</a></li>
+              <li><a href="#" data-value="3">Level 3</a></li>
+              <li><a href="#" data-value="4">Level 4</a></li>
             </ul>
           </div>
         </li>
@@ -111,6 +114,11 @@
     <script>
       $(function () {
         $('[data-toggle="popover"]').popover();
+      });
+
+      $(".dropdown-menu li a").click(function(){
+          $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+          $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
       });
     </script>
 

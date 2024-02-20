@@ -1,5 +1,4 @@
 import Phaser from "phaser";
-import Physics from "phaser";
 
 import parrotImg from "../assets/parrot.png";
 import grassImg from "../assets/grassNew.png";
@@ -12,10 +11,12 @@ import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 
 import level1JSON from "../assets/levels/level1.json";
+import level2JSON from "../assets/levels/level2.json";
+import level3JSON from "../assets/levels/level3.json";
 
 import C4C from "c4c-lib";
 
-import { IslandTiles } from "./WorldGen.js";
+
 import { GenerateSceneFromLevelData } from "../level.js";
 import Buttons from "../Buttons";
 import Entity from "../entity";
@@ -41,6 +42,12 @@ export default class GameScene extends Phaser.Scene {
     super("Example");
     // Buttons ;
     // Buttons.constructor()
+  }
+
+  setLevel(level) {
+    var level = document.getElementById('dropdownMenuButton').value;
+    this.level = level;
+    this.currentStep = 0;
   }
 
   //Load in images || TODO: move to own file
