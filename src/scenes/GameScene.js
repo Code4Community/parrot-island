@@ -26,6 +26,7 @@ import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
 import Tree from "../Tree.js";
+import Cannonball from "../Cannonball.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -150,6 +151,13 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, Tree],
+      (p, _) => {
+        p.destroy();
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Cannonball],
       (p, _) => {
         p.destroy();
       }
