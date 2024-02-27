@@ -9,6 +9,7 @@ import mapPieceImg from "../assets/pieceOfMap.png";
 import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
+import blankImg from "../assets/blank.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -25,6 +26,8 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
+import Cannonball from "../Cannonball.js";
+import Barrier from "../Barrier.js";
 
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -63,6 +66,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("sand", sandImg);
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
+    this.load.image("none", blankImg);
   }
 
   // Create Scene
@@ -78,10 +82,6 @@ export default class GameScene extends Phaser.Scene {
     // Set tile layout
     this.tiles = [];
     this.entities = [];
-
-    this.parrot = new Parrot(0, 0, TILE_SIZE);
-    this.entities.push(this.parrot);
-    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
 
     GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
 
@@ -155,6 +155,20 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Treasure],
       (_, treasure) => {
         treasure.destroy();
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Barrier],
+      (p, _) => {
+        p.destroy();
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Cannonball],
+      (p, _) => {
+        p.destroy();
       }
     );
   }

@@ -10,11 +10,12 @@ import Cannonball from "./Cannonball";
 */
 export default class Emitter extends Entity{
     
-    constructor(x, y, size, vx = 0, vy = 0, scene){
+    constructor(x, y, size, vx = 0, vy = 0, interval = 3, scene){
         super(x, y, "cannon", size);
         this.vx = vx;
         this.vy = vy;
         this.scene = scene;
+        this.interval = interval;
         this.timer = 0;
     }
 
@@ -23,10 +24,11 @@ export default class Emitter extends Entity{
         
         this.timer++;
         
-        if(this.timer == 3){
+        if(this.timer == this.interval){
             var cannonball = new Cannonball(this.x, this.y, this.size, this.vx, this.vy);
             cannonball.initialize(this.scene);
             this.scene.entities.push(cannonball);
+            cannonball.update(this.scene);
             this.timer = 0;
         }
     }
