@@ -102,6 +102,13 @@ export default class GameScene extends Phaser.Scene {
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
       this.parrot.x += x_dist;
+      
+      console.log("block ON : ",this.parrot.peekAt(this, 0, 0));
+      console.log("block right : ",this.parrot.peekAt(this, 1, 0));
+      console.log("block below : ",this.parrot.peekAt(this, 0, 1));
+      console.log("block left : ",this.parrot.peekAt(this, -1, 0));
+      console.log("block above : ",this.parrot.peekAt(this, 0, -1));
+      
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)

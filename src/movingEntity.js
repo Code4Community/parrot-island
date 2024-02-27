@@ -99,4 +99,31 @@ export default class MovingEntity extends Entity {
     moveTo(newX, newY) {
         super.moveTo(newX, newY)
     }
+
+    peekAt(scene, xOffset, yOffset) {
+        let checkX = this.x + xOffset;
+        let checkY = this.y + yOffset;
+        let maxTilesX = scene.tiles[0].length;
+        let maxTilesY = scene.tiles.length;
+
+        if (checkX < 0 || checkX >= maxTilesX || checkY < 0 || checkY >= maxTilesY) {
+            return [];
+        }
+        else{
+            // console.log("FOUND ",scene.tiles[checkY][checkX].texture.key);
+            return scene.tiles[checkY][checkX].texture.key;
+        }
+    }
+
+
+    /*
+    * collidable entities are [rock, water]
+    */
+    canMove(scene, xOffset, yOffset) {
+        let collisionBlocks = ["rock", "water"];
+        let blockName = this.peekAt(scene, xOffset, yOffset);
+        return !collisionBlocks.includes(blockName);
+        
+    }
+
 }
