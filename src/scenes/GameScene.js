@@ -76,6 +76,49 @@ export default class GameScene extends Phaser.Scene {
     C4C.Editor.Window.open();
     C4C.Editor.setText(`moveRight(1)`);
 
+    const canvas = document.querySelector('canvas')
+
+    this.levelEditData = level1JSON;
+    this.currentTile = 0;
+    this.editorEnabled = false;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        this.currentTile += 1;
+      } else if (e.key === 'ArrowLeft') {
+        this.currentTile -= 1;
+      } else if (e.key === '~') {
+        this.editorEnabled = !this.editorEnabled;
+      }
+    })
+
+    canvas.addEventListener('click', (e) => {
+      if (this.editorEnabled) {
+        let tileMap = {
+          0: "water",
+          1: "grass",
+          2: "sand",
+          3: "stone",
+          4: "tree",
+        };
+        const x = Math.floor(e.offsetX / TILE_SIZE);
+        const y = Math.floor(e.offsetY / TILE_SIZE);
+        this.levelEditData.tiles[y][x] = this.currentTile;
+        let tile = this.add.sprite(
+          x * TILE_SIZE + TILE_SIZE / 2,
+          y * TILE_SIZE + TILE_SIZE / 2,
+          tileMap[this.currentTile]
+        );
+
+        tile.width = TILE_SIZE;
+        tile.displayWidth = TILE_SIZE;
+        tile.height = TILE_SIZE;
+        tile.displayHeight = TILE_SIZE;
+
+        console.log(this.levelData.tiles);
+      }
+    })
+
     let NumTilesX = 30;
     let NumTilesY = 30;
 
@@ -88,7 +131,6 @@ export default class GameScene extends Phaser.Scene {
     this.entities.push(new Emitter(12,3, 30, 1, 0, this));
 
     GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
-
     for (let x = 4; x < 20; x++) {
       if (Math.random() < 0.5) {
         this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
@@ -97,11 +139,12 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
+    this.doneVisualUpdate = true;
+
 
     this.doneVisualUpdate = true;
 
     this.entities.forEach((e) => e.initialize(this));
-
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
     };
