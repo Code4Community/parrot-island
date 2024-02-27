@@ -83,6 +83,8 @@ export default class MovingEntity extends Entity {
             let targetVisY = this.y * this.size + this.size / 2
             this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
             this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+            // true if entity has reached final position
+            return currentVisX === targetVisX && currentVisY === targetVisY 
         }
     }
 
