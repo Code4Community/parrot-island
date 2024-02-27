@@ -25,7 +25,9 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
             switch(levelData.tiles[y][x]){
                 case 1: texture = "grass"; break;
                 case 2: texture = "sand";  break;
-                case 3: texture = "stone"; break;
+                case 3: texture = "stone"; 
+                    scene.entities.push(new Barrier(x,y,tileSize));
+                break;
                 case 4: texture = "tree"; 
                     scene.entities.push(new Barrier(x,y,tileSize));
                 break;

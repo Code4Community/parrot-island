@@ -115,7 +115,7 @@ export default class GameScene extends Phaser.Scene {
         tile.height = TILE_SIZE;
         tile.displayHeight = TILE_SIZE;
 
-        console.log(this.levelData.tiles);
+        console.log(this.levelEditData.tiles);
       }
     })
 
