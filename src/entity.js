@@ -64,6 +64,7 @@ export default class Entity {
     visualUpdate() {
         this.sprite?.setX(this.x * this.size + this.size / 2)
         this.sprite?.setY(this.y * this.size + this.size / 2)
+        return true;
     }
 
     destroy() {

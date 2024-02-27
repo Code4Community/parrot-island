@@ -97,6 +97,9 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
+
+    this.doneVisualUpdate = true;
+
     this.entities.forEach((e) => e.initialize(this));
 
     const updateAll = () => {
@@ -181,18 +184,26 @@ export default class GameScene extends Phaser.Scene {
 
 
   update() {
+    // update visuals, and keep track if whether all entities are done.
 
-    // visual update, and keep track if whether all entities are done.
-    let doneVisualUpdate = true;
+    this.doneVisualUpdate = true; // assume viz updates are done.
+    let numEntitiesDone=0;
+
     this.entities.forEach((entity) => {
       let isEntityDone = entity.visualUpdate();
-      doneVisualUpdate = doneVisualUpdate && isEntityDone;
+      this.doneVisualUpdate &= isEntityDone;  // if *any* entity is not done, this.doneVisualUpdate will be false.
+      numEntitiesDone+=isEntityDone?1:0;
+      // if(!isEntityDone){
+      //   console.log(entity)
+      // }
     });
 
-    // wait until all entities are done with their visual updates, and also whether 1 second has passed.
-    if (doneVisualUpdate && Date.now() - this.lastUpdate > 1000) {
+    console.log(this.doneVisualUpdate)
+
+    // wait until all entities are done with their visual updates
+    //malso check that 1 second has passed.
+    if (this.doneVisualUpdate && Date.now() - this.lastUpdate > 1000) {
       // if so, run the next line of code.
-      console.log('1 second has passed, and all visual updates are finished.\nstepping...')
       const programText = C4C.Editor.getText();
       const res = C4C.Interpreter.stepRun(programText, [this.loc]);
       this.loc = res[1];

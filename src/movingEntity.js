@@ -25,7 +25,7 @@ export default class MovingEntity extends Entity {
 
         this.vx = vx;
         this.vy = vy;
-
+        this.EPSILON=0.1;
         this.fadingAway = false;
     }
 
@@ -84,7 +84,7 @@ export default class MovingEntity extends Entity {
             this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
             this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
             // true if entity has reached final position
-            return currentVisX === targetVisX && currentVisY === targetVisY 
+            return Math.abs(currentVisX-targetVisX)<this.EPSILON && Math.abs(currentVisY-targetVisY)<this.EPSILON
         }
     }
 
