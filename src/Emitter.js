@@ -10,33 +10,23 @@ import Cannonball from "./Cannonball";
 */
 export default class Emitter extends Entity{
     
-    constructor(x, y, size, vx = 0, vy = 0, scene){
-        super(x, y, "unloadedCannon", size);
+    constructor(x, y, size, vx = 0, vy = 0, interval = 3, scene){
+        super(x, y, "cannon", size);
         this.vx = vx;
         this.vy = vy;
         this.scene = scene;
         this.interval = interval;
         this.timer = 0;
     }
-    
 
     update(){
+        super.update();
         
         this.timer++;
-
-        if (this.timer == this.interval - 1) {
-            this.sprite.setTexture("loadedCannon");
-        }
         
         if(this.timer == this.interval){
-            this.sprite.setTexture("unloadedCannon");
-            var cannonball = new Cannonball(this.x + this.vx, this.y + this.vy, this.size, this.vx, this.vy);
+            var cannonball = new Cannonball(this.x, this.y, this.size, this.vx, this.vy);
             cannonball.initialize(this.scene);
-            if (this.vx > 0) {
-                cannonball.sprite.setRotation(Math.PI);
-            } else if (this.vy != 0) {
-                cannonball.sprite.setRotation(Math.sign(this.vy) * -1 * Math.PI/2);
-            }
             this.scene.entities.push(cannonball);
             cannonball.update(this.scene);
             this.timer = 0;
