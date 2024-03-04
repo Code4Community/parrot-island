@@ -10,7 +10,7 @@ import Cannonball from "./Cannonball";
 */
 export default class Emitter extends Entity{
     
-    constructor(x, y, size, vx = 0, vy = 0, scene){
+    constructor(x, y, size, vx = 0, vy = 0, interval = 3, scene){
         super(x, y, "unloadedCannon", size);
         this.vx = vx;
         this.vy = vy;
