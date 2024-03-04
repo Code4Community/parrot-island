@@ -10,6 +10,8 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
+import unloadedCannonImg from "../assets/unloadedCannon.png"
+import loadedCannonImg from "../assets/loadedCannon.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -67,6 +69,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
+    this.load.image("unloadedCannon", unloadedCannonImg);
+    this.load.image("loadedCannon", loadedCannonImg);
     }
 
   // Create Scene
@@ -129,6 +133,7 @@ export default class GameScene extends Phaser.Scene {
     this.parrot = new Parrot(0, 0, TILE_SIZE);
     this.entities.push(this.parrot);
     this.entities.push(new Emitter(12,3, 30, 1, 0, this));
+    this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
 
     GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
     for (let x = 4; x < 20; x++) {
