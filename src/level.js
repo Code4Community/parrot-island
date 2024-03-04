@@ -74,7 +74,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 entity = new Entity(data.x, data.y, data.texture, data.size);
         }
 
-        scene.entities.push(entity);
+        // scene.entities.push(entity);
         console.log("CURRENT TILES ARE",scene.tiles[5][5]);
 
     }

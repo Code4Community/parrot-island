@@ -13,12 +13,7 @@ import blankImg from "../assets/blank.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 
-import level1JSON from "../assets/levels/level1.json";
-import level2JSON from "../assets/levels/level2.json";
-import level3JSON from "../assets/levels/level3.json";
-
 import C4C from "c4c-lib";
-
 
 import { GenerateSceneFromLevelData } from "../level.js";
 import Buttons from "../Buttons";
@@ -31,6 +26,7 @@ import Emitter from "../Emitter.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
+import { levels } from "../levels.js";
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
@@ -82,7 +78,7 @@ export default class GameScene extends Phaser.Scene {
 
     const canvas = document.querySelector('canvas')
 
-    this.levelEditData = level1JSON;
+    this.levelEditData = levels['level1'];
     this.currentTile = 0;
     this.editorEnabled = false;
 
@@ -123,6 +119,17 @@ export default class GameScene extends Phaser.Scene {
       }
     })
 
+    const levelDropdown = document.querySelector('.dropdown-menu')
+
+    // levelDropdown.addEventListener('change', (e) => {
+    for (const child of levelDropdown.children) {
+      child.addEventListener('click', (e) => {
+        const newLevelName = (child.children[0].dataset.value)
+        GenerateSceneFromLevelData(levels[newLevelName], this, TILE_SIZE)
+      })
+    }
+    // })
+
     let NumTilesX = 30;
     let NumTilesY = 30;
 
@@ -135,7 +142,7 @@ export default class GameScene extends Phaser.Scene {
     this.entities.push(new Emitter(12,3, 30, 1, 0, this));
     this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
 
-    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
+    GenerateSceneFromLevelData(levels['level1'],this,TILE_SIZE);
     for (let x = 4; x < 20; x++) {
       if (Math.random() < 0.5) {
         this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
