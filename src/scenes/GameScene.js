@@ -132,8 +132,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.parrot = new Parrot(0, 0, TILE_SIZE);
     this.entities.push(this.parrot);
-    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
-    this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
+    this.entities.push(new Emitter(12, 3, 30, 1, 0, 3, this));
+    this.entities.push(new Emitter(18, 10, 30, 0, -1, 3, this));
 
     GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
     for (let x = 4; x < 20; x++) {
