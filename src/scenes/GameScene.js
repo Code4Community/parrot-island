@@ -10,6 +10,7 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
+import gameOverImg from "../assets/gameOver.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 
@@ -47,6 +48,8 @@ export default class GameScene extends Phaser.Scene {
     super("Example");
     // Buttons ;
     // Buttons.constructor()
+    this.level = 1;
+    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   setLevel(level) {
@@ -69,9 +72,10 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
+    this.load.image("gameOver", gameOverImg);
     this.load.image("unloadedCannon", unloadedCannonImg);
     this.load.image("loadedCannon", loadedCannonImg);
-    }
+  }
 
   // Create Scene
   create() {
@@ -125,27 +129,12 @@ export default class GameScene extends Phaser.Scene {
 
     let NumTilesX = 30;
     let NumTilesY = 30;
-
-    // Set tile layout
     this.tiles = [];
     this.entities = [];
 
-    this.parrot = new Parrot(0, 0, TILE_SIZE);
-    this.entities.push(this.parrot);
-    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
-    this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
+    this.splash = null;
 
-    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
-    for (let x = 4; x < 20; x++) {
-      if (Math.random() < 0.5) {
-        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-      } else {
-        this.entities.push(new Treasure(x, 0, TILE_SIZE));
-      }
-    }
-
-    this.doneVisualUpdate = true;
-
+    this.loadScene();
 
     this.doneVisualUpdate = true;
 
@@ -189,8 +178,7 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
-    // Create some interface to running the interpreter:
-    new Buttons(this);
+    //Define interactions
 
     this.interactionsManager = new InteractionsManager();
 
@@ -212,6 +200,13 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Barrier],
       (p, _) => {
         p.destroy();
+        this.splash = this.add.sprite(450,450,"gameOver");
+
+        this.entities.forEach((e) => e.destroy(true));
+        this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+        
+        C4C.Editor.Window.close();
+        this.buttons = new Buttons(this);
       }
     );
 
@@ -254,5 +249,34 @@ export default class GameScene extends Phaser.Scene {
       this.lastUpdate = Date.now();
       this.doneVisualUpdate = false;
     }
+  }
+
+  loadScene(){
+
+    if(this.splash !== null){
+      this.splash.destroy();
+    }
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+
+    // Set tile layout
+    this.tiles = [];
+    this.entities = [];
+
+    GenerateSceneFromLevelData(this.levelJSONs[this.level],this,TILE_SIZE);
+
+    for (let x = 4; x < 20; x++) {
+      if (Math.random() < 0.5) {
+        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
+      } else {
+        this.entities.push(new Treasure(x, 0, TILE_SIZE));
+      }
+    }
+
+    this.entities.forEach((e) => e.initialize(this));
+
+    // Create some interface to running the interpreter:
+    this.buttons = new Buttons(this);
   }
 }

@@ -14,7 +14,7 @@ export default class Buttons {
     }
     // Run Button
     const runButton = scene.add
-      .text(550, 100, "Evaluate", { fill: "#fff", fontSize: "30px" })
+      .text(550, 200, "Evaluate", { fill: "#fff", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         const programText = C4C.Editor.getText();
@@ -26,7 +26,7 @@ export default class Buttons {
 
     // Editor Button
     const editorButton = scene.add
-      .text(500, 200, "Toggle Editor", {
+      .text(500, 250, "Toggle Editor", {
         fill: "#fff",
         fontSize: "30px",
       })
@@ -57,7 +57,7 @@ export default class Buttons {
 
     // Help Button
     const helpButton = scene.add
-      .text(580, 400, "Help", { fill: "#fff", fontSize: "30px" })
+      .text(580, 350, "Help", { fill: "#fff", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         scene.entities.forEach((entity) => {
@@ -69,7 +69,7 @@ export default class Buttons {
 
     // Toggle Grid Button
     const gridButton = scene.add
-      .text(510, 500, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
+      .text(510, 400, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         var square_alpha = 0.7;
@@ -82,5 +82,15 @@ export default class Buttons {
       })
       .on("pointerover", () => enterButtonHoverState(gridButton))
       .on("pointerout", () => enterButtonRestState(gridButton));
+
+    //Restart Button
+    const restartButton = scene.add
+    .text(550, 450, "Restart", { fill: "#fff", fontSize: "30px" })
+    .setInteractive()
+    .on("pointerdown", () => {
+       scene.loadScene();
+    })
+    .on("pointerover", () => enterButtonHoverState(restartButton))
+    .on("pointerout", () => enterButtonRestState(restartButton));
   }
 }
