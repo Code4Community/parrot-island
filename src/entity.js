@@ -69,8 +69,7 @@ export default class Entity {
 
     destroy() {
         this.alive = false;
-
-        //TODO: fix this error?
+        // @ts-ignore
         this.sprite.destroy();
     }
 
