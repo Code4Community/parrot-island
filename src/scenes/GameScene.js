@@ -78,7 +78,7 @@ export default class GameScene extends Phaser.Scene {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`moveRight(1)`);
+    C4C.Editor.setText(`moveLeft(1)`);
 
     const canvas = document.querySelector('canvas')
 
@@ -132,8 +132,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.parrot = new Parrot(0, 0, TILE_SIZE);
     this.entities.push(this.parrot);
-    this.entities.push(new Emitter(12, 3, 30, 1, 0, 3, this));
-    this.entities.push(new Emitter(18, 10, 30, 0, -1, 3, this));
+    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
+    this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
 
     GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
     for (let x = 4; x < 20; x++) {
@@ -155,7 +155,7 @@ export default class GameScene extends Phaser.Scene {
     };
 
     // Intepreter Movement Commands
-    C4C.Interpreter.define("moveRight", (x_dist) => {
+    C4C.Interpreter.define("moveLeft", (x_dist) => {
       this.parrot.x += x_dist;
       
       // console.log("block ON : ",this.parrot.peekAt(this, 0, 0));
