@@ -2,7 +2,7 @@
 - Collisions -- 
   - straightforward system to add more types of collisions + callbacks
   - more collisions/interactions between cannon, parrot, trees.
-- Fix level display tiles being cut off
+- Fix level display tiles being cut off -- Levi (IN PROGRESS)
   - (bottom few rows are not visible on game scene)
 - more interpreter features
   - 'wait' command Connor (IN PROGRESS)
@@ -10,9 +10,9 @@
 - level design
   - Kent and Ayden (IN PROGRESS)
   - more pairs of people independently design levels going forward.
-- Custom textures (more of them) -- 
-  - custom cannon -- Levi (IN PROGRESS)
-- Detect Game End Condition
+  - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
+- Custom textures (more of them)
+- Detect Game End Condition -- David (IN PROGRESS)
 - Custom sounds
   - parrot call
   - cannonball
@@ -43,3 +43,4 @@
 - Primary textures
   - connected tiles -- David (DONE)
   - custom parrot -- Levi (DONE)
+  - custom cannon -- Levi (DONE)
