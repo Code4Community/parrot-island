@@ -10,6 +10,7 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
+import gameOverImg from "../assets/gameOver.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -45,6 +46,8 @@ export default class GameScene extends Phaser.Scene {
     super("Example");
     // Buttons ;
     // Buttons.constructor()
+    this.level = 1;
+    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   setLevel(level) {
@@ -67,6 +70,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
+    this.load.image("gameOver", gameOverImg);
   }
 
   // Create Scene
@@ -78,22 +82,12 @@ export default class GameScene extends Phaser.Scene {
 
     let NumTilesX = 30;
     let NumTilesY = 30;
-
-    // Set tile layout
     this.tiles = [];
     this.entities = [];
 
-    GenerateSceneFromLevelData(level1JSON,this,TILE_SIZE);
+    this.splash = null;
 
-    for (let x = 4; x < 20; x++) {
-      if (Math.random() < 0.5) {
-        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-      } else {
-        this.entities.push(new Treasure(x, 0, TILE_SIZE));
-      }
-    }
-
-    this.entities.forEach((e) => e.initialize(this));
+    this.loadScene();
 
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
@@ -139,8 +133,7 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
-    // Create some interface to running the interpreter:
-    new Buttons(this);
+    //Define interactions
 
     this.interactionsManager = new InteractionsManager();
 
@@ -162,6 +155,9 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Barrier],
       (p, _) => {
         p.destroy();
+        this.splash = this.add.sprite(450,450,"gameOver");
+        C4C.Editor.Window.close();
+        this.buttons = new Buttons(this);
       }
     );
 
@@ -186,5 +182,34 @@ export default class GameScene extends Phaser.Scene {
     this.entities.forEach((entity) => {
       entity.visualUpdate();
     });
+  }
+
+  loadScene(){
+
+    if(this.splash !== null){
+      this.splash.destroy();
+    }
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+
+    // Set tile layout
+    this.tiles = [];
+    this.entities = [];
+
+    GenerateSceneFromLevelData(this.levelJSONs[this.level],this,TILE_SIZE);
+
+    for (let x = 4; x < 20; x++) {
+      if (Math.random() < 0.5) {
+        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
+      } else {
+        this.entities.push(new Treasure(x, 0, TILE_SIZE));
+      }
+    }
+
+    this.entities.forEach((e) => e.initialize(this));
+
+    // Create some interface to running the interpreter:
+    this.buttons = new Buttons(this);
   }
 }
