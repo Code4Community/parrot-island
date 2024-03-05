@@ -199,25 +199,35 @@ export default class GameScene extends Phaser.Scene {
     this.interactionsManager.addInteraction(
       [Parrot, Barrier],
       (p, _) => {
-        p.destroy();
-        this.splash = this.add.sprite(450,450,"gameOver");
-
-        this.entities.forEach((e) => e.destroy(true));
-        this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
-        
-        C4C.Editor.Window.close();
-        this.buttons = new Buttons(this);
+        this.gameOver(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Cannonball],
       (p, _) => {
-        p.destroy();
+        this.gameOver(p);
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Emitter],
+      (p, _) => {
+        this.gameOver(p);
       }
     );
   }
 
+  gameOver(p){
+    p.destroy();
+    this.splash = this.add.sprite(450,450,"gameOver");
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    
+    C4C.Editor.Window.close();
+    this.buttons = new Buttons(this);
+  }
 
   update() {
     // update visuals, and keep track if whether all entities are done.
