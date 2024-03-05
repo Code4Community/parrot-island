@@ -11,6 +11,8 @@ import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
 import gameOverImg from "../assets/gameOver.png"
+import unloadedCannonImg from "../assets/unloadedCannon.png"
+import loadedCannonImg from "../assets/loadedCannon.png"
 
 import level1JSON from "../assets/levels/level1.json";
 import level2JSON from "../assets/levels/level2.json";
@@ -27,9 +29,9 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
+
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
-
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
@@ -71,6 +73,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
     this.load.image("gameOver", gameOverImg);
+    this.load.image("unloadedCannon", unloadedCannonImg);
+    this.load.image("loadedCannon", loadedCannonImg);
   }
 
   // Create Scene
@@ -78,7 +82,50 @@ export default class GameScene extends Phaser.Scene {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`moveRight(1)`);
+    C4C.Editor.setText(`moveLeft(1)`);
+
+    const canvas = document.querySelector('canvas')
+
+    this.levelEditData = level1JSON;
+    this.currentTile = 0;
+    this.editorEnabled = false;
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        this.currentTile += 1;
+      } else if (e.key === 'ArrowLeft') {
+        this.currentTile -= 1;
+      } else if (e.key === '~') {
+        this.editorEnabled = !this.editorEnabled;
+      }
+    })
+
+    canvas.addEventListener('click', (e) => {
+      if (this.editorEnabled) {
+        let tileMap = {
+          0: "water",
+          1: "grass",
+          2: "sand",
+          3: "stone",
+          4: "tree",
+        };
+        const x = Math.floor(e.offsetX / TILE_SIZE);
+        const y = Math.floor(e.offsetY / TILE_SIZE);
+        this.levelEditData.tiles[y][x] = this.currentTile;
+        let tile = this.add.sprite(
+          x * TILE_SIZE + TILE_SIZE / 2,
+          y * TILE_SIZE + TILE_SIZE / 2,
+          tileMap[this.currentTile]
+        );
+
+        tile.width = TILE_SIZE;
+        tile.displayWidth = TILE_SIZE;
+        tile.height = TILE_SIZE;
+        tile.displayHeight = TILE_SIZE;
+
+        console.log(this.levelEditData.tiles);
+      }
+    })
 
     let NumTilesX = 30;
     let NumTilesY = 30;
@@ -88,7 +135,10 @@ export default class GameScene extends Phaser.Scene {
     this.splash = null;
 
     this.loadScene();
+    
+    this.doneVisualUpdate = true;
 
+    this.entities.forEach((e) => e.initialize(this));
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
     };
@@ -96,22 +146,17 @@ export default class GameScene extends Phaser.Scene {
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", (x_dist) => {
       this.parrot.x += x_dist;
-      
-      console.log("block ON : ",this.parrot.peekAt(this, 0, 0));
-      console.log("block right : ",this.parrot.peekAt(this, 1, 0));
-      console.log("block below : ",this.parrot.peekAt(this, 0, 1));
-      console.log("block left : ",this.parrot.peekAt(this, -1, 0));
-      console.log("block above : ",this.parrot.peekAt(this, 0, -1));
-      
+      console.log('moving right...')
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
-      );
-    });
-
-    C4C.Interpreter.define("moveLeft", (x_dist) => {
-      this.parrot.x -= x_dist;
-      updateAll();
+        );
+      });
+      
+      C4C.Interpreter.define("moveLeft", (x_dist) => {
+        this.parrot.x -= x_dist;
+        updateAll();
+        console.log('moving left...')
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
@@ -169,8 +214,28 @@ export default class GameScene extends Phaser.Scene {
     );
   }
 
+
   update() {
-    if (Date.now() - this.lastUpdate > 1000) {
+    // update visuals, and keep track if whether all entities are done.
+
+    this.doneVisualUpdate = true; // assume viz updates are done.
+    let numEntitiesDone=0;
+
+    this.entities.forEach((entity) => {
+      let isEntityDone = entity.visualUpdate();
+      this.doneVisualUpdate &= isEntityDone;  // if *any* entity is not done, this.doneVisualUpdate will be false.
+      numEntitiesDone+=isEntityDone?1:0;
+      // if(!isEntityDone){
+      //   console.log(entity)
+      // }
+    });
+
+    console.log("done visual update? "+this.doneVisualUpdate)
+
+    // wait until all entities are done with their visual updates
+    //malso check that 1 second has passed.
+    if (this.doneVisualUpdate && Date.now() - this.lastUpdate > 1000) {
+      // if so, run the next line of code.
       const programText = C4C.Editor.getText();
       const res = C4C.Interpreter.stepRun(programText, [this.loc]);
       this.loc = res[1];
@@ -178,10 +243,8 @@ export default class GameScene extends Phaser.Scene {
         this.entities.filter((e) => e.alive)
       );
       this.lastUpdate = Date.now();
+      this.doneVisualUpdate = false;
     }
-    this.entities.forEach((entity) => {
-      entity.visualUpdate();
-    });
   }
 
   loadScene(){

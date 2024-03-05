@@ -1,11 +1,8 @@
 # To Do/Notes:
 - Collisions -- 
-  - add callbacks for different combinations of collisions -- David (IN PROGRESS)
-  - parrot should not phase through all blocks 
-    - trees & water should be parrot-collidable -- David (IN PROGRESS)
-    - parrot should not fly over water
-    - straightforward system to add more types of collisions + callbacks?
-- Fix level display tiles being cut off
+  - straightforward system to add more types of collisions + callbacks
+  - more collisions/interactions between cannon, parrot, trees.
+- Fix level display tiles being cut off -- Levi (IN PROGRESS)
   - (bottom few rows are not visible on game scene)
 - more interpreter features
   - 'wait' command Connor (IN PROGRESS)
@@ -13,8 +10,9 @@
 - level design
   - Kent and Ayden (IN PROGRESS)
   - more pairs of people independently design levels going forward.
-- Custom textures (more of them) -- 
-  - custom cannon -- Levi (IN PROGRESS)
+  - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
+- Custom textures (more of them)
+- Detect Game End Condition -- David (IN PROGRESS)
 - Custom sounds
   - parrot call
   - cannonball
@@ -36,9 +34,13 @@
 # Finished:
 
 - Collisions with entities -- Ayden (DONE)
+- Collision Callbacks
+  - add callbacks for different combinations of collisions -- David (DONE)
+  - trees & water should be parrot-collidable -- David (DONE)
 - Scale pieceOfMap and treasure to better fit the grid cells -- Levi (DONE)
 - Fix parrot icon on the header (frontend) -- Ayden (DONE) 
 - Config files to streamline map design/loading -- David (DONE)
 - Primary textures
   - connected tiles -- David (DONE)
   - custom parrot -- Levi (DONE)
+  - custom cannon -- Levi (DONE)
