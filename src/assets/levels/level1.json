@@ -47,6 +47,13 @@
       "y": 10,
       "texture": "mapPiece",
       "size": 30
-    }
+    },{
+      "x":12,
+      "y":3,
+      "texture":"cannon",
+      "size":30,
+      "vx":1,
+      "vy":1
+  }
   ]
 }

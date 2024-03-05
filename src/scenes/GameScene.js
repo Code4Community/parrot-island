@@ -135,7 +135,7 @@ export default class GameScene extends Phaser.Scene {
     this.splash = null;
 
     this.loadScene();
-    
+
     this.doneVisualUpdate = true;
 
     this.entities.forEach((e) => e.initialize(this));
@@ -201,6 +201,10 @@ export default class GameScene extends Phaser.Scene {
       (p, _) => {
         p.destroy();
         this.splash = this.add.sprite(450,450,"gameOver");
+
+        this.entities.forEach((e) => e.destroy(true));
+        this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+        
         C4C.Editor.Window.close();
         this.buttons = new Buttons(this);
       }
