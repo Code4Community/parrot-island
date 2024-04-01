@@ -11,6 +11,7 @@ import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
 import gameOverImg from "../assets/gameOver.png"
+import gameWinImg from "../assets/gameWin.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 
@@ -73,6 +74,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
     this.load.image("gameOver", gameOverImg);
+    this.load.image("gameWin", gameWinImg);
     this.load.image("unloadedCannon", unloadedCannonImg);
     this.load.image("loadedCannon", loadedCannonImg);
   }
@@ -193,27 +195,29 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Treasure],
       (_, treasure) => {
         treasure.destroy();
+        this.gameWin(p);
+
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Barrier],
       (p, _) => {
-        this.gameOver(p);
+        this.gameWin(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Cannonball],
       (p, _) => {
-        this.gameOver(p);
+        this.gameWin(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Emitter],
       (p, _) => {
-        this.gameOver(p);
+        this.gameWin(p);
       }
     );
   }
@@ -221,6 +225,16 @@ export default class GameScene extends Phaser.Scene {
   gameOver(p){
     p.destroy();
     this.splash = this.add.sprite(450,450,"gameOver");
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    
+    C4C.Editor.Window.close();
+    this.buttons = new Buttons(this);
+  }
+  gameWin(p){
+    p.destroy();
+    this.splash = this.add.sprite(300,300,"gameWin");
 
     this.entities.forEach((e) => e.destroy(true));
     this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));

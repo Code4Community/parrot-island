@@ -43,11 +43,12 @@
       "size": 30
     },
     {
-      "x": 13,
+      "x": 6,
       "y": 10,
       "texture": "mapPiece",
       "size": 30
-    },{
+    },
+    {
       "x":12,
       "y":3,
       "texture":"cannon",
