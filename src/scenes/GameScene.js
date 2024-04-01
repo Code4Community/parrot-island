@@ -82,7 +82,7 @@ export default class GameScene extends Phaser.Scene {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`moveLeft(1)`);
+    C4C.Editor.setText(`moveLeft\nmoveLeft`);
 
     const canvas = document.querySelector('canvas')
 
@@ -144,8 +144,8 @@ export default class GameScene extends Phaser.Scene {
     };
 
     // Intepreter Movement Commands
-    C4C.Interpreter.define("moveRight", (x_dist) => {
-      this.parrot.x += x_dist;
+    C4C.Interpreter.define("moveRight", () => {
+      this.parrot.x += 1;
       console.log('moving right...')
       updateAll();
       this.interactionsManager.checkInteractions(
@@ -153,8 +153,8 @@ export default class GameScene extends Phaser.Scene {
         );
       });
       
-      C4C.Interpreter.define("moveLeft", (x_dist) => {
-        this.parrot.x -= x_dist;
+      C4C.Interpreter.define("moveLeft", () => {
+        this.parrot.x -= 1;
         updateAll();
         console.log('moving left...')
       this.interactionsManager.checkInteractions(
@@ -162,16 +162,16 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
-    C4C.Interpreter.define("moveDown", (y_dist) => {
-      this.parrot.y += y_dist;
+    C4C.Interpreter.define("moveDown", () => {
+      this.parrot.y += 1;
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
     });
 
-    C4C.Interpreter.define("moveUp", (y_dist) => {
-      this.parrot.y -= y_dist;
+    C4C.Interpreter.define("moveUp", () => {
+      this.parrot.y -= 1;
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
