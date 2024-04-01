@@ -137,19 +137,19 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.entities = [];
 
-    this.parrot = new Parrot(0, 0, TILE_SIZE);
-    this.entities.push(this.parrot);
-    this.entities.push(new Emitter(12,3, 30, 1, 0, this));
-    this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
+    // this.parrot = new Parrot(0, 0, TILE_SIZE);
+    // this.entities.push(this.parrot);
+    // this.entities.push(new Emitter(12,3, 30, 1, 0, this));
+    // this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
 
-    GenerateSceneFromLevelData(levels['level1'],this,TILE_SIZE);
-    for (let x = 4; x < 20; x++) {
-      if (Math.random() < 0.5) {
-        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-      } else {
-        this.entities.push(new Treasure(x, 0, TILE_SIZE));
-      }
-    }
+    GenerateSceneFromLevelData(levels['level2'],this,TILE_SIZE);
+    // for (let x = 4; x < 20; x++) {
+    //   if (Math.random() < 0.5) {
+    //     this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
+    //   } else {
+    //     this.entities.push(new Treasure(x, 0, TILE_SIZE));
+    //   }
+    // }
 
     this.doneVisualUpdate = true;
 
