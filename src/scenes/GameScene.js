@@ -81,7 +81,7 @@ export default class GameScene extends Phaser.Scene {
     this.levelEditData = levels['level1'];
     this.currentTile = 0;
     this.editorEnabled = false;
-
+    // Level editor
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
         this.currentTile += 1;
