@@ -88,7 +88,8 @@ export default class Buttons {
     .text(550, 450, "Restart", { fill: "#fff", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
-       scene.loadScene();
+        C4C.Editor.Window.open();
+        scene.loadScene();
     })
     .on("pointerover", () => enterButtonHoverState(restartButton))
     .on("pointerout", () => enterButtonRestState(restartButton));
