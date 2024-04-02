@@ -48,14 +48,23 @@ export default class GameScene extends Phaser.Scene {
     super("Example");
     // Buttons ;
     // Buttons.constructor()
+    
+    //Set the level based on query string
     this.level = 1;
-    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
-  }
+    
+    var name = "level"
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    var results = regex.exec(window.location.href);
 
-  setLevel(level) {
-    var level = document.getElementById('dropdownMenuButton').value;
-    this.level = level;
-    this.currentStep = 0;
+    if (!results || !results[2]){
+      this.level = 1;
+    }else{
+      this.level = decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    document.getElementById("dropdownMenuButton").firstChild.data = "Level " + this.level;
+
+    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   //Load in images || TODO: move to own file
@@ -275,14 +284,6 @@ export default class GameScene extends Phaser.Scene {
     this.entities = [];
 
     GenerateSceneFromLevelData(this.levelJSONs[this.level],this,TILE_SIZE);
-
-    for (let x = 4; x < 20; x++) {
-      if (Math.random() < 0.5) {
-        this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-      } else {
-        this.entities.push(new Treasure(x, 0, TILE_SIZE));
-      }
-    }
 
     this.entities.forEach((e) => e.initialize(this));
 
