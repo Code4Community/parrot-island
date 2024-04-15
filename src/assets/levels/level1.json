@@ -53,7 +53,7 @@
       "y":3,
       "texture":"cannon",
       "size":30,
-      "vx":1,
+      "vx":0,
       "vy":1
   }
   ]

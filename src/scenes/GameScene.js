@@ -33,6 +33,7 @@ import Emitter from "../Emitter.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
+import BallBarrier from "../BallBarrier.js";
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
@@ -227,6 +228,13 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Emitter],
       (p, _) => {
         this.gameWin(p);
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Cannonball, BallBarrier],
+      (c, _) => {
+        c.destroy();
       }
     );
   }
