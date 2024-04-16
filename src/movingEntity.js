@@ -117,6 +117,9 @@ export default class MovingEntity extends Entity {
         }
     }
 
+    getPosOnNextTick() {
+        return [this.x + this.vx, this.y + this.vy];
+    }
 
     /*
     * collidable entities are [rock, water]

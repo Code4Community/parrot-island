@@ -18,6 +18,24 @@ export default class Emitter extends Entity{
         this.interval = interval;
         this.timer = 0;
     }
+
+    initialize(scene) {
+        this.sprite = scene.add.sprite(
+            this.x * this.size + this.size / 2,
+            this.y * this.size + this.size / 2, 
+            this.texture,
+        )
+
+        this.sprite.width = this.size;
+        this.sprite.height = this.size;
+        this.sprite.displayWidth = this.size;
+        this.sprite.displayHeight = this.size;
+        if (this.vx < 0) {
+            this.sprite.setRotation(Math.PI);
+        } else if (this.vy != 0) {
+            this.sprite.setRotation(Math.sign(this.vy) * Math.PI/2);
+        }
+    }
     
 
     update(){
@@ -30,7 +48,7 @@ export default class Emitter extends Entity{
         
         if(this.timer == this.interval){
             this.sprite.setTexture("unloadedCannon");
-            var cannonball = new Cannonball(this.x + this.vx, this.y + this.vy, this.size, this.vx, this.vy);
+            var cannonball = new Cannonball(this.x, this.y, this.size, this.vx, this.vy);
             cannonball.initialize(this.scene);
             if (this.vx > 0) {
                 cannonball.sprite.setRotation(Math.PI);

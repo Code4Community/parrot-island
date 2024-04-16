@@ -10,6 +10,8 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
+import gameOverImg from "../assets/gameOver.png"
+import gameWinImg from "../assets/gameWin.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 
@@ -27,6 +29,7 @@ import Emitter from "../Emitter.js";
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
 import { levels } from "../levels.js";
+import BallBarrier from "../BallBarrier.js";
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
@@ -43,12 +46,23 @@ export default class GameScene extends Phaser.Scene {
     super("Example");
     // Buttons ;
     // Buttons.constructor()
-  }
+    
+    //Set the level based on query string
+    this.level = 1;
+    
+    var name = "level"
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+    var results = regex.exec(window.location.href);
 
-  setLevel(level) {
-    var level = document.getElementById('dropdownMenuButton').value;
-    this.level = level;
-    this.currentStep = 0;
+    if (!results || !results[2]){
+      this.level = 1;
+    }else{
+      this.level = decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    document.getElementById("dropdownMenuButton").firstChild.data = "Level " + this.level;
+
+    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   //Load in images || TODO: move to own file
@@ -65,16 +79,18 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("cannonball", cannonballImg);
     this.load.image("mapPiece", mapPieceImg);
     this.load.image("none", blankImg);
+    this.load.image("gameOver", gameOverImg);
+    this.load.image("gameWin", gameWinImg);
     this.load.image("unloadedCannon", unloadedCannonImg);
     this.load.image("loadedCannon", loadedCannonImg);
-    }
+  }
 
   // Create Scene
   create() {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`moveRight(1)`);
+    C4C.Editor.setText(`moveLeft\nmoveLeft`);
 
     const canvas = document.querySelector('canvas')
 
@@ -132,8 +148,6 @@ export default class GameScene extends Phaser.Scene {
 
     let NumTilesX = 30;
     let NumTilesY = 30;
-
-    // Set tile layout
     this.tiles = [];
     this.entities = [];
 
@@ -152,7 +166,9 @@ export default class GameScene extends Phaser.Scene {
     // }
 
     this.doneVisualUpdate = true;
+    this.splash = null;
 
+    this.loadScene();
 
     this.doneVisualUpdate = true;
 
@@ -162,15 +178,8 @@ export default class GameScene extends Phaser.Scene {
     };
 
     // Intepreter Movement Commands
-    C4C.Interpreter.define("moveRight", (x_dist) => {
-      this.parrot.x += x_dist;
-      
-      // console.log("block ON : ",this.parrot.peekAt(this, 0, 0));
-      // console.log("block right : ",this.parrot.peekAt(this, 1, 0));
-      // console.log("block below : ",this.parrot.peekAt(this, 0, 1));
-      // console.log("block left : ",this.parrot.peekAt(this, -1, 0));
-      // console.log("block above : ",this.parrot.peekAt(this, 0, -1));
-
+    C4C.Interpreter.define("moveRight", () => {
+      this.parrot.x += 1;
       console.log('moving right...')
       updateAll();
       this.interactionsManager.checkInteractions(
@@ -178,8 +187,8 @@ export default class GameScene extends Phaser.Scene {
         );
       });
       
-      C4C.Interpreter.define("moveLeft", (x_dist) => {
-        this.parrot.x -= x_dist;
+      C4C.Interpreter.define("moveLeft", () => {
+        this.parrot.x -= 1;
         updateAll();
         console.log('moving left...')
       this.interactionsManager.checkInteractions(
@@ -187,24 +196,23 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
-    C4C.Interpreter.define("moveDown", (y_dist) => {
-      this.parrot.y += y_dist;
+    C4C.Interpreter.define("moveDown", () => {
+      this.parrot.y += 1;
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
     });
 
-    C4C.Interpreter.define("moveUp", (y_dist) => {
-      this.parrot.y -= y_dist;
+    C4C.Interpreter.define("moveUp", () => {
+      this.parrot.y -= 1;
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
     });
 
-    // Create some interface to running the interpreter:
-    new Buttons(this);
+    //Define interactions
 
     this.interactionsManager = new InteractionsManager();
 
@@ -219,24 +227,60 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, Treasure],
       (_, treasure) => {
         treasure.destroy();
+        this.gameWin(p);
+
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Barrier],
       (p, _) => {
-        p.destroy();
+        this.gameWin(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Cannonball],
       (p, _) => {
-        p.destroy();
+        this.gameWin(p);
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Emitter],
+      (p, _) => {
+        this.gameWin(p);
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Cannonball, BallBarrier],
+      (c, _) => {
+        c.destroy();
       }
     );
   }
 
+  gameOver(p){
+    p.destroy();
+    this.splash = this.add.sprite(450,450,"gameOver");
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    
+    C4C.Editor.Window.close();
+    this.buttons = new Buttons(this);
+  }
+  gameWin(p){
+    p.destroy();
+    this.splash = this.add.sprite(300,300,"gameWin");
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    
+    C4C.Editor.Window.close();
+    this.buttons = new Buttons(this);
+  }
 
   update() {
     // update visuals, and keep track if whether all entities are done.
@@ -253,7 +297,7 @@ export default class GameScene extends Phaser.Scene {
       // }
     });
 
-    console.log(this.doneVisualUpdate)
+    console.log("done visual update? "+this.doneVisualUpdate)
 
     // wait until all entities are done with their visual updates
     //malso check that 1 second has passed.
@@ -268,5 +312,26 @@ export default class GameScene extends Phaser.Scene {
       this.lastUpdate = Date.now();
       this.doneVisualUpdate = false;
     }
+  }
+
+  loadScene(){
+
+    if(this.splash !== null){
+      this.splash.destroy();
+    }
+
+    this.entities.forEach((e) => e.destroy(true));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+
+    // Set tile layout
+    this.tiles = [];
+    this.entities = [];
+
+    GenerateSceneFromLevelData(this.levelJSONs[this.level],this,TILE_SIZE);
+
+    this.entities.forEach((e) => e.initialize(this));
+
+    // Create some interface to running the interpreter:
+    this.buttons = new Buttons(this);
   }
 }
