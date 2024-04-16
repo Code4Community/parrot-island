@@ -3,7 +3,7 @@
 } */
 
 #navbar {
-  border-bottom: 60px solid #bb0000;
+  border-bottom: 30px solid #bb0000;
 }
 
 #brand {
@@ -28,6 +28,7 @@
 
 #flex-container {
   display: flex;
+  padding: 0;
 }
 
 .flex-child {
@@ -106,5 +107,8 @@ li {
 
 canvas {
   display: block;
-  margin: auto;
+  margin-left: 300px;
+  margin-top: auto;
+  margin-right: auto;
+  margin-bottom: auto;
 }

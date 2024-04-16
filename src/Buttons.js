@@ -14,11 +14,11 @@ export default class Buttons {
     }
 
     function enterButtonRestState(btn) {
-      btn.setStyle({ fill: "#fff" });
+      btn.setStyle({ fill: "#00007A" });
     }
     // Run Button
     const runButton = scene.add
-      .text(550 + 250, 200, "Evaluate", { fill: "#fff", fontSize: "30px" })
+      .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         this.isUpdating = true;
@@ -29,8 +29,8 @@ export default class Buttons {
 
     // Editor Button
     const editorButton = scene.add
-      .text(500+ 250, 250, "Toggle Editor", {
-        fill: "#fff",
+      .text(500+ 410, 250, "Toggle Editor", {
+        fill: "#00007A",
         fontSize: "30px",
       })
       .setInteractive()
@@ -42,7 +42,7 @@ export default class Buttons {
 
     // Check Button
     const checkButton = scene.add
-      .text(570+ 250, 300, "Check", { fill: "#fff", fontSize: "30px" })
+      .text(570+ 410, 300, "Check", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         const programText = C4C.Editor.getText();
@@ -60,7 +60,7 @@ export default class Buttons {
 
     // Help Button
     const helpButton = scene.add
-      .text(580+ 250, 350, "Help", { fill: "#fff", fontSize: "30px" })
+      .text(580+ 410, 350, "Help", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         scene.entities.forEach((entity) => {
@@ -72,7 +72,7 @@ export default class Buttons {
 
     // Toggle Grid Button
     const gridButton = scene.add
-      .text(510+ 250, 400, "Toggle Grid", { fill: "#fff", fontSize: "30px" })
+      .text(510+ 410, 400, "Toggle Grid", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         var square_alpha = 0.7;
@@ -88,7 +88,7 @@ export default class Buttons {
 
     //Restart Button
     const restartButton = scene.add
-    .text(550+ 250, 450, "Restart", { fill: "#fff", fontSize: "30px" })
+    .text(550+ 410, 450, "Restart", { fill: "#00007A", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
         C4C.Editor.Window.open();

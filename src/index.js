@@ -19,14 +19,14 @@ C4C.Editor.create(document.body, theme, true);
 var config = {
   parent: "body",
   type: Phaser.AUTO,
-  width: 1000,
+  width: 1150,
   height: 600,
   pixelArt: true,
   dom: {
     createContainer: true,
   },
   scene: [WorldGame],
-  backgroundColor:"#000000",
+  backgroundColor:"#DDFFFF",
 };
 
 const game = new Phaser.Game(config);
