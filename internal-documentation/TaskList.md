@@ -1,7 +1,4 @@
 # To Do/Notes:
-- Collisions -- 
-  - straightforward system to add more types of collisions + callbacks
-  - more collisions/interactions between cannon, parrot, trees.
 - Fix level display tiles being cut off -- Levi (IN PROGRESS)
   - (bottom few rows are not visible on game scene)
 - Implement stepEval on our interpreter
@@ -12,7 +9,6 @@
   - more pairs of people independently design levels going forward.
   - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
 - Custom textures (more of them)
-- Detect Game End Condition -- David (IN PROGRESS)
 - conditionals -- detect cannonball -- Ram 
   - peek at sprites around current pos (DONE)
   - add condition to 'if' statement
@@ -48,3 +44,7 @@
   - connected tiles -- David (DONE)
   - custom parrot -- Levi (DONE)
   - custom cannon -- Levi (DONE)
+- Collisions -- (DONE)
+  - straightforward system to add more types of collisions + callbacks
+  - more collisions/interactions between cannon, parrot, trees.
+- Detect Game End Condition -- David (DONE)
