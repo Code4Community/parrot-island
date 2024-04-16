@@ -1,18 +1,18 @@
 # To Do/Notes:
-- Collisions -- 
-  - straightforward system to add more types of collisions + callbacks
-  - more collisions/interactions between cannon, parrot, trees.
 - Fix level display tiles being cut off -- Levi (IN PROGRESS)
   - (bottom few rows are not visible on game scene)
-- more interpreter features
+- Implement stepEval on our interpreter
   - 'wait' command Connor (IN PROGRESS)
-  - conditionals -- detect cannonball -- Ram (IN PROGRESS)
+  - https://github.com/Code4Community/c4c-lib/blob/master/src/interpreter/stepEval.js
 - level design
   - Kent and Ayden (IN PROGRESS)
   - more pairs of people independently design levels going forward.
   - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
 - Custom textures (more of them)
-- Detect Game End Condition -- David (IN PROGRESS)
+- conditionals -- detect cannonball -- Ram 
+  - peek at sprites around current pos (DONE)
+  - add condition to 'if' statement
+  - add function for cannons to return their position on the next iteration
 - Custom sounds
   - parrot call
   - cannonball
@@ -44,3 +44,7 @@
   - connected tiles -- David (DONE)
   - custom parrot -- Levi (DONE)
   - custom cannon -- Levi (DONE)
+- Collisions -- (DONE)
+  - straightforward system to add more types of collisions + callbacks
+  - more collisions/interactions between cannon, parrot, trees.
+- Detect Game End Condition -- David (DONE)
