@@ -283,19 +283,6 @@ export default class GameScene extends Phaser.Scene {
   }
 
   update() {
-    if (this.buttons.isUpdating) {
-      if (Date.now() - this.buttons.timeOfLastUpdate > 1000) {
-        const programText = C4C.Editor.getText();
-        if (this.buttons.location[1][0] == 0) {
-          this.buttons.location = C4C.Interpreter.stepRun(programText, this.buttons.location[1]);
-          this.buttons.timeOfLastUpdate = Date.now();
-        } else {
-          this.buttons.isUpdating = false;
-          this.buttons.location = [0, [0]];
-        }
-      }
-    }
-    
     // update visuals, and keep track if whether all entities are done.
 
     this.doneVisualUpdate = true; // assume viz updates are done.

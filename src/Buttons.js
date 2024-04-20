@@ -4,10 +4,6 @@ import C4C from "c4c-lib";
  */
 export default class Buttons {
   constructor(scene) {
-    this.isUpdating = false;
-    this.timeOfLastUpdate = Date.now();
-    this.location = [0, [0]];
-
     //Button Hovering
     function enterButtonHoverState(btn) {
       btn.setStyle({ fill: "#ff0" });
@@ -21,8 +17,9 @@ export default class Buttons {
       .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
-        this.isUpdating = true;
-        this.isUpdating.timeOfLastUpdate = Date.now() - 1000;
+        const programText = C4C.Editor.getText();
+        // HERE'S THE IMPORTANT PART!!
+        C4C.Interpreter.run(programText);
       })
       .on("pointerover", () => enterButtonHoverState(runButton))
       .on("pointerout", () => enterButtonRestState(runButton));
