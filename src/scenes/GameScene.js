@@ -15,7 +15,12 @@ import gameWinImg from "../assets/gameWin.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 
+import level1JSON from "../assets/levels/level1.json";
+import level2JSON from "../assets/levels/level2.json";
+import level3JSON from "../assets/levels/level3.json";
+
 import C4C from "c4c-lib";
+
 
 import { GenerateSceneFromLevelData } from "../level.js";
 import Buttons from "../Buttons";
@@ -28,7 +33,6 @@ import Emitter from "../Emitter.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
-import { levels } from "../levels.js";
 import BallBarrier from "../BallBarrier.js";
 //Button Hovering
 function enterButtonHoverState(btn) {
@@ -94,10 +98,10 @@ export default class GameScene extends Phaser.Scene {
 
     const canvas = document.querySelector('canvas')
 
-    this.levelEditData = levels['level1'];
+    this.levelEditData = level1JSON;
     this.currentTile = 0;
     this.editorEnabled = false;
-    // Level editor
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
         this.currentTile += 1;
@@ -135,38 +139,12 @@ export default class GameScene extends Phaser.Scene {
       }
     })
 
-    const levelDropdown = document.querySelector('.dropdown-menu')
-
-    // levelDropdown.addEventListener('change', (e) => {
-    for (const child of levelDropdown.children) {
-      child.addEventListener('click', (e) => {
-        const newLevelName = (child.children[0].dataset.value)
-        GenerateSceneFromLevelData(levels[newLevelName], this, TILE_SIZE)
-      })
-    }
-    // })
-
     let NumTilesX = 30;
     let NumTilesY = 30;
     this.tiles = [];
     this.entities = [];
 
     this.splash = null;
-    // this.parrot = new Parrot(0, 0, TILE_SIZE);
-    // this.entities.push(this.parrot);
-    // this.entities.push(new Emitter(12,3, 30, 1, 0, this));
-    // this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
-
-    GenerateSceneFromLevelData(levels['level2'],this,TILE_SIZE);
-    // for (let x = 4; x < 20; x++) {
-    //   if (Math.random() < 0.5) {
-    //     this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-    //   } else {
-    //     this.entities.push(new Treasure(x, 0, TILE_SIZE));
-    //   }
-    // }
-
-    this.doneVisualUpdate = true;
 
     this.loadScene();
 
