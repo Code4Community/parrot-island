@@ -235,21 +235,21 @@ export default class GameScene extends Phaser.Scene {
     this.interactionsManager.addInteraction(
       [Parrot, Barrier],
       (p, _) => {
-        this.gameWin(p);
+        this.gameOver(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Cannonball],
       (p, _) => {
-        this.gameWin(p);
+        this.gameOver(p);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Emitter],
       (p, _) => {
-        this.gameWin(p);
+        this.gameOver(p);
       }
     );
 
