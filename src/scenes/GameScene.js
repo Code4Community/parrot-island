@@ -62,7 +62,7 @@ export default class GameScene extends Phaser.Scene {
 
     document.getElementById("dropdownMenuButton").firstChild.data = "Level " + this.level;
 
-    this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
+    //this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   //Load in images || TODO: move to own file
@@ -157,7 +157,7 @@ export default class GameScene extends Phaser.Scene {
     // this.entities.push(new Emitter(12,3, 30, 1, 0, this));
     // this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
 
-    GenerateSceneFromLevelData(levels['level2'],this,TILE_SIZE);
+    //GenerateSceneFromLevelData(levels['level2'],this,TILE_SIZE);
     // for (let x = 4; x < 20; x++) {
     //   if (Math.random() < 0.5) {
     //     this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
@@ -320,14 +320,14 @@ export default class GameScene extends Phaser.Scene {
       this.splash.destroy();
     }
 
-    this.entities.forEach((e) => e.destroy(true));
+    this.entities.forEach((e) => e.destroy());
     this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
 
     // Set tile layout
     this.tiles = [];
     this.entities = [];
 
-    GenerateSceneFromLevelData(this.levelJSONs[this.level],this,TILE_SIZE);
+    GenerateSceneFromLevelData(levels['level' + this.level],this,TILE_SIZE);
 
     this.entities.forEach((e) => e.initialize(this));
 
