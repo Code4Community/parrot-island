@@ -75,6 +75,10 @@ export default class MovingEntity extends Entity {
                 this.sprite.scale *= 0.95
                 this.sprite.x += vx;
                 this.sprite.y += vy;
+
+                this.sprite?.setX(this.sprite.x);
+                this.sprite?.setY(this.sprite.y);
+                this.sprite?.setScale(this.sprite.scale);
             }
         } else {
             let currentVisX = this.sprite.x
