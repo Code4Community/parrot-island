@@ -7,6 +7,7 @@ import Treasure from "./Treasure";
 import Barrier from "./Barrier";
 import Entity from "./entity";
 import MovingEntity from "./movingEntity";
+import BallBarrier from "./BallBarrier";
 
 /**
  * @param {LevelData} levelData - the level data.
@@ -26,10 +27,10 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 case 1: texture = "grass"; break;
                 case 2: texture = "sand";  break;
                 case 3: texture = "stone"; 
-                    scene.entities.push(new Barrier(x,y,tileSize));
+                    scene.entities.push(new BallBarrier(x,y,tileSize));
                 break;
                 case 4: texture = "tree"; 
-                    scene.entities.push(new Barrier(x,y,tileSize));
+                    scene.entities.push(new BallBarrier(x,y,tileSize));
                 break;
                 default: texture = "water"; 
                     scene.entities.push(new Barrier(x,y,tileSize));
@@ -42,7 +43,8 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 y * tileSize + tileSize / 2,
                 texture
             );
-
+            //scene.add.text(x * tileSize, y * tileSize, x + "," + y, { fill: "#fff", fontSize: "7px" });
+            
             tile.width = tileSize;
             tile.displayWidth = tileSize;
             tile.height = tileSize;
