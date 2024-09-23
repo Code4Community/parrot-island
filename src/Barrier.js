@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import Entity from "./entity";
+import MovingEntity from "./movingEntity";
 
 /**
  * 

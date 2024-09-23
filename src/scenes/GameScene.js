@@ -264,10 +264,7 @@ export default class GameScene extends Phaser.Scene {
     p.destroy(this);
     this.splash = this.add.sprite(450,450,"gameOver");
 
-    this.entities.forEach((e) => e.destroy(this));
-    
-    console.log(this.entities.length);
-    this.tiles.forEach((row) => row.forEach((t) => t.destroy(this)));
+    this.destroyAll();
     
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
@@ -276,9 +273,8 @@ export default class GameScene extends Phaser.Scene {
     p.destroy(this);
     this.splash = this.add.sprite(300,300,"gameWin");
 
-    this.entities.forEach((e) => e.destroy(this));
-    this.tiles.forEach((row) => row.forEach((t) => t.destroy(this)));
-    
+    this.destroyAll();
+
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
   }
@@ -313,7 +309,6 @@ export default class GameScene extends Phaser.Scene {
     });
 
     //console.log("done visual update? "+this.doneVisualUpdate)
-    console.log(this.entities.length);
 
     // wait until all entities are done with their visual updates
     //malso check that 1 second has passed.
@@ -349,5 +344,17 @@ export default class GameScene extends Phaser.Scene {
 
     // Create some interface to running the interpreter:
     this.buttons = new Buttons(this);
+  }
+
+  destroyAll(){
+    while(this.entities.length > 0){
+      this.entities[0].destroy(this);
+    }
+    
+    for(var i = 0 ; i < this.tiles.length; i++){
+      for(var j = 0; j < this.tiles[i].length; j++){
+        this.tiles[i][j].destroy(this);
+      }
+    }
   }
 }
