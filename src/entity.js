@@ -67,10 +67,11 @@ export default class Entity {
         return true;
     }
 
-    destroy() {
+    destroy(scene) {
         this.alive = false;
         // @ts-ignore
         this.sprite.destroy();
+        scene.entities.splice(scene.entities.indexOf(this),1);
     }
 
     /**

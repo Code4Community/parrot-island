@@ -141,7 +141,7 @@ export default class GameScene extends Phaser.Scene {
     for (const child of levelDropdown.children) {
       child.addEventListener('click', (e) => {
         const newLevelName = (child.children[0].dataset.value)
-        GenerateSceneFromLevelData(levels[newLevelName], this, TILE_SIZE)
+        //GenerateSceneFromLevelData(levels[newLevelName], this, TILE_SIZE)
       })
     }
     // })
@@ -168,11 +168,10 @@ export default class GameScene extends Phaser.Scene {
 
     this.doneVisualUpdate = true;
 
-    this.loadScene();
-
     this.doneVisualUpdate = true;
 
-    this.entities.forEach((e) => e.initialize(this));
+    //this.entities.forEach((e) => e.initialize(this));
+    this.loadScene();
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
     };
@@ -219,14 +218,14 @@ export default class GameScene extends Phaser.Scene {
     this.interactionsManager.addInteraction(
       [Parrot, PieceOfMap],
       (_, pieceOfMap) => {
-        pieceOfMap.destroy();
+        pieceOfMap.destroy(this);
       }
     );
 
     this.interactionsManager.addInteraction(
       [Parrot, Treasure],
       (_, treasure) => {
-        treasure.destroy();
+        treasure.destroy(this);
         this.gameWin(p);
 
       }
@@ -256,27 +255,29 @@ export default class GameScene extends Phaser.Scene {
     this.interactionsManager.addInteraction(
       [Cannonball, BallBarrier],
       (c, _) => {
-        c.destroy();
+        c.destroy(this);
       }
     );
   }
 
   gameOver(p){
-    p.destroy();
+    p.destroy(this);
     this.splash = this.add.sprite(450,450,"gameOver");
 
-    this.entities.forEach((e) => e.destroy(true));
-    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    this.entities.forEach((e) => e.destroy(this));
+    
+    console.log(this.entities.length);
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(this)));
     
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
   }
   gameWin(p){
-    p.destroy();
+    p.destroy(this);
     this.splash = this.add.sprite(300,300,"gameWin");
 
-    this.entities.forEach((e) => e.destroy(true));
-    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    this.entities.forEach((e) => e.destroy(this));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(this)));
     
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
@@ -317,7 +318,8 @@ export default class GameScene extends Phaser.Scene {
       // }
     });
 
-    console.log("done visual update? "+this.doneVisualUpdate)
+    //console.log("done visual update? "+this.doneVisualUpdate)
+    console.log(this.entities.length);
 
     // wait until all entities are done with their visual updates
     //malso check that 1 second has passed.
@@ -337,11 +339,11 @@ export default class GameScene extends Phaser.Scene {
   loadScene(){
 
     if(this.splash !== null){
-      this.splash.destroy();
+      this.splash.destroy(this);
     }
 
-    this.entities.forEach((e) => e.destroy());
-    this.tiles.forEach((row) => row.forEach((t) => t.destroy(true)));
+    this.entities.forEach((e) => e.destroy(this));
+    this.tiles.forEach((row) => row.forEach((t) => t.destroy(this)));
 
     // Set tile layout
     this.tiles = [];

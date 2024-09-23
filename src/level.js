@@ -77,9 +77,8 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
         }
 
         scene.entities.push(entity);
-        console.log("CURRENT TILES ARE",scene.tiles[5][5]);
-
     }
+    console.log("CURRENT TILES ARE",scene.tiles[5][5]);
 }
 
 /**
