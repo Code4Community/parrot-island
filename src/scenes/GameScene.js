@@ -211,6 +211,8 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
+    C4C.Interpreter.define("maybe", () => {return (Math.random() > 1);});
+
     //Define interactions
 
     this.interactionsManager = new InteractionsManager();

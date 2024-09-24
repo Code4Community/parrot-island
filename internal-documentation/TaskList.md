@@ -1,22 +1,17 @@
 # To Do/Notes:
-- Fix level display tiles being cut off -- Levi (IN PROGRESS)
-  - (bottom few rows are not visible on game scene)
-- Implement stepEval on our interpreter
-  - 'wait' command Connor (IN PROGRESS)
-  - https://github.com/Code4Community/c4c-lib/blob/master/src/interpreter/stepEval.js
 - level design
   - Kent and Ayden (IN PROGRESS)
   - more pairs of people independently design levels going forward.
   - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
-- Custom textures (more of them)
+  - Fix level display tiles being cut off -- Levi (IN PROGRESS)
+    - (bottom few rows are not visible on game scene)
+
 - conditionals -- detect cannonball -- Ram 
   - peek at sprites around current pos (DONE)
   - add condition to 'if' statement
-  - add function for cannons to return their position on the next iteration
-- Custom sounds
-  - parrot call
-  - cannonball
-- General: finalize game mechanics:
+  - add function for cannonballs to return their position on the next iteration
+- 
+General: finalize game mechanics:
   - obstacles
     - cannonballs
     - animals
@@ -26,10 +21,15 @@
   - goal objective
     - treasure map and some treasure
     - levels leading up to final treasure map
+
 - QoL
   - autocomplete
   - blockly
   - Parrot cosmetics
+  - Custom textures (more of them)
+  - Custom sounds
+    - parrot call
+    - cannonball
 
 # Finished:
 
@@ -48,3 +48,6 @@
   - straightforward system to add more types of collisions + callbacks
   - more collisions/interactions between cannon, parrot, trees.
 - Detect Game End Condition -- David (DONE)
+- Implement stepEval on our interpreter (DONE)
+  - 'wait' command Connor (DONE)
+  - https://github.com/Code4Community/c4c-lib/blob/master/src/interpreter/stepEval.js
