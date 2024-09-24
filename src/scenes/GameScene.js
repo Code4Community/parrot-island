@@ -178,7 +178,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", () => {
-      this.parrot.x += 1;
+      this.parrot.moveTo(this.parrot.x + 1, this.parrot.y);
       console.log('moving right...')
       updateAll();
       this.interactionsManager.checkInteractions(
@@ -187,7 +187,7 @@ export default class GameScene extends Phaser.Scene {
       });
       
       C4C.Interpreter.define("moveLeft", () => {
-        this.parrot.x -= 1;
+        this.parrot.moveTo(this.parrot.x - 1, this.parrot.y);
         updateAll();
         console.log('moving left...')
       this.interactionsManager.checkInteractions(
@@ -196,7 +196,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveDown", () => {
-      this.parrot.y += 1;
+      this.parrot.moveTo(this.parrot.x, this.parrot.y + 1);
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
@@ -204,7 +204,14 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveUp", () => {
-      this.parrot.y -= 1;
+      this.parrot.moveTo(this.parrot.x, this.parrot.y - 1);
+      updateAll();
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
+    });
+
+    C4C.Interpreter.define("wait", () => {
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
@@ -284,7 +291,7 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.buttons.isUpdating) {
-      if (Date.now() - this.buttons.timeOfLastUpdate > 1000) {
+      if (Date.now() - this.buttons.timeOfLastUpdate > 500) {
         const programText = C4C.Editor.getText();
         if (this.buttons.location[1][0] == 0) {
           this.buttons.location = C4C.Interpreter.stepRun(programText, this.buttons.location[1]);
