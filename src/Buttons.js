@@ -22,7 +22,7 @@ export default class Buttons {
       .setInteractive()
       .on("pointerdown", () => {
         this.isUpdating = true;
-        this.timeOfLastUpdate = Date.now() - 1000;
+        this.timeOfLastUpdate = Date.now() - 500;
       })
       .on("pointerover", () => enterButtonHoverState(runButton))
       .on("pointerout", () => enterButtonRestState(runButton));
