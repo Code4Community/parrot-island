@@ -218,8 +218,14 @@ export default class GameScene extends Phaser.Scene {
       );
     });
 
-    C4C.Interpreter.define("maybe", () => {return (Math.random() > 1);});
+    C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
+    C4C.Interpreter.define("safeNorth", () => {return this.parrot.canMove(this, 0, - 1)});
+    C4C.Interpreter.define("safeSouth", () => {return this.parrot.canMove(this, 0, 1)});
+    C4C.Interpreter.define("safeEast", () => {return this.parrot.canMove(this, 1, 0)});
+    C4C.Interpreter.define("safeWest", () => {console.log(this.parrot.canMove(this, - 1, 0)); return this.parrot.canMove(this, - 1, 0)});
+    C4C.Interpreter.define("switch", () => {return false});
+    
     //Define interactions
 
     this.interactionsManager = new InteractionsManager();
