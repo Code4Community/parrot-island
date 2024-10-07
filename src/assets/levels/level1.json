@@ -37,6 +37,12 @@
 ,
   "entities": [
     {
+      "x": 7,
+      "y": 12,
+      "texture":"switch",
+      "size":30
+    },
+    {
       "x": 10,
       "y": 10,
       "texture": "parrot",
