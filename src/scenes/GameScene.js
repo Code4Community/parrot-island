@@ -25,6 +25,7 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
+import Switch from "../Switch.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
@@ -273,6 +274,13 @@ export default class GameScene extends Phaser.Scene {
         c.destroy(this);
       }
     );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Switch],
+      (_, s) => {
+        s.flipSwitch(this);
+      }
+    );
   }
 
   gameOver(p){
@@ -341,6 +349,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadScene(){
+
+    this.switchValue = false;
 
     if(this.splash !== null){
       this.splash.destroy(this);
