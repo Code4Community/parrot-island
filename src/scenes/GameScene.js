@@ -25,6 +25,7 @@ import PieceOfMap from "../PieceOfMap";
 import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
+import Switch from "../Switch.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
@@ -220,10 +221,10 @@ export default class GameScene extends Phaser.Scene {
 
     C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
-    C4C.Interpreter.define("safeNorth", () => {return this.parrot.canMove(this, 0, - 1)});
-    C4C.Interpreter.define("safeSouth", () => {return this.parrot.canMove(this, 0, 1)});
-    C4C.Interpreter.define("safeEast", () => {return this.parrot.canMove(this, 1, 0)});
-    C4C.Interpreter.define("safeWest", () => {console.log(this.parrot.canMove(this, - 1, 0)); return this.parrot.canMove(this, - 1, 0)});
+    C4C.Interpreter.define("safeUp", () => {return this.parrot.canMove(this, 0, - 1)});
+    C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, 0, 1)});
+    C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
+    C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, - 1, 0)});
     C4C.Interpreter.define("switch", () => {return false});
     
     //Define interactions
@@ -271,6 +272,13 @@ export default class GameScene extends Phaser.Scene {
       [Cannonball, BallBarrier],
       (c, _) => {
         c.destroy(this);
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, Switch],
+      (_, s) => {
+        s.flipSwitch(this);
       }
     );
   }
@@ -341,6 +349,8 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadScene(){
+
+    this.switchValue = false;
 
     if(this.splash !== null){
       this.splash.destroy(this);
