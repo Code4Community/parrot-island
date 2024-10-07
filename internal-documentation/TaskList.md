@@ -5,11 +5,12 @@
   - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
   - Fix level display tiles being cut off -- Levi (IN PROGRESS)
     - (bottom few rows are not visible on game scene)
+  - forever times conditional (bonus?) level
 
-- conditionals -- detect cannonball -- Ram 
-  - peek at sprites around current pos (DONE)
-  - add condition to 'if' statement
-  - add function for cannonballs to return their position on the next iteration
+- conditionals -- detect cannonball (DONE?)
+  - peek at sprites around current pos (DONE) Ram
+  - add condition to 'if' statement (DONE) David
+  - add function for cannonballs to return their position on the next iteration (DONE) Ram
 - 
 General: finalize game mechanics:
   - obstacles

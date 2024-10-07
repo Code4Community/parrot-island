@@ -129,7 +129,7 @@ export default class MovingEntity extends Entity {
     * collidable entities are [rock, water]
     */
     canMove(scene, xOffset, yOffset) {
-        let collisionBlocks = ["rock", "water", "tree"];
+        let collisionBlocks = ["stone", "water", "tree"];
         let blockName = this.peekAt(scene, xOffset, yOffset);
 
         scene.entities.forEach(e => {
