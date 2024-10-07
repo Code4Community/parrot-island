@@ -222,9 +222,9 @@ export default class GameScene extends Phaser.Scene {
     C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
     C4C.Interpreter.define("safeUp", () => {return this.parrot.canMove(this, 0, - 1)});
-    C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, 0, 1)});
+    C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, 0, 1)});
     C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
-    C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, - 1, 0)});
+    C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, - 1, 0)});
     C4C.Interpreter.define("switch", () => {return false});
     
     //Define interactions
