@@ -9,6 +9,7 @@ import Entity from "./entity";
 import MovingEntity from "./movingEntity";
 import BallBarrier from "./BallBarrier";
 import Switch from "./Switch";
+import SwitchBarrier from "./SwitchBarrier";
 
 /**
  * @param {LevelData} levelData - the level data.
@@ -75,6 +76,9 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
             break;
             case "switch":
                 entity = new Switch(data.x, data.y, data.size, scene);
+            break;
+            case "switchBarrier":
+                entity = new SwitchBarrier(data.x, data.y, data.size, scene);
             break;
             default:
                 entity = new Entity(data.x, data.y, data.texture, data.size);

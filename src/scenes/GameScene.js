@@ -16,6 +16,8 @@ import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 import leftSwitchImg from "../assets/leftSwitch.png"
 import rightSwitchImg from "../assets/rightSwitch.png"
+import deactivatedSwitchBarrierImg from "../assets/deactivatedSwitchBarrier.png"
+import activatedSwitchBarrierImg from "../assets/activatedSwitchBarrier.png"
 
 import C4C from "c4c-lib";
 
@@ -28,6 +30,7 @@ import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
 import Switch from "../Switch.js";
+import SwitchBarrier from "../SwitchBarrier.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
@@ -88,6 +91,8 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("loadedCannon", loadedCannonImg);
     this.load.image("leftSwitch", leftSwitchImg);
     this.load.image("rightSwitch", rightSwitchImg);
+    this.load.image("deactivatedSwitchBarrier", deactivatedSwitchBarrierImg);
+    this.load.image("activatedSwitchBarrier", activatedSwitchBarrierImg);
   }
 
   // Create Scene
@@ -186,7 +191,7 @@ export default class GameScene extends Phaser.Scene {
     };
 
     function updateIfSwitch(entity) {
-      if (entity.texture == "leftSwitch" || entity.texture == "rightSwitch") {
+      if (entity.texture == "leftSwitch" || entity.texture == "rightSwitch" || entity.texture == "activatedSwitchBarrier" || entity.texture == "deactivatedSwitchBarrier") {
         entity.update();
       }
     }
@@ -300,6 +305,25 @@ export default class GameScene extends Phaser.Scene {
         s.flipSwitch(this);
       }
     );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, SwitchBarrier],
+      (p, _) => {
+        if (this.switchValue == false) {
+          this.gameOver(p);
+        }
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Cannonball, SwitchBarrier],
+      (c, _) => {
+        if (this.switchValue == false) {
+          c.destroy(this);
+        }
+      }
+    );
+
   }
 
   gameOver(p){
