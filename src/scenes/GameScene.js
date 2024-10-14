@@ -16,8 +16,8 @@ import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 import leftSwitchImg from "../assets/leftSwitch.png"
 import rightSwitchImg from "../assets/rightSwitch.png"
-import deactivatedSwitchBarrierImg from "../assets/deactivatedSwitchBarrier.png"
-import activatedSwitchBarrierImg from "../assets/activatedSwitchBarrier.png"
+import deactivatedSwitchBarrierImg from "../assets/switchOff.png"
+import activatedSwitchBarrierImg from "../assets/switchOn.png"
 
 import C4C from "c4c-lib";
 
@@ -264,7 +264,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, Treasure],
-      (_, treasure) => {
+      (p, treasure) => {
         treasure.destroy(this);
         this.gameWin(p);
 

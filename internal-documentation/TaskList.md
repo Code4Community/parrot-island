@@ -1,11 +1,11 @@
 # To Do/Notes:
 - level design
-  - Kent and Ayden (IN PROGRESS)
+  - Kent (IN PROGRESS)
   - more pairs of people independently design levels going forward.
-  - Finalizing level 1 -- Ayden & Kent (IN PROGRESS)
+  - Finalizing level 1 -- Kent (IN PROGRESS)
   - Fix level display tiles being cut off -- Levi (IN PROGRESS)
     - (bottom few rows are not visible on game scene)
-  - forever times conditional (bonus?) level
+  - forever times conditional (bonus?) level David
 
 - conditionals -- detect cannonball (DONE?)
   - peek at sprites around current pos (DONE) Ram
