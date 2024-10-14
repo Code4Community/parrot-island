@@ -14,6 +14,10 @@ import gameOverImg from "../assets/gameOver.png"
 import gameWinImg from "../assets/gameWin.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
+import leftSwitchImg from "../assets/leftSwitch.png"
+import rightSwitchImg from "../assets/rightSwitch.png"
+import deactivatedSwitchBarrierImg from "../assets/switchOff.png"
+import activatedSwitchBarrierImg from "../assets/switchOn.png"
 
 import C4C from "c4c-lib";
 
@@ -26,6 +30,7 @@ import InteractionsManager from "../interactions";
 import Parrot from "../Parrot.js";
 import Emitter from "../Emitter.js";
 import Switch from "../Switch.js";
+import SwitchBarrier from "../SwitchBarrier.js";
 
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
@@ -84,6 +89,10 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("gameWin", gameWinImg);
     this.load.image("unloadedCannon", unloadedCannonImg);
     this.load.image("loadedCannon", loadedCannonImg);
+    this.load.image("leftSwitch", leftSwitchImg);
+    this.load.image("rightSwitch", rightSwitchImg);
+    this.load.image("deactivatedSwitchBarrier", deactivatedSwitchBarrierImg);
+    this.load.image("activatedSwitchBarrier", activatedSwitchBarrierImg);
   }
 
   // Create Scene
@@ -177,6 +186,16 @@ export default class GameScene extends Phaser.Scene {
       this.entities.forEach((e) => e.update());
     };
 
+    const updateSwitches = () => {
+      this.entities.forEach((e) => updateIfSwitch(e));
+    };
+
+    function updateIfSwitch(entity) {
+      if (entity.texture == "leftSwitch" || entity.texture == "rightSwitch" || entity.texture == "activatedSwitchBarrier" || entity.texture == "deactivatedSwitchBarrier") {
+        entity.update();
+      }
+    }
+
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", () => {
       this.parrot.moveTo(this.parrot.x + 1, this.parrot.y);
@@ -185,6 +204,7 @@ export default class GameScene extends Phaser.Scene {
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
         );
+      updateSwitches();
       });
       
       C4C.Interpreter.define("moveLeft", () => {
@@ -194,6 +214,7 @@ export default class GameScene extends Phaser.Scene {
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
+      updateSwitches();
     });
 
     C4C.Interpreter.define("moveDown", () => {
@@ -202,6 +223,7 @@ export default class GameScene extends Phaser.Scene {
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
+      updateSwitches();
     });
 
     C4C.Interpreter.define("moveUp", () => {
@@ -210,6 +232,7 @@ export default class GameScene extends Phaser.Scene {
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
+      updateSwitches();
     });
 
     C4C.Interpreter.define("wait", () => {
@@ -217,10 +240,17 @@ export default class GameScene extends Phaser.Scene {
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
+      updateSwitches();
     });
 
-    C4C.Interpreter.define("maybe", () => {return (Math.random() > 1);});
+    C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
+    C4C.Interpreter.define("safeUp", () => {return this.parrot.canMove(this, 0, -1)});
+    C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, 0, 1)});
+    C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
+    C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, - 1, 0)});
+    C4C.Interpreter.define("switch", () => {return this.switchValue});
+    
     //Define interactions
 
     this.interactionsManager = new InteractionsManager();
@@ -234,7 +264,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, Treasure],
-      (_, treasure) => {
+      (p, treasure) => {
         treasure.destroy(this);
         this.gameWin(p);
 
@@ -278,6 +308,25 @@ export default class GameScene extends Phaser.Scene {
         s.flipSwitch(this);
       }
     );
+
+    this.interactionsManager.addInteraction(
+      [Parrot, SwitchBarrier],
+      (p, _) => {
+        if (this.switchValue == false) {
+          this.gameOver(p);
+        }
+      }
+    );
+
+    this.interactionsManager.addInteraction(
+      [Cannonball, SwitchBarrier],
+      (c, _) => {
+        if (this.switchValue == false) {
+          c.destroy(this);
+        }
+      }
+    );
+
   }
 
   gameOver(p){
