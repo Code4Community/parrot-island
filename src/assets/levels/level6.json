@@ -43,9 +43,18 @@
     },
     {
       "x": 13,
-      "y": 10,
-      "texture": "mapPiece",
+      "y": 17,
+      "texture": "treasure",
       "size": 30
+    },
+    {
+      "x": 13, 
+      "y": 3,
+      "texture":"cannon",
+      "interval": 1,
+      "size":30,
+      "vx":0,
+      "vy":1
     }
   ]
 }
