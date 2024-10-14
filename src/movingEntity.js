@@ -92,8 +92,8 @@ export default class MovingEntity extends Entity {
         }
     }
 
-    destroy() {
-        super.destroy();
+    destroy(scene) {
+        super.destroy(scene);
         this.fadingAway = true;
     }
 

@@ -32,7 +32,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 case 4: texture = "tree"; 
                     scene.entities.push(new BallBarrier(x,y,tileSize));
                 break;
-                default: texture = "water"; 
+                case 0: texture = "water"; 
                     scene.entities.push(new Barrier(x,y,tileSize));
                 break;
                     
@@ -77,9 +77,10 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
         }
 
         scene.entities.push(entity);
-        console.log("CURRENT TILES ARE",scene.tiles[5][5]);
 
     }
+    console.log(scene.entities.length);
+    console.log("CURRENT TILES ARE",scene.tiles[5][5]);
 }
 
 /**

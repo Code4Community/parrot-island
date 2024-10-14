@@ -19,6 +19,8 @@ export default class Entity {
     constructor(x, y, texture, size, depth = 1) {
         this.x = x;
         this.y = y;
+        this.prevX = x;
+        this.prevY = y;
 
         this.texture = texture; 
 
@@ -67,10 +69,11 @@ export default class Entity {
         return true;
     }
 
-    destroy() {
+    destroy(scene) {
         this.alive = false;
         // @ts-ignore
         this.sprite.destroy();
+        scene.entities.splice(scene.entities.indexOf(this),1);
     }
 
     /**
@@ -79,7 +82,9 @@ export default class Entity {
      * @param {number} newY 
      */
     moveTo(newX, newY) {
+        this.prevX = this.x
         this.x = newX
+        this.prevY = this.y
         this.y = newY
     }
 }
