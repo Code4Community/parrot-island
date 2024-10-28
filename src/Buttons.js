@@ -21,8 +21,16 @@ export default class Buttons {
       .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
+        const programText = C4C.Editor.getText();
+        try{
+        C4C.Interpreter.check(programText);
         this.isUpdating = true;
         this.timeOfLastUpdate = Date.now() - 500;
+        }catch(err){
+        alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
+        this.buttons.isUpdating = false;
+        this.buttons.location = [0, [0]];
+      }
       })
       .on("pointerover", () => enterButtonHoverState(runButton))
       .on("pointerout", () => enterButtonRestState(runButton));
