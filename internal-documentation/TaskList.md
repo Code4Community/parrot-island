@@ -14,9 +14,9 @@
 - 
 General: finalize game mechanics:
   - obstacles
-    - cannonballs
-    - animals
-    - ship
+    - cannonballs (DONE) David
+    - /No?/animals
+    - /No?/ship
   - start to finish -- straightforward path?
   - Points system
   - goal objective
@@ -43,7 +43,7 @@ General: finalize game mechanics:
 - Config files to streamline map design/loading -- David (DONE)
 - Primary textures
   - connected tiles -- David (DONE)
-  - custom parrot -- Levi (DONE)
+  - custom parrot -- Levi, David (DONE)
   - custom cannon -- Levi (DONE)
 - Collisions -- (DONE)
   - straightforward system to add more types of collisions + callbacks

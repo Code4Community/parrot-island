@@ -352,6 +352,8 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.buttons.isUpdating) {
+      try{
+        C4C.Interpreter.check(programText);
       if (Date.now() - this.buttons.timeOfLastUpdate > 500) {
         const programText = C4C.Editor.getText();
         if (this.buttons.location[1][0] == 0) {
@@ -361,6 +363,11 @@ export default class GameScene extends Phaser.Scene {
           this.buttons.isUpdating = false;
           this.buttons.location = [0, [0]];
         }
+      }
+      }catch(err){
+        alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
+        this.buttons.isUpdating = false;
+        this.buttons.location = [0, [0]];
       }
     }
 
