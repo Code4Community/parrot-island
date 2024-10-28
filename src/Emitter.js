@@ -15,7 +15,20 @@ export default class Emitter extends Entity{
         this.vx = vx;
         this.vy = vy;
         this.scene = scene;
+        var cannoninterval;
+        var tf = Math.random()>0.5;
+        if(y==4){
+           if(tf){
+             cannoninterval = 0;
+             tf = !tf;
+           } else{
+             cannoninterval = 1;
+             tf = !tf;
+           }
+           this.interval = cannoninterval;
+        } else {
         this.interval = interval;
+        }
         this.timer = 0;
     }
 
