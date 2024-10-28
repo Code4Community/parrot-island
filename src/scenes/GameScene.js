@@ -352,7 +352,10 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.buttons.isUpdating) {
+<<<<<<< HEAD
       const programText = C4C.Editor.getText();
+=======
+>>>>>>> 14cd8b85d90c81fcd2b5292126faa501d8dea52c
       try{
         C4C.Interpreter.check(programText);
       if (Date.now() - this.buttons.timeOfLastUpdate > 500) {
