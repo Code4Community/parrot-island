@@ -133,13 +133,13 @@ export default class MovingEntity extends Entity {
         let blockName = this.peekAt(scene, xOffset, yOffset);
 
         scene.entities.forEach(e => {
-            if(e.texture == "cannonball"){
+            if(e.texture == "cannonball" || e.texture == "activatedSwitchBarrier"){
 
-                if(e.x == xOffset && e.y == yOffset){
+                if(e.x == this.x + xOffset && e.y == this.y + yOffset){
                     return false;
                 }
 
-                if(e.getPosOnNextTick()[0] == xOffset && e.getPosOnNextTick()[1] == yOffset){
+                if(e.getPosOnNextTick()[0] == this.x + xOffset && e.getPosOnNextTick()[1] == this.y + yOffset){
                     return false;
                 }
             }

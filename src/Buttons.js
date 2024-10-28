@@ -50,7 +50,7 @@ export default class Buttons {
         try {
           C4C.Interpreter.check(programText);
         } catch (err) {
-          alert("Caught something: " + err);
+          alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
         } finally {
           console.log("Done handling");
         }

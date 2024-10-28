@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 
-import parrotImg from "../assets/parrot.png";
+import parrotImg from "../assets/polly.png";
+import parrotImg2 from "../assets/polly2.png";
 import grassImg from "../assets/grassNew.png";
 import stoneImg from "../assets/stoneNew.png";
 import treeImg from "../assets/treeNew2.png";
@@ -75,6 +76,7 @@ export default class GameScene extends Phaser.Scene {
   preload() {
     // this.load.image("logo", logoImg);
     this.load.image("parrot", parrotImg);
+    this.load.image("parrot2", parrotImg2);
     this.load.image("grass", grassImg);
     this.load.image("stone", stoneImg);
     this.load.image("tree", treeImg);
@@ -198,6 +200,7 @@ export default class GameScene extends Phaser.Scene {
 
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", () => {
+      this.parrot.sprite.setFlipX(false);
       this.parrot.moveTo(this.parrot.x + 1, this.parrot.y);
       console.log('moving right...')
       updateAll();
@@ -208,6 +211,7 @@ export default class GameScene extends Phaser.Scene {
       });
       
       C4C.Interpreter.define("moveLeft", () => {
+        this.parrot.sprite.setFlipX(true);
         this.parrot.moveTo(this.parrot.x - 1, this.parrot.y);
         updateAll();
         console.log('moving left...')
@@ -351,8 +355,10 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.buttons.isUpdating) {
+      const programText = C4C.Editor.getText();
+      try{
+        C4C.Interpreter.check(programText);
       if (Date.now() - this.buttons.timeOfLastUpdate > 500) {
-        const programText = C4C.Editor.getText();
         if (this.buttons.location[1][0] == 0) {
           this.buttons.location = C4C.Interpreter.stepRun(programText, this.buttons.location[1]);
           this.buttons.timeOfLastUpdate = Date.now();
@@ -360,6 +366,11 @@ export default class GameScene extends Phaser.Scene {
           this.buttons.isUpdating = false;
           this.buttons.location = [0, [0]];
         }
+      }
+      }catch(err){
+        alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
+        this.buttons.isUpdating = false;
+        this.buttons.location = [0, [0]];
       }
     }
 
