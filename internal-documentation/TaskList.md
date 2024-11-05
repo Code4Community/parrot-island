@@ -7,7 +7,7 @@
     - (bottom few rows are not visible on game scene)
   - forever times conditional (bonus?) level David
 
-- conditionals -- detect cannonball (DONE?)
+- conditionals -- detect cannonball (DONE)
   - peek at sprites around current pos (DONE) Ram
   - add condition to 'if' statement (DONE) David
   - add function for cannonballs to return their position on the next iteration (DONE) Ram

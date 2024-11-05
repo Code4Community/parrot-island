@@ -23,14 +23,17 @@ export default class Buttons {
       .on("pointerdown", () => {
         const programText = C4C.Editor.getText();
         try{
-        //C4C.Interpreter.check(programText);
+        C4C.Interpreter.check(programText);
         this.isUpdating = true;
         this.timeOfLastUpdate = Date.now() - 500;
         }catch(err){
-          throw err;
         alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
-        this.buttons.isUpdating = false;
-        this.buttons.location = [0, [0]];
+        this.isUpdating = false;
+        this.location = [0, [0]];
+      }finally{
+        scene.loadScene();
+        C4C.Editor.Window.close();
+        this.location = [0, [0]];
       }
       })
       .on("pointerover", () => enterButtonHoverState(runButton))
@@ -57,10 +60,12 @@ export default class Buttons {
         const programText = C4C.Editor.getText();
         // HERE'S THE IMPORTANT PART!!
         try {
-          //C4C.Interpreter.check(programText);
+          C4C.Interpreter.check(programText);
         } catch (err) {
           alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
         } finally {
+          scene.loadScene();
+          C4C.Editor.Window.open();
           console.log("Done handling");
         }
       })
