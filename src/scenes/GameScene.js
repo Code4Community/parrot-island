@@ -24,6 +24,7 @@ import C4C from "c4c-lib";
 
 import { GenerateSceneFromLevelData } from "../level.js";
 import Buttons from "../Buttons";
+import Coconut from "../Coconut.js";
 import Entity from "../entity";
 import Treasure from "../Treasure";
 import PieceOfMap from "../PieceOfMap";
@@ -249,7 +250,7 @@ export default class GameScene extends Phaser.Scene {
 
     C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
-    C4C.Interpreter.define("safeUp", () => {alert(this.parrot.canMove(this, 0, -1)); return this.parrot.canMove(this, 0, -1)});
+    C4C.Interpreter.define("safeUp", () => { return this.parrot.canMove(this, 0, -1)});
     C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, 0, 1)});
     C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
     C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, - 1, 0)});
@@ -416,7 +417,9 @@ export default class GameScene extends Phaser.Scene {
     this.entities.forEach((e) => e.initialize(this));
 
     // Create some interface to running the interpreter:
-    this.buttons = new Buttons(this);
+    if(this.buttons == null){
+      this.buttons = new Buttons(this);
+    }
   }
 
   destroyAll(){
