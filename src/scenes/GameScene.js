@@ -263,6 +263,7 @@ export default class GameScene extends Phaser.Scene {
       [Parrot, PieceOfMap],
       (_, pieceOfMap) => {
         pieceOfMap.destroy(this);
+        this.gameWin(p);
       }
     );
 
@@ -271,7 +272,6 @@ export default class GameScene extends Phaser.Scene {
       (p, treasure) => {
         treasure.destroy(this);
         this.gameWin(p);
-
       }
     );
 

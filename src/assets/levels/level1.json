@@ -36,18 +36,6 @@
   ],
   "entities": [
     {
-      "x": 7,
-      "y": 12,
-      "texture":"switch",
-      "size":30
-    },
-    {
-      "x": 10,
-      "y": 9,
-      "texture": "switchBarrier",
-      "size":30
-    },
-    {
       "x": 10,
       "y": 10,
       "texture": "parrot",
@@ -58,15 +46,6 @@
       "y": 10,
       "texture": "treasure",
       "size": 30
-    },
-    {
-      "x":12,
-      "y":3,
-      "texture":"cannon",
-      "interval":1,
-      "size":30,
-      "vx":0,
-      "vy":1
-  }
+    }
   ]
 }
