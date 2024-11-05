@@ -15,7 +15,6 @@ export default class Parrot extends MovingEntity {
         super.visualUpdate();
 
         if(this.t == 0){
-            console.log(this.texture);
             if(this.texture == "parrot"){
                 this.sprite.setTexture("parrot2");
                 this.texture = "parrot2";
