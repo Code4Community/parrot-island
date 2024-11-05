@@ -42,10 +42,52 @@
       "size": 30
     },
     {
-      "x": 13,
-      "y": 10,
-      "texture": "mapPiece",
+      "x": 19,
+      "y": 9,
+      "texture": "treasure",
       "size": 30
+    },
+    {
+      "x": 9, 
+      "y": 7,
+      "texture":"cannon",
+      "size":30,
+      "vx":0,
+      "vy":1
+    },
+    {
+      "x": 11, 
+      "y": 7,
+      "texture":"cannon",
+      "size":30,
+      "vx":0,
+      "vy":1
+    },
+    {
+      "x": 13, 
+      "y": 7,
+      "texture":"cannon",
+      "size":30,
+      "vx":0,
+      "vy":1
+    },
+    {
+      "x": 15, 
+      "y": 7,
+      "texture":"cannon",
+      "interval": 4,
+      "size":30,
+      "vx":0,
+      "vy":1
+    },
+    {
+      "x": 17, 
+      "y": 7,
+      "texture":"cannon",
+      "interval": 3,
+      "size":30,
+      "vx":0,
+      "vy":1
     }
   ]
 }

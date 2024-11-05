@@ -36,16 +36,34 @@
 ],
   "entities": [
     {
-      "x": 13,
+      "x": 12,
       "y": 14,
       "texture": "parrot",
       "size": 30
     },
     {
-      "x": 13,
-      "y": 10,
-      "texture": "mapPiece",
+      "x": 12,
+      "y": 6,
+      "texture": "treasure",
       "size": 30
+    },
+    {
+      "x": 14, 
+      "y": 4,
+      "texture":"cannon",
+      "interval": 3,
+      "size":30,
+      "vx":0,
+      "vy":1
+    },
+    {
+      "x": 10, 
+      "y": 4,
+      "texture":"cannon",
+      "interval": 1,
+      "size":30,
+      "vx":0,
+      "vy":1
     }
   ]
 }
