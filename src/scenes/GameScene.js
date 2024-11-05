@@ -249,7 +249,7 @@ export default class GameScene extends Phaser.Scene {
 
     C4C.Interpreter.define("random", () => {return Math.random() > 0.5});
 
-    C4C.Interpreter.define("safeUp", () => {return this.parrot.canMove(this, 0, -1)});
+    C4C.Interpreter.define("safeUp", () => {alert(this.parrot.canMove(this, 0, -1)); return this.parrot.canMove(this, 0, -1)});
     C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, 0, 1)});
     C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
     C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, - 1, 0)});
@@ -355,10 +355,9 @@ export default class GameScene extends Phaser.Scene {
   update() {
 
     if (this.buttons.isUpdating) {
-      const programText = C4C.Editor.getText();
-      try{
-        C4C.Interpreter.check(programText);
+      
       if (Date.now() - this.buttons.timeOfLastUpdate > 500) {
+        const programText = C4C.Editor.getText();
         if (this.buttons.location[1][0] == 0) {
           this.buttons.location = C4C.Interpreter.stepRun(programText, this.buttons.location[1]);
           this.buttons.timeOfLastUpdate = Date.now();
@@ -366,11 +365,6 @@ export default class GameScene extends Phaser.Scene {
           this.buttons.isUpdating = false;
           this.buttons.location = [0, [0]];
         }
-      }
-      }catch(err){
-        alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
-        this.buttons.isUpdating = false;
-        this.buttons.location = [0, [0]];
       }
     }
 
