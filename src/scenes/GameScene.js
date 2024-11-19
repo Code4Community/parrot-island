@@ -342,6 +342,7 @@ export default class GameScene extends Phaser.Scene {
     
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
+    this.buttons.enabled = false;
   }
   gameWin(p){
     p.destroy(this);
@@ -351,6 +352,18 @@ export default class GameScene extends Phaser.Scene {
 
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
+    this.buttons.enabled = false;
+
+    let levelDropdown = document.querySelector('.dropdown-menu');
+
+    this.level++;
+
+    let html = '<li><a href=\"./index.html?level=' + 
+      (this.level) + '\" data-value=\"'+ (this.level) + '\">Level ' + (this.level) + '</a></li>';
+    let div = document.createElement('div');
+    div.innerHTML = html;
+    levelDropdown.appendChild(div);
+
   }
 
   update() {

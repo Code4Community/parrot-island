@@ -37,6 +37,25 @@
       /></a>
       <ul class="nav me-auto">
         <li class="nav-item">
+          <div class="dropdown">
+            <button
+              class="btn btn-default dropdown-toggle"
+              type="button"
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="true"
+              value="1"
+            >
+              Level 1
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li><a href="./index.html?level=1" data-value="1">Level 1</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="nav-item">
           <div class="container">
             <span
               type="button"
@@ -84,35 +103,6 @@
               >Instructions</span
             >
           </div>
-        </li>
-        <li class="nav-item">
-          <div class="dropdown">
-            <button
-              class="btn btn-default dropdown-toggle"
-              type="button"
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="true"
-              value="1"
-            >
-              Level 1
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a href="./index.html?level=1" data-value="1">Level 1</a></li>
-              <li><a href="./index.html?level=2" data-value="2">Level 2</a></li>
-              <li><a href="./index.html?level=3" data-value="3">Level 3</a></li>
-              <li><a href="./index.html?level=4" data-value="4">Level 4</a></li>
-              <li><a href="./index.html?level=5" data-value="5">Level 5</a></li>
-              <li><a href="./index.html?level=6" data-value="6">Level 6</a></li>
-            </ul>
-          </div>
-        </li>
-        <li class="nav-item">
-          <button id="run" type="button" class="btn btn-lg btn-success">
-            Start!
-          </button>
         </li>
       </ul>
     </nav>
