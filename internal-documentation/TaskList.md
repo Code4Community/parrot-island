@@ -6,11 +6,6 @@
   - Fix level display tiles being cut off -- Levi (IN PROGRESS)
     - (bottom few rows are not visible on game scene)
   - forever times conditional (bonus?) level David
-
-- conditionals -- detect cannonball (DONE)
-  - peek at sprites around current pos (DONE) Ram
-  - add condition to 'if' statement (DONE) David
-  - add function for cannonballs to return their position on the next iteration (DONE) Ram
 - 
 General: finalize game mechanics:
   - obstacles
@@ -52,3 +47,7 @@ General: finalize game mechanics:
 - Implement stepEval on our interpreter (DONE)
   - 'wait' command Connor (DONE)
   - https://github.com/Code4Community/c4c-lib/blob/master/src/interpreter/stepEval.js
+  - conditionals -- detect cannonball (DONE)
+    - peek at sprites around current pos (DONE) Ram
+    - add condition to 'if' statement (DONE) David
+    - add function for cannonballs to return their position on the next iteration (DONE) Ram

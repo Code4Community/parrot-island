@@ -7,6 +7,7 @@ export default class Buttons {
     this.isUpdating = false;
     this.timeOfLastUpdate = Date.now();
     this.location = [0, [0]];
+    this.enabled = true;
 
     //Button Hovering
     function enterButtonHoverState(btn) {
@@ -21,20 +22,27 @@ export default class Buttons {
       .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
-        const programText = C4C.Editor.getText();
-        try{
-        C4C.Interpreter.check(programText);
-        this.isUpdating = true;
-        this.timeOfLastUpdate = Date.now() - 500;
-        }catch(err){
-        alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
-        this.isUpdating = false;
-        this.location = [0, [0]];
-      }finally{
-        scene.loadScene();
-        C4C.Editor.Window.close();
-        this.location = [0, [0]];
-      }
+
+        if(this.enabled){
+          const programText = C4C.Editor.getText();
+          
+          try{
+            C4C.Interpreter.check(programText);
+            this.isUpdating = true;
+            this.timeOfLastUpdate = Date.now() - 500;
+            this.enabled = false;
+          
+          }catch(err){
+            alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
+            this.isUpdating = false;
+            this.location = [0, [0]];
+          
+          }finally{
+            scene.loadScene();
+            C4C.Editor.Window.close();
+            this.location = [0, [0]];
+          }
+        }
       })
       .on("pointerover", () => enterButtonHoverState(runButton))
       .on("pointerout", () => enterButtonRestState(runButton));
@@ -47,7 +55,9 @@ export default class Buttons {
       })
       .setInteractive()
       .on("pointerdown", () => {
-        C4C.Editor.Window.toggle();
+        if(this.enabled){
+          C4C.Editor.Window.toggle();
+        }
       })
       .on("pointerover", () => enterButtonHoverState(editorButton))
       .on("pointerout", () => enterButtonRestState(editorButton));
@@ -57,36 +67,27 @@ export default class Buttons {
       .text(570+ 410, 300, "Check", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
-        const programText = C4C.Editor.getText();
-        // HERE'S THE IMPORTANT PART!!
-        try {
-          C4C.Interpreter.check(programText);
-        } catch (err) {
-          alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
-        } finally {
-          scene.loadScene();
-          C4C.Editor.Window.open();
-          console.log("Done handling");
+
+        if(this.enabled){
+          const programText = C4C.Editor.getText();
+          // HERE'S THE IMPORTANT PART!!
+          try {
+            C4C.Interpreter.check(programText);
+          } catch (err) {
+            alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
+          } finally {
+            scene.loadScene();
+            C4C.Editor.Window.open();
+            console.log("Done handling");
+          }
         }
       })
       .on("pointerover", () => enterButtonHoverState(checkButton))
       .on("pointerout", () => enterButtonRestState(checkButton));
 
-    // Help Button
-    const helpButton = scene.add
-      .text(580+ 410, 350, "Help", { fill: "#00007A", fontSize: "30px" })
-      .setInteractive()
-      .on("pointerdown", () => {
-        scene.entities.forEach((entity) => {
-          entity.update();
-        });
-      })
-      .on("pointerover", () => enterButtonHoverState(helpButton))
-      .on("pointerout", () => enterButtonRestState(helpButton));
-
     // Toggle Grid Button
     const gridButton = scene.add
-      .text(510+ 410, 400, "Toggle Grid", { fill: "#00007A", fontSize: "30px" })
+      .text(510+ 410, 350, "Toggle Grid", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
         var square_alpha = 0.7;
@@ -102,7 +103,7 @@ export default class Buttons {
 
     //Restart Button
     const restartButton = scene.add
-    .text(550+ 410, 450, "Restart", { fill: "#00007A", fontSize: "30px" })
+    .text(550+ 410, 400, "Restart", { fill: "#00007A", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
         C4C.Editor.Window.open();
