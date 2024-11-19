@@ -416,6 +416,30 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.entities = [];
 
+    if(this.level == 4){
+      if(Math.random()<0.5){
+        levels['level'+4].entities[2].interval=0;
+        levels['level'+4].entities[3].interval=1;
+      } else{
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=0;
+      }
+  }
+
+  if(this.level == 5){
+    if(Math.random()<0.5){
+      levels['level'+5].entities[3].interval=2;
+      levels['level'+5].entities[4].interval=3;
+      levels['level'+5].entities[5].interval=2;
+      levels['level'+5].entities[6].interval=3;
+    } else{
+      levels['level'+5].entities[3].interval=3;
+      levels['level'+5].entities[4].interval=2;
+      levels['level'+5].entities[5].interval=3;
+      levels['level'+5].entities[6].interval=2;
+    }
+}
+
     GenerateSceneFromLevelData(levels['level' + this.level],this,TILE_SIZE);
 
     this.entities.forEach((e) => e.initialize(this));
@@ -425,7 +449,6 @@ export default class GameScene extends Phaser.Scene {
       this.buttons = new Buttons(this);
     }
   }
-
   destroyAll(){
     while(this.entities.length > 0){
       this.entities[0].destroy(this);
