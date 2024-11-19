@@ -12,7 +12,7 @@ import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
 import gameOverImg from "../assets/gameOver.png"
-import gameWinImg from "../assets/gameWin.png"
+import gameWinImg from "../assets/GameWinNew.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 import leftSwitchImg from "../assets/leftSwitch.png"
