@@ -108,6 +108,7 @@ export default class Buttons {
     .on("pointerdown", () => {
         C4C.Editor.Window.open();
         scene.loadScene();
+        this.enabled = true;
     })
     .on("pointerover", () => enterButtonHoverState(restartButton))
     .on("pointerout", () => enterButtonRestState(restartButton));

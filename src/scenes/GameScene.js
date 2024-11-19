@@ -365,6 +365,7 @@ export default class GameScene extends Phaser.Scene {
         } else {
           this.buttons.isUpdating = false;
           this.buttons.location = [0, [0]];
+          alert("Polly did everything you said but didn't reach the map! \nPress restart so she can try again!");
         }
       }
     }
