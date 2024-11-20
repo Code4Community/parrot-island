@@ -110,6 +110,9 @@ export default class Buttons {
     .setInteractive()
     .on("pointerdown", () => {
         C4C.Editor.Window.open();
+        this.isUpdating = false;
+        this.timeOfLastUpdate = Date.now();
+        this.location = [0, [0]];
         scene.loadScene();
     })
     .on("pointerover", () => enterButtonHoverState(restartButton))
