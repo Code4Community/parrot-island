@@ -22,27 +22,27 @@ export default class Buttons {
 
     // Run Button
     const runButton = scene.add
-      .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
+      .text(550 + 390, 200, "Run Code!", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
 
         if(this.enabled){
+
           const programText = C4C.Editor.getText();
-          
+        
           try{
             C4C.Interpreter.check(programText);
-            this.isUpdating = true;
-            this.timeOfLastUpdate = Date.now() - 500;
-            this.enabled = false;
+            
+            scene.loadScene(true);
           
           }catch(err){
             alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
             this.isUpdating = false;
-            this.location = [0, [0]];
+            scene.loadScene();
+
           
           }finally{
-            scene.loadScene();
-            C4C.Editor.Window.close();
+            
             this.location = [0, [0]];
           }
         }
@@ -76,12 +76,12 @@ export default class Buttons {
           // HERE'S THE IMPORTANT PART!!
           try {
             C4C.Interpreter.check(programText);
+            alert("Your code looks good! Try running it to see if Polly reaches the goal!");
           } catch (err) {
             alert("Oh No! Something is wrong with your code:\n\n\t" + err + "\n\nFix it and try again!");
           } finally {
-            scene.loadScene();
             C4C.Editor.Window.open();
-            console.log("Done handling");
+            scene.loadScene();
           }
         }
       })
@@ -111,11 +111,12 @@ export default class Buttons {
     .on("pointerdown", () => {
         C4C.Editor.Window.open();
         scene.loadScene();
-        this.enabled = true;
     })
     .on("pointerover", () => enterButtonHoverState(restartButton))
     .on("pointerout", () => enterButtonRestState(restartButton));
+
   }else{
+    
     const continueButton = scene.add
     .text(550+ 410, 400, "Continue", { fill: "#00007A", fontSize: "30px" })
     .setInteractive()
@@ -125,6 +126,7 @@ export default class Buttons {
     })
     .on("pointerover", () => enterButtonHoverState(continueButton))
     .on("pointerout", () => enterButtonRestState(continueButton));
+
   }
   }
 }

@@ -358,7 +358,7 @@ export default class GameScene extends Phaser.Scene {
   gameOver(p){
     p.destroy(this);
     this.splash = this.add.sprite(450,450,"gameOver");
-
+    
     this.destroyAll();
     
     C4C.Editor.Window.close();
@@ -451,7 +451,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  loadScene(){
+  loadScene(run=false){
 
     this.switchValue = false;
 
@@ -473,6 +473,17 @@ export default class GameScene extends Phaser.Scene {
     // Create some interface to running the interpreter:
     if(this.buttons == null){
       this.buttons = new Buttons(this);
+    }
+
+    if(!run){
+    this.buttons.enabled = true;
+    }else{
+      
+      this.buttons.isUpdating = true;
+      this.buttons.timeOfLastUpdate = Date.now() - 500;
+      this.buttons.enabled = false;
+
+      C4C.Editor.Window.close();
     }
   }
 
