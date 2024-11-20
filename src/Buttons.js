@@ -11,7 +11,7 @@ export default class Buttons {
 
     //Button Hovering
     function enterButtonHoverState(btn) {
-      btn.setStyle({ fill: "#ff0" });
+      btn.setStyle({ fill: "#bf0000" });
     }
 
     function enterButtonRestState(btn) {

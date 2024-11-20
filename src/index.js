@@ -11,7 +11,7 @@ const theme = {
   },
   ".cm-content, .cm-gutter": {
     minHeight: "600px",
-  }
+  },
 }
 
 C4C.Editor.create(document.body, theme, true);
