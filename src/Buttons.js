@@ -3,7 +3,7 @@ import C4C from "c4c-lib";
  * Class responsible for functionality of any main menu button
  */
 export default class Buttons {
-  constructor(scene) {
+  constructor(scene, version = 0) {
     this.isUpdating = false;
     this.timeOfLastUpdate = Date.now();
     this.location = [0, [0]];
@@ -17,6 +17,9 @@ export default class Buttons {
     function enterButtonRestState(btn) {
       btn.setStyle({ fill: "#00007A" });
     }
+
+    if(version == 0){
+
     // Run Button
     const runButton = scene.add
       .text(550 + 410, 200, "Evaluate", { fill: "#00007A", fontSize: "30px" })
@@ -112,5 +115,16 @@ export default class Buttons {
     })
     .on("pointerover", () => enterButtonHoverState(restartButton))
     .on("pointerout", () => enterButtonRestState(restartButton));
+  }else{
+    const continueButton = scene.add
+    .text(550+ 410, 400, "Continue", { fill: "#00007A", fontSize: "30px" })
+    .setInteractive()
+    .on("pointerdown", () => {
+        C4C.Editor.Window.open();
+        window.location.replace(window.location.href.slice(0,-1) + scene.level);
+    })
+    .on("pointerover", () => enterButtonHoverState(continueButton))
+    .on("pointerout", () => enterButtonRestState(continueButton));
+  }
   }
 }
