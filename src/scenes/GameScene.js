@@ -64,6 +64,7 @@ export default class GameScene extends Phaser.Scene {
 
     if (!results || !results[2]){
       this.level = 1;
+        window.location.replace('./index.html?level=1');
     }else{
       this.level = decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
