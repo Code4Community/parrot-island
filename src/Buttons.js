@@ -22,7 +22,7 @@ export default class Buttons {
 
     // Run Button
     const runButton = scene.add
-      .text(550 + 390, 200, "Run Code!", { fill: "#00007A", fontSize: "30px" })
+      .text(550 + 395, 200, "Run Code!", { fill: "#00007A", fontSize: "30px" })
       .setInteractive()
       .on("pointerdown", () => {
 
