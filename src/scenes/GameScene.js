@@ -357,7 +357,8 @@ export default class GameScene extends Phaser.Scene {
 
   gameOver(p){
     p.destroy(this);
-    this.splash = this.add.sprite(450,450,"gameOver");
+    this.splash = this.add.sprite(300,300, "gameOver");
+    this.splash.setDisplaySize(960, 540);
     
     this.destroyAll();
     
@@ -416,8 +417,6 @@ export default class GameScene extends Phaser.Scene {
           alert("Polly did everything you said but didn't reach the map! \nPress restart so she can try again!");
         }
       }
-
-      console.log(this.buttons.location);
     }
 
     // update visuals, and keep track if whether all entities are done.

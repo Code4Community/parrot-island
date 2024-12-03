@@ -143,7 +143,7 @@ export default class MovingEntity extends Entity {
                     }
 
                 case "activatedSwitchBarrier":
-                    if(e.x == this.x + xOffset && e.y == this.y + yOffset){
+                    if(!scene.switchValue && e.x == this.x + xOffset && e.y == this.y + yOffset){
                         safe = false;
                     }
                 
