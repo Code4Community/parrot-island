@@ -11,7 +11,7 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
-import gameOverImg from "../assets/loseSceneNew.png"
+import gameOverImg from "../assets/gameOver.png"
 import gameWinImg from "../assets/GameWinNew.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
@@ -64,31 +64,11 @@ export default class GameScene extends Phaser.Scene {
 
     if (!results || !results[2]){
       this.level = 1;
-        window.location.replace('./index.html?level=1');
     }else{
       this.level = decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     document.getElementById("dropdownMenuButton").firstChild.data = "Level " + this.level;
-
-    if(sessionStorage.getItem("maxLevel") == null){
-      sessionStorage.setItem("maxLevel", this.level);
-    }
-
-    if(this.level > sessionStorage.getItem("maxLevel")){
-      alert("Oh, a cheater?!\nNice try buddy ;)");
-      window.location.replace(window.location.href.slice(0,-1) + sessionStorage.getItem("maxLevel"));
-    }
-
-    const levelDropdown = document.querySelector('.dropdown-menu')
-  
-    for(var i = 1; i <= sessionStorage.getItem("maxLevel"); i++){
-      let html = '<li><a href=\"./index.html?level=' + 
-        (i) + '\" data-value=\"'+ (i) + '\">Level ' + (i) + '</a></li>';
-      let div = document.createElement('div');
-      div.innerHTML = html;
-      levelDropdown.appendChild(div);
-    }
 
     //this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
@@ -123,7 +103,7 @@ export default class GameScene extends Phaser.Scene {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`Code goes here!`);
+    C4C.Editor.setText(`moveLeft\nmoveLeft`);
 
     const canvas = document.querySelector('canvas')
 
@@ -205,9 +185,6 @@ export default class GameScene extends Phaser.Scene {
 
     //this.entities.forEach((e) => e.initialize(this));
     this.loadScene();
-
-    this.buttons.enabled = true;
-
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
     };
@@ -226,6 +203,7 @@ export default class GameScene extends Phaser.Scene {
     C4C.Interpreter.define("moveRight", () => {
       this.parrot.sprite.setFlipX(false);
       this.parrot.moveTo(this.parrot.x + 1, this.parrot.y);
+      console.log('moving right...')
       updateAll();
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
@@ -237,6 +215,7 @@ export default class GameScene extends Phaser.Scene {
         this.parrot.sprite.setFlipX(true);
         this.parrot.moveTo(this.parrot.x - 1, this.parrot.y);
         updateAll();
+        console.log('moving left...')
       this.interactionsManager.checkInteractions(
         this.entities.filter((e) => e.alive)
       );
@@ -358,47 +337,20 @@ export default class GameScene extends Phaser.Scene {
   gameOver(p){
     p.destroy(this);
     this.splash = this.add.sprite(450,450,"gameOver");
-    
+
     this.destroyAll();
     
     C4C.Editor.Window.close();
     this.buttons = new Buttons(this);
-    this.buttons.enabled = false;
   }
   gameWin(p){
     p.destroy(this);
-
-    this.add.rectangle(0,0,3000, 1080, 0xDDFFFF)
-
-    this.splash = this.add.sprite(300,300, "gameWin");
-    this.splash.setDisplaySize(960, 540);
+    this.splash = this.add.sprite(300,300,"gameWin");
 
     this.destroyAll();
 
     C4C.Editor.Window.close();
-
-    this.buttons = new Buttons(this, 1);
-    this.buttons.enabled = false;
-
-    if(this.level < 6){
-      this.level++;
-    }
-
-    if(sessionStorage.getItem("maxLevel") < this.level){
-      sessionStorage.setItem("maxLevel", this.level);
-    }
-
-    const levelDropdown = document.querySelector('.dropdown-menu')
-
-    levelDropdown.innerHTML = "";
-
-    for(let i = 1; i <= sessionStorage.getItem("maxLevel"); i++){
-      let html = '<li><a href=\"./index.html?level=' + 
-        (i) + '\" data-value=\"'+ (i) + '\">Level ' + (i) + '</a></li>';
-      let div = document.createElement('div');
-      div.innerHTML = html;
-      levelDropdown.appendChild(div);
-    }
+    this.buttons = new Buttons(this);
   }
 
   update() {
@@ -416,8 +368,6 @@ export default class GameScene extends Phaser.Scene {
           alert("Polly did everything you said but didn't reach the map! \nPress restart so she can try again!");
         }
       }
-
-      console.log(this.buttons.location);
     }
 
     // update visuals, and keep track if whether all entities are done.
@@ -451,7 +401,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
-  loadScene(run=false){
+  loadScene(){
 
     this.switchValue = false;
 
@@ -499,7 +449,6 @@ export default class GameScene extends Phaser.Scene {
       this.buttons = new Buttons(this);
     }
   }
-
   destroyAll(){
     while(this.entities.length > 0){
       this.entities[0].destroy(this);
