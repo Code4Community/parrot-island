@@ -430,12 +430,12 @@ export default class GameScene extends Phaser.Scene {
     if(Math.random()<0.5){
       levels['level'+5].entities[3].interval=2;
       levels['level'+5].entities[4].interval=3;
-      levels['level'+5].entities[5].interval=2;
+      levels['level'+5].entities[5].interval=6;
       levels['level'+5].entities[6].interval=3;
     } else{
       levels['level'+5].entities[3].interval=3;
       levels['level'+5].entities[4].interval=2;
-      levels['level'+5].entities[5].interval=3;
+      levels['level'+5].entities[5].interval=6;
       levels['level'+5].entities[6].interval=2;
     }
 }
