@@ -51,7 +51,7 @@
       "x": 13, 
       "y": 18,
       "texture":"cannon",
-      "interval": 1,
+      "interval": 10,
       "size":30,
       "vx":0,
       "vy":-1

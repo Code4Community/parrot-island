@@ -416,7 +416,8 @@ export default class GameScene extends Phaser.Scene {
     this.tiles = [];
     this.entities = [];
 
-    if(this.level == 4){
+    // Cannon randomness on level 4
+    if(this.level == 4 ){
       if(Math.random()<0.5){
         levels['level'+4].entities[2].interval=0;
         levels['level'+4].entities[3].interval=1;
