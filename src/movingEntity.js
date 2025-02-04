@@ -141,6 +141,7 @@ export default class MovingEntity extends Entity {
                     if(e.getPosOnNextTick()[0] == this.x + xOffset && e.getPosOnNextTick()[1] == this.y + yOffset){
                         safe = false;
                     }
+                break;
 
                 case "activatedSwitchBarrier":
                     if(!scene.switchValue && e.x == this.x + xOffset && e.y == this.y + yOffset){
