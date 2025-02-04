@@ -11,8 +11,8 @@ import waterImg from "../assets/waterNew.png";
 import sandImg from "../assets/sandNew.png";
 import cannonballImg from "../assets/cannonball.png"
 import blankImg from "../assets/blank.png"
-import gameOverImg from "../assets/gameOver.png"
-import gameWinImg from "../assets/GameWinNew.png"
+import gameOverImg from "../assets/LoseSceneNew.png"
+import gameWinImg from "../assets/GameWinNewCropped.png"
 import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 import leftSwitchImg from "../assets/leftSwitch.png"
@@ -262,7 +262,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, PieceOfMap],
-      (_, pieceOfMap) => {
+      (p, pieceOfMap) => {
         pieceOfMap.destroy(this);
         this.gameWin(p);
       }
@@ -336,7 +336,7 @@ export default class GameScene extends Phaser.Scene {
 
   gameOver(p){
     p.destroy(this);
-    this.splash = this.add.sprite(450,300,"gameOver");
+    this.splash = this.add.sprite(320,290,"gameOver");
     
     this.destroyAll();
     
@@ -345,7 +345,7 @@ export default class GameScene extends Phaser.Scene {
   }
   gameWin(p){
     p.destroy(this);
-    this.splash = this.add.sprite(450,300,"gameWin");
+    this.splash = this.add.sprite(320,290,"gameWin");
 
     this.destroyAll();
 
