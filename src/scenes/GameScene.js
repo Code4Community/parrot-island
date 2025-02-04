@@ -336,8 +336,8 @@ export default class GameScene extends Phaser.Scene {
 
   gameOver(p){
     p.destroy(this);
-    this.splash = this.add.sprite(450,450,"gameOver");
-
+    this.splash = this.add.sprite(450,300,"gameOver");
+    
     this.destroyAll();
     
     C4C.Editor.Window.close();
@@ -345,7 +345,7 @@ export default class GameScene extends Phaser.Scene {
   }
   gameWin(p){
     p.destroy(this);
-    this.splash = this.add.sprite(300,300,"gameWin");
+    this.splash = this.add.sprite(450,300,"gameWin");
 
     this.destroyAll();
 
