@@ -51,10 +51,28 @@
       "x": 13, 
       "y": 18,
       "texture":"cannon",
-      "interval": 1,
+      "interval": 10,
       "size":30,
       "vx":0,
       "vy":-1
-    }
+    },
+  {
+    "x": 15, 
+    "y": 9,
+    "texture":"cannon",
+    "interval": 2,
+    "size":30,
+    "vx":-1,
+    "vy":0
+  },
+  {
+    "x": 15, 
+    "y": 12,
+    "texture":"cannon",
+    "interval": 3,
+    "size":30,
+    "vx":-1,
+    "vy":0
+  }
   ]
 }

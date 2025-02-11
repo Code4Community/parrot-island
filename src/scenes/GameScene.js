@@ -275,6 +275,7 @@ export default class GameScene extends Phaser.Scene {
     C4C.Interpreter.define("safeDown", () => {return this.parrot.canMove(this, 0, 1)});
     C4C.Interpreter.define("safeRight", () => {return this.parrot.canMove(this, 1, 0)});
     C4C.Interpreter.define("safeLeft", () => {return this.parrot.canMove(this, - 1, 0)});
+    C4C.Interpreter.define("safeWait", () => {return this.parrot.canMove(this, 0, 0)});
     C4C.Interpreter.define("switch", () => {return this.switchValue});
     
     //Define interactions
@@ -464,8 +465,34 @@ export default class GameScene extends Phaser.Scene {
     // Set tile layout
     this.tiles = [];
     this.entities = [];
+    
 
     GenerateSceneFromLevelData(levels['level' + this.level],this,TILE_SIZE);
+
+    // Cannon randomness on level 4
+    if(this.level == 4 ){
+      if(Math.random()<0.5){
+        levels['level'+4].entities[2].interval=0;
+        levels['level'+4].entities[3].interval=1;
+      } else{
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=0;
+      }
+  }
+
+  if(this.level == 5){
+    if(Math.random()<0.5){
+      levels['level'+5].entities[3].interval=2;
+      levels['level'+5].entities[4].interval=3;
+      levels['level'+5].entities[5].interval=2;
+      levels['level'+5].entities[6].interval=3;
+    } else{
+      levels['level'+5].entities[3].interval=3;
+      levels['level'+5].entities[4].interval=2;
+      levels['level'+5].entities[5].interval=3;
+      levels['level'+5].entities[6].interval=2;
+    }
+}
 
     this.entities.forEach((e) => e.initialize(this));
 

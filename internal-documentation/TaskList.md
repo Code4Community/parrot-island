@@ -1,3 +1,11 @@
+# Wrap-Up
+  re-switching graphical glitch
+  safewait 
+  autocomplete
+  levels finalized
+
+
+
 # To Do/Notes:
 - level design
   - Kent (IN PROGRESS)
