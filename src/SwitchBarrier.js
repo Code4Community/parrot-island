@@ -20,7 +20,7 @@ export default class SwitchBarrier extends Entity {
             this.sprite.setTexture("deactivatedSwitchBarrier");
         } else if (this.scene.switchValue == false && this.currentSprite == 1) {
             this.currentSprite = 0;
-            this.sprite.setTexture("ActivatedSwtichBarrier");
+            this.sprite.setTexture("activatedSwtichBarrier");
         }
     }
 }

@@ -469,7 +469,7 @@ export default class GameScene extends Phaser.Scene {
 
     GenerateSceneFromLevelData(levels['level' + this.level],this,TILE_SIZE);
 
-    // Cannon randomness on level 4
+    // Cannon randomness on levels 4 and 5
     if(this.level == 4 ){
       if(Math.random()<0.5){
         levels['level'+4].entities[2].interval=0;

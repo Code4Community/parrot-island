@@ -1,7 +1,8 @@
 # Wrap-Up
-  re-switching graphical glitch
-  safewait 
-  autocomplete
+  //re-switching graphical glitch
+  //safewait 
+  //autocomplete
+  moving into cannonballs
   levels finalized
 
 
