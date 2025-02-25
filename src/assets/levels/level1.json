@@ -44,7 +44,7 @@
     {
       "x": 13,
       "y": 10,
-      "texture": "treasure",
+      "texture": "mapPiece",
       "size": 30
     }
   ]

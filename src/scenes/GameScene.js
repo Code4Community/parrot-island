@@ -469,7 +469,7 @@ export default class GameScene extends Phaser.Scene {
 
     GenerateSceneFromLevelData(levels['level' + this.level],this,TILE_SIZE);
 
-    // Cannon randomness on levels 4 and 5
+    // Cannon randomness on levels 4 and 6
     if(this.level == 4 ){
       if(Math.random()<0.5){
         levels['level'+4].entities[2].interval=0;
@@ -480,17 +480,17 @@ export default class GameScene extends Phaser.Scene {
       }
   }
 
-  if(this.level == 5){
+  if(this.level == 6){
     if(Math.random()<0.5){
-      levels['level'+5].entities[3].interval=2;
-      levels['level'+5].entities[4].interval=3;
-      levels['level'+5].entities[5].interval=2;
-      levels['level'+5].entities[6].interval=3;
+      levels['level'+6].entities[3].interval=2;
+      levels['level'+6].entities[4].interval=3;
+      levels['level'+6].entities[5].interval=2;
+      levels['level'+6].entities[6].interval=3;
     } else{
-      levels['level'+5].entities[3].interval=3;
-      levels['level'+5].entities[4].interval=2;
-      levels['level'+5].entities[5].interval=3;
-      levels['level'+5].entities[6].interval=2;
+      levels['level'+6].entities[3].interval=3;
+      levels['level'+6].entities[4].interval=2;
+      levels['level'+6].entities[5].interval=3;
+      levels['level'+6].entities[6].interval=2;
     }
 }
 
