@@ -2,9 +2,9 @@
   //re-switching graphical glitch
   //safewait 
   //autocomplete
-  moving into cannonballs
+  //moving into cannonballs
   levels finalized
-
+  save code between sessions
 
 
 # To Do/Notes:

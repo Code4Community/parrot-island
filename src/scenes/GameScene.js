@@ -71,18 +71,18 @@ export default class GameScene extends Phaser.Scene {
 
     document.getElementById("dropdownMenuButton").firstChild.data = "Level " + this.level;
 
-    if(sessionStorage.getItem("maxLevel") == null){
-      sessionStorage.setItem("maxLevel", this.level);
+    if(localStorage.getItem("maxLevel") == null){
+      localStorage.setItem("maxLevel", this.level);
     }
 
-    if(this.level > sessionStorage.getItem("maxLevel")){
+    if(this.level > localStorage.getItem("maxLevel")){
       alert("Oh, a cheater?!\nNice try buddy ;)");
-      window.location.replace(window.location.href.slice(0,-1) + sessionStorage.getItem("maxLevel"));
+      window.location.replace(window.location.href.slice(0,-1) + localStorage.getItem("maxLevel"));
     }
 
     const levelDropdown = document.querySelector('.dropdown-menu')
   
-    for(var i = 1; i <= sessionStorage.getItem("maxLevel"); i++){
+    for(var i = 1; i <= localStorage.getItem("maxLevel"); i++){
       let html = '<li><a href=\"./index.html?level=' + 
         (i) + '\" data-value=\"'+ (i) + '\">Level ' + (i) + '</a></li>';
       let div = document.createElement('div');
@@ -210,6 +210,9 @@ export default class GameScene extends Phaser.Scene {
 
     const updateAll = () => {
       this.entities.forEach((e) => e.update());
+      this.interactionsManager.checkInteractions(
+        this.entities.filter((e) => e.alive)
+      );
     };
 
     const updateSwitches = () => {
@@ -224,48 +227,41 @@ export default class GameScene extends Phaser.Scene {
 
     // Intepreter Movement Commands
     C4C.Interpreter.define("moveRight", () => {
+      
+      this.parrot.savePos();
       this.parrot.sprite.setFlipX(false);
       this.parrot.moveTo(this.parrot.x + 1, this.parrot.y);
       updateAll();
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-        );
       updateSwitches();
       });
       
-      C4C.Interpreter.define("moveLeft", () => {
+      C4C.Interpreter.define("moveLeft", () => { 
+       
+        this.parrot.savePos();
         this.parrot.sprite.setFlipX(true);
         this.parrot.moveTo(this.parrot.x - 1, this.parrot.y);
         updateAll();
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-      );
       updateSwitches();
     });
 
     C4C.Interpreter.define("moveDown", () => {
+     
+      this.parrot.savePos();
       this.parrot.moveTo(this.parrot.x, this.parrot.y + 1);
       updateAll();
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-      );
       updateSwitches();
     });
 
     C4C.Interpreter.define("moveUp", () => {
+     
+      this.parrot.savePos();
       this.parrot.moveTo(this.parrot.x, this.parrot.y - 1);
       updateAll();
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-      );
       updateSwitches();
     });
 
     C4C.Interpreter.define("wait", () => {
       updateAll();
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-      );
       updateSwitches();
     });
 
@@ -386,15 +382,15 @@ export default class GameScene extends Phaser.Scene {
       this.level++;
     }
 
-    if(sessionStorage.getItem("maxLevel") < this.level){
-      sessionStorage.setItem("maxLevel", this.level);
+    if(localStorage.getItem("maxLevel") < this.level){
+      localStorage.setItem("maxLevel", this.level);
     }
 
     const levelDropdown = document.querySelector('.dropdown-menu')
 
     levelDropdown.innerHTML = "";
 
-    for(let i = 1; i <= sessionStorage.getItem("maxLevel"); i++){
+    for(let i = 1; i <= localStorage.getItem("maxLevel"); i++){
       let html = '<li><a href=\"./index.html?level=' + 
         (i) + '\" data-value=\"'+ (i) + '\">Level ' + (i) + '</a></li>';
       let div = document.createElement('div');
@@ -433,6 +429,7 @@ export default class GameScene extends Phaser.Scene {
       //   console.log(entity)
       // }
     });
+    
 
     //console.log("done visual update? "+this.doneVisualUpdate)
 
@@ -443,9 +440,9 @@ export default class GameScene extends Phaser.Scene {
       const programText = C4C.Editor.getText();
       const res = C4C.Interpreter.stepRun(programText, [this.loc]);
       this.loc = res[1];
-      this.interactionsManager.checkInteractions(
-        this.entities.filter((e) => e.alive)
-      );
+      // this.interactionsManager.checkInteractions(
+      //   this.entities.filter((e) => e.alive)
+      // );
       this.lastUpdate = Date.now();
       this.doneVisualUpdate = false;
     }

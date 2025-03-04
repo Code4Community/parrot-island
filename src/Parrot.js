@@ -9,6 +9,8 @@ export default class Parrot extends MovingEntity {
     constructor(x, y, size) {
         super(x, y, "parrot", size);
         this.t = 0;
+        this.saveX = x;
+        this.saveY = y;
     }
 
     visualUpdate(){
@@ -27,4 +29,14 @@ export default class Parrot extends MovingEntity {
         this.t++;
         this.t%=15;
     }
+    
+    savePos(){
+        this.saveX = this.x;
+        this.saveY = this.y;
+    }
+
+    getPosOnLastTick() {
+        return [this.saveX, this.saveY];
+    }
+    
 }
