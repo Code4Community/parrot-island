@@ -8,6 +8,7 @@ export default class Buttons {
     this.timeOfLastUpdate = Date.now();
     this.location = [0, [0]];
     this.enabled = true;
+    this.scene = scene
 
     //Button Hovering
     function enterButtonHoverState(btn) {
@@ -27,8 +28,8 @@ export default class Buttons {
       .on("pointerdown", () => {
 
         if(this.enabled){
-
           const programText = C4C.Editor.getText();
+          this.saveCode();
         
           try{
             C4C.Interpreter.check(programText);
@@ -73,6 +74,7 @@ export default class Buttons {
 
         if(this.enabled){
           const programText = C4C.Editor.getText();
+          this.saveCode();
           // HERE'S THE IMPORTANT PART!!
           try {
             C4C.Interpreter.check(programText);
@@ -109,6 +111,7 @@ export default class Buttons {
     .text(550+ 410, 400, "Restart", { fill: "#00007A", fontSize: "30px" })
     .setInteractive()
     .on("pointerdown", () => {
+        this.saveCode();
         C4C.Editor.Window.open();
         this.isUpdating = false;
         this.timeOfLastUpdate = Date.now();
@@ -131,5 +134,9 @@ export default class Buttons {
     .on("pointerout", () => enterButtonRestState(continueButton));
 
   }
+  }
+
+  saveCode(){
+    localStorage.setItem("level" + this.scene.level, C4C.Editor.getText());
   }
 }

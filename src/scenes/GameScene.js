@@ -123,7 +123,6 @@ export default class GameScene extends Phaser.Scene {
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
-    C4C.Editor.setText(`Code goes here!`);
 
     const canvas = document.querySelector('canvas')
 
@@ -449,6 +448,9 @@ export default class GameScene extends Phaser.Scene {
   }
 
   loadScene(run=false){
+
+    let programText = localStorage.getItem("level" + this.level);
+    C4C.Editor.setText(programText == "" || programText == null ? "Code goes here!" : programText);
 
     this.switchValue = false;
 
