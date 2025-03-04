@@ -244,7 +244,7 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveDown", () => {
-     
+      console.log("DOWN");
       this.parrot.savePos();
       this.parrot.moveTo(this.parrot.x, this.parrot.y + 1);
       updateAll();
@@ -260,6 +260,8 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("wait", () => {
+      console.log("WAIT");
+      this.parrot.savePos();
       updateAll();
       updateSwitches();
     });
@@ -279,7 +281,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, PieceOfMap],
-      (_, pieceOfMap) => {
+      (p, pieceOfMap) => {
         pieceOfMap.destroy(this);
         this.gameWin(p);
       }
