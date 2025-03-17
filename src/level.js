@@ -72,7 +72,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 entity = new Treasure(data.x, data.y, data.size);
             break;
             case "cannon":
-                entity = new Emitter(data.x, data.y, data.size, data.vx, data.vy, data.interval, scene);
+                entity = new Emitter(data.x, data.y, data.size, data.vx, data.vy, data.interval, scene, data.timer);
             break;
             case "switch":
                 entity = new Switch(data.x, data.y, data.size, scene);
@@ -106,6 +106,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
  *                  interval: number,
  *                  vx: number,
  *                  vy: number
+ *                  timer: number
  *                }[], //
  * }} LevelData
  */
