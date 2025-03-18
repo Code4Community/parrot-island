@@ -78,7 +78,7 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 entity = new Switch(data.x, data.y, data.size, scene);
             break;
             case "switchBarrier":
-                entity = new SwitchBarrier(data.x, data.y, data.size, scene);
+                entity = new SwitchBarrier(data.x, data.y, data.size, scene, data.status);
             break;
             default:
                 entity = new Entity(data.x, data.y, data.texture, data.size);
@@ -105,8 +105,9 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
  *                  size : number,
  *                  interval: number,
  *                  vx: number,
- *                  vy: number
- *                  timer: number
+ *                  vy: number,
+ *                  timer: number,
+ *                  status: number
  *                }[], //
  * }} LevelData
  */

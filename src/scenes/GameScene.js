@@ -335,8 +335,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, SwitchBarrier],
-      (p, _) => {
-        if (this.switchValue == false) {
+      (p, b) => {
+        if (b.currentSprite == 0) {
           this.gameOver(p);
         }
       }
