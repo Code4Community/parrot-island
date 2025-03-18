@@ -344,8 +344,8 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Cannonball, SwitchBarrier],
-      (c, _) => {
-        if (this.switchValue == false) {
+      (c, b) => {
+        if (b.currentSprite == 0) {
           c.destroy(this);
         }
       }
@@ -488,7 +488,7 @@ export default class GameScene extends Phaser.Scene {
       levels['level'+6].entities[5].interval=2;
       levels['level'+6].entities[6].interval=3;
     } else{
-      levels['level'+6].entities[3].interval=3;
+      levels['level'+6].entities[3].interval=2;
       levels['level'+6].entities[4].interval=2;
       levels['level'+6].entities[5].interval=3;
       levels['level'+6].entities[6].interval=2;
