@@ -381,7 +381,7 @@ export default class GameScene extends Phaser.Scene {
     this.buttons = new Buttons(this, 1);
     this.buttons.enabled = false;
 
-    if(this.level < 6){
+    if(this.level < 7){
       this.level++;
     }
 
