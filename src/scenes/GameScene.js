@@ -24,7 +24,6 @@ import C4C from "c4c-lib";
 
 import { GenerateSceneFromLevelData } from "../level.js";
 import Buttons from "../Buttons";
-import Coconut from "../Coconut.js";
 import Entity from "../entity";
 import Treasure from "../Treasure";
 import PieceOfMap from "../PieceOfMap";
