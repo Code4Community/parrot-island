@@ -328,8 +328,10 @@ export default class GameScene extends Phaser.Scene {
 
     this.interactionsManager.addInteraction(
       [Parrot, Switch],
-      (_, s) => {
-        s.flipSwitch(this);
+      (p, s) => {
+        if(p.saveX != s.x || p.saveY != s.y){
+          s.flipSwitch(this);
+        }
       }
     );
 
