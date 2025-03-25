@@ -19,6 +19,7 @@ import leftSwitchImg from "../assets/leftSwitch.png"
 import rightSwitchImg from "../assets/rightSwitch.png"
 import deactivatedSwitchBarrierImg from "../assets/switchOff.png"
 import activatedSwitchBarrierImg from "../assets/switchOn.png"
+import bgm from "../assets/zbgm.mp3"
 
 import C4C from "c4c-lib";
 
@@ -115,10 +116,17 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("rightSwitch", rightSwitchImg);
     this.load.image("deactivatedSwitchBarrier", deactivatedSwitchBarrierImg);
     this.load.image("activatedSwitchBarrier", activatedSwitchBarrierImg);
+
+    this.load.audio('bgm', bgm);
   }
 
   // Create Scene
   create() {
+
+    //start sound
+    this.sound.unlock();
+    this.sound.play('bgm', {loop: true});
+
     // Initialize editor window
     C4C.Editor.Window.init(this);
     C4C.Editor.Window.open();
