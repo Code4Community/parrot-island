@@ -45,7 +45,6 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 y * tileSize + tileSize / 2,
                 texture
             );
-            //scene.add.text(x * tileSize, y * tileSize, x + "," + y, { fill: "#fff", fontSize: "7px" });
             
             tile.width = tileSize;
             tile.displayWidth = tileSize;
