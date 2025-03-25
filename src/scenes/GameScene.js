@@ -52,8 +52,6 @@ const TILE_SIZE = 30;
 export default class GameScene extends Phaser.Scene {
   constructor() {
     super("Example");
-    // Buttons ;
-    // Buttons.constructor()
     
     //Set the level based on query string
     this.level = 1;
@@ -90,12 +88,10 @@ export default class GameScene extends Phaser.Scene {
       levelDropdown.appendChild(div);
     }
 
-    //this.levelJSONs = [level1JSON, level1JSON, level2JSON, level3JSON];
   }
 
   //Load in images || TODO: move to own file
   preload() {
-    // this.load.image("logo", logoImg);
     this.load.image("parrot", parrotImg);
     this.load.image("parrot2", parrotImg2);
     this.load.image("grass", grassImg);
@@ -176,14 +172,11 @@ export default class GameScene extends Phaser.Scene {
 
     const levelDropdown = document.querySelector('.dropdown-menu')
 
-    // levelDropdown.addEventListener('change', (e) => {
     for (const child of levelDropdown.children) {
       child.addEventListener('click', (e) => {
         const newLevelName = (child.children[0].dataset.value)
-        //GenerateSceneFromLevelData(levels[newLevelName], this, TILE_SIZE)
       })
     }
-    // })
 
     let NumTilesX = 30;
     let NumTilesY = 30;
@@ -191,25 +184,11 @@ export default class GameScene extends Phaser.Scene {
     this.entities = [];
 
     this.splash = null;
-    // this.parrot = new Parrot(0, 0, TILE_SIZE);
-    // this.entities.push(this.parrot);
-    // this.entities.push(new Emitter(12,3, 30, 1, 0, this));
-    // this.entities.push(new Emitter(18, 10, 30, 0, -1, this));
-
-    //GenerateSceneFromLevelData(levels['level2'],this,TILE_SIZE);
-    // for (let x = 4; x < 20; x++) {
-    //   if (Math.random() < 0.5) {
-    //     this.entities.push(new PieceOfMap(x, 0, TILE_SIZE));
-    //   } else {
-    //     this.entities.push(new Treasure(x, 0, TILE_SIZE));
-    //   }
-    // }
 
     this.doneVisualUpdate = true;
 
     this.doneVisualUpdate = true;
 
-    //this.entities.forEach((e) => e.initialize(this));
     this.loadScene();
 
     this.buttons.enabled = true;
@@ -425,13 +404,8 @@ export default class GameScene extends Phaser.Scene {
       let isEntityDone = entity.visualUpdate();
       this.doneVisualUpdate &= isEntityDone;  // if *any* entity is not done, this.doneVisualUpdate will be false.
       numEntitiesDone+=isEntityDone?1:0;
-      // if(!isEntityDone){
-      //   console.log(entity)
-      // }
     });
     
-
-    //console.log("done visual update? "+this.doneVisualUpdate)
 
     // wait until all entities are done with their visual updates
     //malso check that 1 second has passed.
@@ -440,9 +414,6 @@ export default class GameScene extends Phaser.Scene {
       const programText = C4C.Editor.getText();
       const res = C4C.Interpreter.stepRun(programText, [this.loc]);
       this.loc = res[1];
-      // this.interactionsManager.checkInteractions(
-      //   this.entities.filter((e) => e.alive)
-      // );
       this.lastUpdate = Date.now();
       this.doneVisualUpdate = false;
     }
