@@ -6,8 +6,13 @@
   levels finalized
   //save code between sessions
 
+  graphical glitch side cannonballs
+  clean up code
+  sound?
+  win screen
+  level bonus name
 
-# To Do/Notes:
+# Old Todo
 - level design
   - Kent (IN PROGRESS)
   - more pairs of people independently design levels going forward.

@@ -316,16 +316,6 @@ export default class GameScene extends Phaser.Scene {
       }
     );
 
-    /*
-    Removed so cannoball can go through walls
-    this.interactionsManager.addInteraction(
-      [Cannonball, BallBarrier],
-      (c, _) => {
-        c.destroy(this);
-      }
-    );
-    */
-
     this.interactionsManager.addInteraction(
       [Parrot, Switch],
       (p, s) => {
