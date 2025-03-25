@@ -6,8 +6,6 @@ import PieceOfMap from "./PieceOfMap";
 import Treasure from "./Treasure";
 import Barrier from "./Barrier";
 import Entity from "./entity";
-import MovingEntity from "./movingEntity";
-import BallBarrier from "./BallBarrier";
 import Switch from "./Switch";
 import SwitchBarrier from "./SwitchBarrier";
 
@@ -29,10 +27,10 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
                 case 1: texture = "grass"; break;
                 case 2: texture = "sand";  break;
                 case 3: texture = "stone"; 
-                    scene.entities.push(new BallBarrier(x,y,tileSize));
+                    scene.entities.push(new Barrier(x,y,tileSize));
                 break;
                 case 4: texture = "tree"; 
-                    scene.entities.push(new BallBarrier(x,y,tileSize));
+                    scene.entities.push(new Barrier(x,y,tileSize));
                 break;
                 case 0: texture = "water"; 
                     scene.entities.push(new Barrier(x,y,tileSize));

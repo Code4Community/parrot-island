@@ -1,5 +1,3 @@
-import Phaser from "phaser";
-import Physics from "phaser";
 import movingEntity from "./movingEntity";
 
 /** 

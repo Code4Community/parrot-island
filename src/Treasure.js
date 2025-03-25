@@ -1,5 +1,4 @@
 import Entity from "./entity";
-import MovingEntity from "./movingEntity";
 
 /** 
  * Class representing a treasure object

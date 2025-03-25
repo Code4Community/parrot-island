@@ -37,7 +37,6 @@ import SwitchBarrier from "../SwitchBarrier.js";
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
 import { levels } from "../levels.js";
-import BallBarrier from "../BallBarrier.js";
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
