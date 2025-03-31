@@ -401,6 +401,9 @@ export default class GameScene extends Phaser.Scene {
 
     this.entities.forEach((entity) => {
       let isEntityDone = entity.visualUpdate();
+      if (entity.x > 29) {
+        entity.destroy(this)
+      }
       this.doneVisualUpdate &= isEntityDone;  // if *any* entity is not done, this.doneVisualUpdate will be false.
       numEntitiesDone+=isEntityDone?1:0;
     });
