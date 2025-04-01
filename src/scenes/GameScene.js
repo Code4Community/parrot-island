@@ -328,6 +328,13 @@ export default class GameScene extends Phaser.Scene {
       }
     );
 
+    this.interactionsManager.addInteraction(
+      [Cannonball, Emitter],
+      (c, _) => {
+        c.destroy(this)
+      }
+    );
+
   }
 
   gameOver(p){
@@ -444,12 +451,49 @@ export default class GameScene extends Phaser.Scene {
 
     // Cannon randomness on levels 4 and 6
     if(this.level == 4 ){
-      if(Math.random()<0.5){
+      let rand = Math.random();
+      if (rand<1/6){
         levels['level'+4].entities[2].interval=0;
         levels['level'+4].entities[3].interval=1;
-      } else{
+        levels['level'+4].entities[4].interval=1;
+        levels['level'+4].entities[5].interval=1;
+        levels['level'+4].entities[6].interval=1;
+        levels['level'+4].entities[7].interval=1;
+      } else if (rand < 2/6) {
         levels['level'+4].entities[2].interval=1;
         levels['level'+4].entities[3].interval=0;
+        levels['level'+4].entities[4].interval=1;
+        levels['level'+4].entities[5].interval=1;
+        levels['level'+4].entities[6].interval=1;
+        levels['level'+4].entities[7].interval=1;
+      } else if (rand < 3/6) {
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=1;
+        levels['level'+4].entities[4].interval=0;
+        levels['level'+4].entities[5].interval=1;
+        levels['level'+4].entities[6].interval=1;
+        levels['level'+4].entities[7].interval=1;
+      } else if (rand < 4/6) {
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=1;
+        levels['level'+4].entities[4].interval=1;
+        levels['level'+4].entities[5].interval=0;
+        levels['level'+4].entities[6].interval=1;
+        levels['level'+4].entities[7].interval=1;
+      } else if (rand < 5/6) {
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=1;
+        levels['level'+4].entities[4].interval=1;
+        levels['level'+4].entities[5].interval=1;
+        levels['level'+4].entities[6].interval=0;
+        levels['level'+4].entities[7].interval=1;
+      } else {
+        levels['level'+4].entities[2].interval=1;
+        levels['level'+4].entities[3].interval=1;
+        levels['level'+4].entities[4].interval=1;
+        levels['level'+4].entities[5].interval=1;
+        levels['level'+4].entities[6].interval=1;
+        levels['level'+4].entities[7].interval=0;
       }
   }
 

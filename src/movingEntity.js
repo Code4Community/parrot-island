@@ -155,6 +155,13 @@ export default class MovingEntity extends Entity {
                     }
                 
                 break;
+
+                case "unloadedCannon":
+                    if(e.timer + 1== e.interval && this.x + xOffset == e.x + e.vx && this.y + yOffset == e.y + e.vy) {
+                        safe = false;
+                    }
+                break;
+
                 default:
                 break;
             }
