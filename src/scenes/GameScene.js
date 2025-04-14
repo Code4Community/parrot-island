@@ -355,7 +355,7 @@ export default class GameScene extends Phaser.Scene {
 
     this.add.rectangle(0,0,3000, 1080, 0xDDFFFF)
     if (this.level == 6) {
-      this.splash = this.add.sprite(300, 300, "winScreen");
+      this.splash = this.add.sprite(450, 300, "winScreen");
       this.splash.setDisplaySize(960, 540);
     } else {
       this.splash = this.add.sprite(300,300, "gameWin");
