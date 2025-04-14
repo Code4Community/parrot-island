@@ -17,6 +17,7 @@ import unloadedCannonImg from "../assets/unloadedCannon.png"
 import loadedCannonImg from "../assets/loadedCannon.png"
 import leftSwitchImg from "../assets/leftSwitch.png"
 import rightSwitchImg from "../assets/rightSwitch.png"
+import winScreenImg from "../assets/WinScreen.png"
 import deactivatedSwitchBarrierImg from "../assets/switchOff.png"
 import activatedSwitchBarrierImg from "../assets/switchOn.png"
 import bgm from "../assets/zbgm.mp3"
@@ -106,6 +107,7 @@ export default class GameScene extends Phaser.Scene {
     this.load.image("none", blankImg);
     this.load.image("gameOver", gameOverImg);
     this.load.image("gameWin", gameWinImg);
+    this.load.image("winScreen", winScreenImg)
     this.load.image("unloadedCannon", unloadedCannonImg);
     this.load.image("loadedCannon", loadedCannonImg);
     this.load.image("leftSwitch", leftSwitchImg);
@@ -352,10 +354,13 @@ export default class GameScene extends Phaser.Scene {
     p.destroy(this);
 
     this.add.rectangle(0,0,3000, 1080, 0xDDFFFF)
-
-    this.splash = this.add.sprite(300,300, "gameWin");
-    this.splash.setDisplaySize(960, 540);
-
+    if (this.level == 6) {
+      this.splash = this.add.sprite(300, 300, "winScreen");
+      this.splash.setDisplaySize(960, 540);
+    } else {
+      this.splash = this.add.sprite(300,300, "gameWin");
+      this.splash.setDisplaySize(960, 540);
+    }
     this.destroyAll();
 
     C4C.Editor.Window.close();
