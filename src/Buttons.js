@@ -123,7 +123,7 @@ export default class Buttons {
 
   }else{
     
-    const continueText = scene.level != 6 ? "Continue": "Bonus!";
+    const continueText = scene.level == 7 ? "Wow!" :scene.level != 6 ? "Continue": "Bonus!";
     const continueButton = scene.add
     .text(550+ 410, 400, continueText, { fill: "#00007A", fontSize: "30px" })
     .setInteractive()
