@@ -14,9 +14,7 @@ import SwitchBarrier from "./SwitchBarrier";
  * @param {number} tileSize
  */
 export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
-
-    console.log("Generating scene level data", levelData);
-    
+        
     for(let y = 0; y < levelData.height; y++){
         let row = [];
         for(let x = 0; x < levelData.height; x++){
@@ -84,8 +82,6 @@ export const GenerateSceneFromLevelData = (levelData, scene, tileSize) =>{
         scene.entities.push(entity);
 
     }
-    console.log(scene.entities.length);
-    console.log("CURRENT TILES ARE",scene.tiles[5][5]);
 }
 
 /**

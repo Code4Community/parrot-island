@@ -116,7 +116,6 @@ export default class MovingEntity extends Entity {
             return [];
         }
         else{
-            // console.log("FOUND ",scene.tiles[checkY][checkX].texture.key);
             return scene.tiles[checkY][checkX].texture.key;
         }
     }

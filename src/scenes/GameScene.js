@@ -165,7 +165,6 @@ export default class GameScene extends Phaser.Scene {
         tile.height = TILE_SIZE;
         tile.displayHeight = TILE_SIZE;
 
-        console.log(this.levelEditData.tiles);
       }
     })
 
@@ -229,7 +228,6 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveDown", () => {
-      console.log("DOWN");
       this.parrot.savePos();
       this.parrot.moveTo(this.parrot.x, this.parrot.y + 1);
       updateAll();
@@ -237,7 +235,6 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("moveUp", () => {
-     
       this.parrot.savePos();
       this.parrot.moveTo(this.parrot.x, this.parrot.y - 1);
       updateAll();
@@ -245,7 +242,6 @@ export default class GameScene extends Phaser.Scene {
     });
 
     C4C.Interpreter.define("wait", () => {
-      console.log("WAIT");
       this.parrot.savePos();
       updateAll();
       updateSwitches();
