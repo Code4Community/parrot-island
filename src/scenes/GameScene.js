@@ -500,7 +500,7 @@ export default class GameScene extends Phaser.Scene {
       }
   }
 
-  if(this.level == 6){
+  if(this.level == 5){
     if(Math.random()<0.5){
       levels['level'+5].entities[3].interval=2;
       levels['level'+5].entities[4].interval=3;
