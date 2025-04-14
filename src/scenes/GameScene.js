@@ -37,6 +37,7 @@ import SwitchBarrier from "../SwitchBarrier.js";
 import Cannonball from "../Cannonball.js";
 import Barrier from "../Barrier.js";
 import { levels } from "../levels.js";
+
 //Button Hovering
 function enterButtonHoverState(btn) {
   btn.setStyle({ fill: "#ff0" });
@@ -131,6 +132,7 @@ export default class GameScene extends Phaser.Scene {
     this.levelEditData = levels['level1'];
     this.currentTile = 0;
     this.editorEnabled = false;
+    
     // Level editor
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight') {
@@ -208,7 +210,7 @@ export default class GameScene extends Phaser.Scene {
       }
     }
 
-    // Intepreter Movement Commands
+    // Intepreter Function Definitions
     C4C.Interpreter.define("moveRight", () => {
       
       this.parrot.savePos();
@@ -257,7 +259,6 @@ export default class GameScene extends Phaser.Scene {
     C4C.Interpreter.define("switch", () => {return this.switchValue});
     
     //Define interactions
-
     this.interactionsManager = new InteractionsManager();
 
     this.interactionsManager.addInteraction(
@@ -333,6 +334,7 @@ export default class GameScene extends Phaser.Scene {
 
   }
 
+  /**Call on player failure */
   gameOver(p){
     p.destroy(this);
     this.splash = this.add.sprite(300,300, "gameOver");
@@ -344,6 +346,8 @@ export default class GameScene extends Phaser.Scene {
     this.buttons = new Buttons(this);
     this.buttons.enabled = false;
   }
+
+  /**Call on player success */
   gameWin(p){
     p.destroy(this);
 
@@ -359,6 +363,7 @@ export default class GameScene extends Phaser.Scene {
     this.buttons = new Buttons(this, 1);
     this.buttons.enabled = false;
 
+    //Update available levels
     if(this.level < 7){
       this.level++;
     }
@@ -380,6 +385,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  /**Run each frame to update game state*/
   update() {
 
     if (this.buttons.isUpdating) {
@@ -424,6 +430,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  /**Run whenever refreshing the scene.*/
   loadScene(run=false){
 
     let programText = localStorage.getItem("level" + this.level);
@@ -526,6 +533,7 @@ export default class GameScene extends Phaser.Scene {
     }
   }
 
+  /**Call on close to clear entities + tiles*/
   destroyAll(){
     while(this.entities.length > 0){
       this.entities[0].destroy(this);

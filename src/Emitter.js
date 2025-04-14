@@ -2,7 +2,6 @@ import Entity from "./entity";
 import Cannonball from "./Cannonball";
 
 /** 
- * 
  * Class representing an object that produces cannonballs
 */
 export default class Emitter extends Entity{

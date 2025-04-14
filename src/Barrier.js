@@ -1,8 +1,7 @@
 import Entity from "./entity";
 
 /**
- * 
- * Class representing a tree object
+ * Class representing a barrier to player movement
 */
 export default class Barrier extends Entity {
     constructor(x, y, size) {

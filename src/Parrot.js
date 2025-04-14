@@ -1,8 +1,7 @@
 import MovingEntity from "./movingEntity";
 
 /**
- * 
- * Class representing a tree object
+ * Class representing the player object
 */
 export default class Parrot extends MovingEntity {
     

@@ -2,7 +2,7 @@ import Entity from "./entity";
 
 /**
  * 
- * Class representing a tree object
+ * Class representing an interactive switch object
 */
 export default class Switch extends Entity {
     constructor(x, y, size, scene) {

@@ -1,8 +1,7 @@
 import Entity from "./entity";
 
 /**
- * 
- * Class representing a tree object
+ * Class representing a barrier to player movement that toggles on switch interactions
 */
 export default class SwitchBarrier extends Entity {
     constructor(x, y, size, scene, status = 0) {

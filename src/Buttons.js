@@ -136,6 +136,7 @@ export default class Buttons {
   }
   }
 
+  /**Save code for repeat visits */
   saveCode(){
     localStorage.setItem("level" + this.scene.level, C4C.Editor.getText());
   }

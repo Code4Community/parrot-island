@@ -1,6 +1,7 @@
 import MovingEntity from "./movingEntity";
 import Parrot from "./Parrot";
 
+/**Defines when interactions between entities in a defined interaction occur.*/
 export default class InteractionsManager {
     constructor() {
         this.interactions = [];

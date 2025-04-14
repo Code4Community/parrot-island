@@ -1,7 +1,6 @@
 import movingEntity from "./movingEntity";
 
 /** 
- * 
  * Class representing a cannonball object
 */
 export default class Cannonball extends movingEntity{
