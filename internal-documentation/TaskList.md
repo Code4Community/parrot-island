@@ -6,11 +6,10 @@
   levels finalized
   //save code between sessions
 
-  graphical glitch side cannonballs
+  //graphical glitch side cannonballs
   clean up code
-  sound?
+  //sound?
   win screen
-  level bonus name
 
 # Old Todo
 - level design
