@@ -2,6 +2,10 @@ import Phaser from "phaser";
 import C4C from "c4c-lib";
 import WorldGame from "./scenes/GameScene";
 
+import "../public/parrot.png"
+import "../public/style.css"
+import "../public/main.bundle.css"
+
 // You can define a custom theme here and pass it into .create below
 const theme = {
   "&": {
