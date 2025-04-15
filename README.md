@@ -1,4 +1,4 @@
-# Parrot Island
+# Polly's Treasure
 A game designed to help teach middle/high schoolers the fundamentals of programming<br>
 Built with Phaser 3 + JS by the [Code4Community](http://c4cosu.com) club at Ohio State
 
