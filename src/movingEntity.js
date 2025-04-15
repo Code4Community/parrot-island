@@ -69,21 +69,25 @@ export default class MovingEntity extends Entity {
                 this.deathVel = [Math.random() * 5 - 2.5, Math.random() * 5 - 2.5]
             } else {
                 const [vx, vy] = this.deathVel;
-                this.sprite.scale *= 0.95
-                this.sprite.x += vx;
-                this.sprite.y += vy;
+                if (this.sprite) {
+                    this.sprite.scale *= 0.95
+                    this.sprite.x += vx;
+                    this.sprite.y += vy;
 
-                this.sprite?.setX(this.sprite.x);
-                this.sprite?.setY(this.sprite.y);
-                this.sprite?.setScale(this.sprite.scale);
+                    this.sprite.setX(this.sprite.x);
+                    this.sprite.setY(this.sprite.y);
+                    this.sprite.setScale(this.sprite.scale);
+                }
             }
         } else {
             let currentVisX = this.sprite.x
             let currentVisY = this.sprite.y
             let targetVisX = this.x * this.size + this.size / 2
             let targetVisY = this.y * this.size + this.size / 2
-            this.sprite?.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
-            this.sprite?.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+            if (this.sprite) {
+                this.sprite.setX(currentVisX + (targetVisX - currentVisX) * 0.1)
+                this.sprite.setY(currentVisY + (targetVisY - currentVisY) * 0.1)
+            }
             // if (this.currentVisX > 30) {
             //     this.destroy()
             // }
