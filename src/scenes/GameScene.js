@@ -339,6 +339,7 @@ export default class GameScene extends Phaser.Scene {
   /**Call on player failure */
   gameOver(p){
     p.destroy(this);
+
     this.splash = this.add.sprite(300,300, "gameOver");
     this.splash.setDisplaySize(960, 540);
     

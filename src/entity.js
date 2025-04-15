@@ -72,6 +72,7 @@ export default class Entity {
     destroy(scene) {
         this.alive = false;
         // @ts-ignore
+        this.sprite.setVisible(false);
         this.sprite.destroy();
         scene.entities.splice(scene.entities.indexOf(this),1);
     }
